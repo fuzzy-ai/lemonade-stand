@@ -14,7 +14,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader?sourceMap=true') }
+      { test: /\.sass$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader?sourceMap=true') }
     ]
   },
   plugins: [
@@ -24,7 +24,7 @@ module.exports = {
     modulesDirectories: ['node_modules']
   },
   resolve: {
-    extensions: ['', '.js', '.scss'],
+    extensions: ['', '.js', '.sass'],
     root: [path.join(__dirname, 'public', 'assets')]
   },
   postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ]
