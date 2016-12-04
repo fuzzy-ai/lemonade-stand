@@ -1,21 +1,31 @@
 @import "reset"
 html
   height: 100%
+  background: #91D6DD
   // background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0,lighten(#7dcfd7,2%)55%,lighten(#7dcfd7,5% ) 100%)
+
+//var
+
+$brand-color : #e41f1f
+
 
 body
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace
   font-size: 16px
   line-height: 28px
   color: #0D1819
-  height: 100vh
+  height: 100%
   overflow-x: hidden
   background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0,lighten(#7dcfd7,2%)55%,lighten(#7dcfd7,5% ) 100%)
+  background-repeat:  no-repeat
 
+.row
+  // width: 100%
+  // height: 100%
 
 a
   text-decoration: none
-  color: #e41f1f
+  color: $brand-color
 
 h1,h2,h3,button,.btn, .heading
   font-family: "refrigerator-deluxe"
@@ -34,6 +44,8 @@ h2
 .logo
   img
     width: 100px
+    filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
+
 
 .page
   padding: 40px 80px
@@ -62,6 +74,8 @@ h2
   font-size: 28px
   font-family: "refrigerator-deluxe"
   text-transform: uppercase
+  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
+
 
 
 .grass
@@ -72,39 +86,39 @@ h2
   bottom: 0
   left: 0
   right: 0
+  border-bottom: 2px solid #221A16
 
-.sun
-  width: 280px
-  height: 280px
+.the-sun
+  width: 320px
+  height: 320px
   position: absolute
-  top: -250px
-  left: calc(50% - 100px)
-  right: calc(50% - 100px)
+  top: -300px
+  left: calc(50% - 160px)
+  right: calc(50% - 160px)
   border-radius: 100%
   svg
     opacity: .75
 
+
+  #outersun-blue
+    filter: url("/assets/images/blur.svg#blue-blur")
+
 .settings
-  color: #f8f8f8
+  color: #fbf6f0
   clear: both
+  padding: 1px
 
 .secondary-zone
   position: relative
   width: 100%
   background: #29201e url("/assets/images/lemonade-stand-bg.jpg") repeat 0 0
 
-  &:after
-    content: ""
-    background: rgba(darken(#29201e, 25%), .15)
-    display: block
-    width: 100%
-    height: 100%
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
+.secondary-zone-inner
+  background: rgba(darken(#29201e, 25%), .15)
 
+.stand
+  margin: 0 auto
+  width: 400px
 
 .flex
   display: flex
@@ -113,25 +127,28 @@ h2
   justify-content: space-between
 
   .flex__item
-    background: rgba(darken(#29201e, 20%), .10)
-    //border: 2px solid cyan
+    background: rgba(darken(#29201e, 25%), .05)
+    border: 1px solid darken(#201816, 1%)
     margin: 3px 2px 0
     padding: 40px
     flex: 1
     color: #fff !important
-    border: 1px solid #201816
 
     h2
-      margin-bottom: 18px
+      margin-bottom: 9px
 
     .flex__item-subline
+      display: block
+      margin-bottom: 18px
       font-family: helvetica, arial
       text-transform: uppercase
       letter-spacing: 2px
       font-size: 10px
+      color: $brand-color
 
 .canvas-wrap
-  background: rgba(darken(#29201e, 25%), .15)
+  background: rgba(darken(#29201e, 25%), .05)
+  border: 1px solid darken(#201816, 1%)
   margin: 3px 2px 0
   padding: 40px
   flex: 1
@@ -140,10 +157,8 @@ h2
 
 
 .cloud1, .cloud2, .cloud3
-  width: 180px
-  height: 40px
   display: block
-  //transition: transform 5s ease-out .25s
+  filter: drop-shadow(0px 0px 10px rgba(0,0,0,.25))
 
 @keyframes animateClouds
   0%
@@ -155,7 +170,7 @@ h2
   0%
     transform: translateX(-20px)
   50%
-    transform: translateX(28px)
+    transform: translateX(10px)
   100%
     transform: translateX(-20px)
 
@@ -175,9 +190,14 @@ h2
   img
     width: 240px
 
-
 .cloud3
-  background: purple
+  position: absolute
+  top: -20px
+  left: 220px
+
+  img
+    width: 180px
+
 
 .moving .cloud1
   animation: floaterClouds 18s linear infinite
@@ -187,15 +207,63 @@ h2
 
 
 .moving .cloud3
-  animation: animateClouds 32s linear infinite
+  animation: animateClouds 72s  infinite
+  transition-timing-function: cubic-bezier(52s .42,.23,.86,.69)
 
 
 .girl, .boy
   width: 140px
   position: relative
   bottom: 30px
+  height: 200px
 
 .btn
   padding: 9px 36px
   text-align: center
   border: 2px solid
+
+
+.secondary-cta
+  width: 60%
+  padding: 120px 40px
+  margin: 40px auto
+  justify-content: space-around
+
+
+
+.value-modifier-wrap
+  width: 50px
+  //height: 80px
+  background: cyan
+  padding: 0
+  margin: 0
+
+  span
+    display: inline-block
+    width: 50px
+    height: 50px
+    border: 2px solid purple
+    position: relative
+    margin: 0
+    line-height: 0
+
+.icon
+  width: 18px
+  height: 18px
+  display: inline-block
+  fill: $brand-color
+  position: absolute
+  top: 25%
+  bottom: 25%
+  left: 25%
+  right: 25%
+  // //display: block
+
+.minus
+
+
+.plus
+
+
+.value
+  font-size: 64px
