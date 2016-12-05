@@ -81,29 +81,32 @@
       <div class="settings">
         <div class="flex">
           <div class="flex__item">
-            <h2>Buyers</h2>
-            <span class="flex__item-subline">waiting in line</span>
+            <header>
+              <h2>Buyers</h2>
+              <span class="flex__item-subline">waiting in line</span>
+           </header>
             <div class="setting-module">
+              <div class="value-modifier-wrap">
+                <span>
+                  <svg class="icon plus">
+                    <use xlink:href="/assets/images/sprite.svg#plus"></use>
+                  </svg>
+                </span>
+                <span>
+                  <svg class="icon minus">
+                   <use xlink:href="/assets/images/sprite.svg#minus"></use>
+                  </svg>
+                </span>
+              </div><!-- end value mod -->
               <h2 class="heading value">10</h2>
-              <div class="value-modifier-wrap">
-                <span>
-                  <svg class="icon plus">
-                    <use xlink:href="/assets/images/sprite.svg#plus"></use>
-                  </svg>
-                </span>
-                <span>
-                  <svg class="icon minus">
-                   <use xlink:href="/assets/images/sprite.svg#minus"></use>
-                  </svg>
-                </span>
-              </div><!-- end value mod -->
             </div>
           </div>
           <div class="flex__item">
-            <h2>temperature</h2>
-            <span class="flex__item-subline">modify temp</span>
+            <header>
+              <h2>temperature</h2>
+              <span class="flex__item-subline">modify temp</span>
+            </header>
             <div class="setting-module">
-              <h2 class="heading value">75 &deg;</h2>
               <div class="value-modifier-wrap">
                 <span>
                   <svg class="icon plus">
@@ -116,15 +119,24 @@
                   </svg>
                 </span>
               </div><!-- end value mod -->
+              <h2 class="heading value">75 &deg;</h2>
             </div>
           </div>
           <div class="flex__item">
-            <h2>Make it rain or shine</h2>
-            <span class="flex__item-subline">set the weather</span>
+            <header>
+              <h2>rain or shine</h2>
+              <span class="flex__item-subline">Play with the weather</span>
+            </header>
             <div class="setting-module">
               <h2 class="heading value">sunny</h2>
-              <span> sun</span>
-              <span> clouds</span>
+              <div class="value-modifier-wrap">
+                <span>
+                  <span class="sunny-icon"></span>
+                </span>
+                <span>
+                  <span class="cloudy-icon"><img src="assets/images/cloudy-icon.png" alt="" /></span>
+                </span>
+              </div>
             </div>
           </div>
         </div><!-- end flex -->

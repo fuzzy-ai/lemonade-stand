@@ -7,6 +7,15 @@ html
 //var
 
 $brand-color : #e41f1f
+$blanco-nino :  #fbf6f0
+
+//mixins
+
+@mixin centerer
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
 
 
 body
@@ -104,7 +113,7 @@ h2
     filter: url("/assets/images/blur.svg#blue-blur")
 
 .settings
-  color: #fbf6f0
+  color: $blanco-nino
   clear: both
   padding: 1px
 
@@ -130,9 +139,9 @@ h2
     background: rgba(darken(#29201e, 25%), .05)
     border: 1px solid darken(#201816, 1%)
     margin: 3px 2px 0
-    padding: 40px
     flex: 1
-    color: #fff !important
+    header
+      padding: 40px
 
     h2
       margin-bottom: 9px
@@ -218,9 +227,15 @@ h2
   height: 200px
 
 .btn
-  padding: 9px 36px
+  padding: 12px 44px
   text-align: center
-  border: 2px solid
+  border: 2px solid #5FE4DA
+  background: $brand-color
+  color: #5FE4DA
+  &:hover
+    background: darken(#E56463, 5%)
+    color: $blanco-nino
+
 
 
 .secondary-cta
@@ -233,16 +248,17 @@ h2
 
 .value-modifier-wrap
   width: 50px
-  //height: 80px
-  background: cyan
+  border: 1px solid darken(#201816, 1%)
   padding: 0
   margin: 0
+  float: left
+  margin-right: 40px
 
   span
-    display: inline-block
-    width: 50px
-    height: 50px
-    border: 2px solid purple
+    display: block
+    width: 80px
+    height: 80px
+    border: 1px solid #221A19
     position: relative
     margin: 0
     line-height: 0
@@ -251,19 +267,40 @@ h2
   width: 18px
   height: 18px
   display: inline-block
-  fill: $brand-color
-  position: absolute
-  top: 25%
-  bottom: 25%
-  left: 25%
-  right: 25%
-  // //display: block
+  fill: $blanco-nino
+  +centerer
+  &:hover
+    fill: $brand-color
+    cursor: pointer
 
 .minus
 
 
 .plus
 
+.setting-module
+  // padding: 40px
+  position: relative
+  min-height: 165px
+  background: rgba(darken(#29201e, 25%), .2)
+  //border: 1px solid darken(#201816, 1%)
+  overflow: hidden
+
 
 .value
   font-size: 64px
+  +centerer
+
+
+.sunny-icon
+  display: block
+  border-radius: 50px
+  width: 24px !important
+  height: 24px !important
+  background: #C6DE5A
+  border: 1px solid darken(#C6DE5A, 5%)
+  +centerer
+
+.cloudy-icon img
+  width: 48px !important
+  +centerer
