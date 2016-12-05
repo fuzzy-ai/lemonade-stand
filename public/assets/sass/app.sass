@@ -188,6 +188,7 @@ h2
     margin: 3px 2px 0
     flex: 1
     header
+      background: rgba(darken(#29201e, 25%), .2)
       padding: 40px 40px 20px
 
     h2
@@ -203,7 +204,8 @@ h2
       color: $brand-color
 
 .canvas-wrap
-  background: rgba(darken(#29201e, 25%), .05)
+  background: rgba(darken(#29201e, 25%), .2)
+
   border: 1px solid darken(#201816, 1%)
   margin: 3px 2px 0
   padding: 40px
@@ -302,8 +304,8 @@ h2
 
 
 .value-modifier-wrap
-  width: 50px
-  border: 1px solid darken(#201816, 1%)
+  width: 80px
+  //border: 1px solid darken(#201816, 2%)
   padding: 0
   margin: 0
   float: left
@@ -313,10 +315,13 @@ h2
     display: block
     width: 80px
     height: 80px
-    border: 1px solid #221A19
+    border: 1px solid #1B1413
+    border-bottom: none
     position: relative
-    margin: 0
+    margin: 0 0  0 -1px
     line-height: 0
+    &:first-of-type
+      margin-bottom: -1px
 
 .icon
   width: 18px
@@ -340,9 +345,8 @@ h2
 .setting-module
   // padding: 40px
   position: relative
-  min-height: 165px
-  background: rgba(darken(#29201e, 25%), .2)
-  //border: 1px solid darken(#201816, 1%)
+  min-height: 162px
+
   overflow: hidden
 
 
