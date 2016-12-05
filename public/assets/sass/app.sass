@@ -7,15 +7,54 @@ html
 //var
 
 $brand-color : #e41f1f
-$blanco-nino :  #fbf6f0
+$blanco-nino :  #F2F1E5
 
-//mixins
 
-@mixin centerer
+=centerer
 	position: absolute
 	top: 50%
 	left: 50%
 	transform: translate(-50%, -50%)
+
+//Keyframe animations
+
+@keyframes fadeIn
+	0%
+		opacity: 0
+  100%
+		opacity: 1
+
+@keyframes fadeInDown
+	0%
+		opacity: 0
+		transform: translate3d(0, -1000px, 0)
+	100%
+		opacity: 1
+		transform: none
+
+@keyframes fadeOutUp
+	0%
+		opacity: 1
+	100%
+		opacity: 0
+		transform: translate3d(0, -100%, 0)
+
+@keyframes animateClouds
+  0%
+    transform: translateX(-1600px)
+  100%
+    transform: translateX(1600px)
+
+@keyframes floaterClouds
+  0%
+    transform: translateX(-20px)
+  50%
+    transform: translateX(10px)
+  100%
+    transform: translateX(-20px)
+
+
+
 
 
 body
@@ -23,13 +62,20 @@ body
   font-size: 16px
   line-height: 28px
   color: #0D1819
-  height: 100%
   overflow-x: hidden
   background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0,lighten(#7dcfd7,2%)55%,lighten(#7dcfd7,5% ) 100%)
   background-repeat:  no-repeat
 
+.cloudy
+  background:  linear-gradient(-180deg,#233236  0,lighten( #3b5961,10%)55%,darken(#f5f5f5,5% ) 100%)
+  animation: fadeIn 1s ease-in
+  .sun
+    animation: fadeOutUp 2s ease-in
+    display: none
+
+
 .row
-  // width: 100%
+  width: 100%
   // height: 100%
 
 a
@@ -105,6 +151,7 @@ h2
   left: calc(50% - 160px)
   right: calc(50% - 160px)
   border-radius: 100%
+  animation: fadeInDown 3s ease-in
   svg
     opacity: .75
 
@@ -141,7 +188,7 @@ h2
     margin: 3px 2px 0
     flex: 1
     header
-      padding: 40px
+      padding: 40px 40px 20px
 
     h2
       margin-bottom: 9px
@@ -169,20 +216,6 @@ h2
   display: block
   filter: drop-shadow(0px 0px 10px rgba(0,0,0,.25))
 
-@keyframes animateClouds
-  0%
-    transform: translateX(-1600px)
-  100%
-    transform: translateX(1600px)
-
-@keyframes floaterClouds
-  0%
-    transform: translateX(-20px)
-  50%
-    transform: translateX(10px)
-  100%
-    transform: translateX(-20px)
-
 .cloud2
   position: absolute
   top: 40px
@@ -207,6 +240,27 @@ h2
   img
     width: 180px
 
+.cloud4
+  position: absolute
+  top: -50px
+  left: 50px
+  display: none
+
+  img
+    width: 190px
+
+.cloud5
+  position: absolute
+  top: -120px
+  left: 280px
+  display: none
+
+  img
+    width: 250px
+
+
+.cloudy .cloud4, .cloudy .cloud5
+  display: block
 
 .moving .cloud1
   animation: floaterClouds 18s linear infinite
@@ -227,14 +281,15 @@ h2
   height: 200px
 
 .btn
+  font-size: 20px
   padding: 12px 44px
   text-align: center
-  border: 2px solid #5FE4DA
-  background: $brand-color
-  color: #5FE4DA
+  border: 2px dashed #69C7D0
+  color:  $brand-color
   &:hover
     background: darken(#E56463, 5%)
     color: $blanco-nino
+    border-color: $blanco-nino
 
 
 
@@ -273,6 +328,10 @@ h2
     fill: $brand-color
     cursor: pointer
 
+.active-icon
+  background: darken(#221A16,1%)
+  box-shadow: 1px 1px 4px darken(#221A16, 2%) inset
+
 .minus
 
 
@@ -288,7 +347,7 @@ h2
 
 
 .value
-  font-size: 64px
+  font-size: 54px
   +centerer
 
 
