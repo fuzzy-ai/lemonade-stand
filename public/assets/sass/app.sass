@@ -82,10 +82,10 @@ body
   height: 200px
   border-radius: 50%
   background: linear-gradient(-180deg, #e9ec76, #e2e571 50%, #f5ed71 80%)
-  border: 2px solid lighten(#f5ed71, 5%)
+  border: 1px solid lighten(#f5ed71,7.50%)
   //margin: 7em auto
   padding: 2em
-  box-shadow: 0 0 60px 40px #fbe602, 0 0 80px 60px lighten(#e70f14, 25%), 0 0 120px 90px #fabc14, 0 0 120px 80px #88d7de
+  box-shadow: 0 0 60px 40px #fbe602, 0 0 80px 60px lighten(#e70f14, 25%), 0 0 120px 90px #fabc14, 0 0 120px 80px #8bd5da
   position: absolute
   top: -220px
   left: calc(50% - 160px)
@@ -98,6 +98,9 @@ body
 
 a
   text-decoration: none
+  color: $brand-color
+
+.accent
   color: $brand-color
 
 h1,h2,h3,button,.btn, .heading
@@ -291,6 +294,15 @@ h2
   animation: animateClouds 72s  infinite
   transition-timing-function: cubic-bezier(52s .42,.23,.86,.69)
 
+.add-buyer-inline
+  position: absolute
+  top: 50%
+  left: 20px
+  font-size: 22px
+  svg
+    margin-left: 80px
+    fill: $brand-color
+
 
 .girl, .boy
   width: 140px
@@ -336,10 +348,11 @@ h2
     border: 1px solid #1B1413
     border-bottom: none
     position: relative
-    margin: 0 0  0 -1px
+    margin: -1px 0  0 -1px
     line-height: 0
     &:first-of-type
-      margin-bottom: -1px
+    //  margin-left: -1px
+    //background: rgba(darkcyan, .95)
 
 
 .icon
@@ -353,8 +366,8 @@ h2
     cursor: pointer
 
 .active-icon
-  background: darken(#221A16,1%)
-  box-shadow: 1px 1px 4px darken(#221A16, 2%) inset
+  background: rgba(#1B1512, .5)
+  // box-shadow: 1px 1px 4px darken(#221A16, 2%) inset
 
 .minus
 
@@ -365,6 +378,10 @@ h2
   // padding: 40px
   position: relative
   min-height: 162px
+  border-top: 1px solid #1B1413
+  margin-top: 1px
+  background: rgba(255,255,255,.015)
+
 
   overflow: hidden
 
