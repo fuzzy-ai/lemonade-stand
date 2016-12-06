@@ -15,17 +15,25 @@
   $(window).load(function(){
     $("body").addClass("moving");
   });
-  $(function(){
+  $( document ).ready(function() {
     $('.cloudy-icon').on('click', function(){
-      $('body').toggleClass('cloudy');
+      $('body').addClass('cloudy');
+      $('.sunny-icon').removeClass('active-icon');
+      $('.cloudy-icon').addClass('active-icon');
       if($('body').hasClass('cloudy')){
         $('.sun-rain').html('cloudy');
       }
-      else if ($('body').hasClass('moving')){
-        $('.sun-rain').html('sunny');
-      }
-      $(this).toggleClass('active-icon')
-      console.log(this);
+      if
+        ($('body').hasClass('cloudy')){
+          $('.sunny-icon').on('click', function(){
+            $('.sun-rain').html('sunny');
+            console.log(this);
+            $('body').removeClass('cloudy');
+            $('.sunny-icon').addClass('active-icon');
+            $('.cloudy-icon').removeClass('active-icon');
+          });
+        };
+
     });
   });
 
@@ -144,15 +152,21 @@
               <span class="flex__item-subline">Play with the weather</span>
             </header>
             <div class="setting-module">
-              <h2 class="heading value sun-rain">sunny</h2>
               <div class="value-modifier-wrap">
                 <span>
-                  <span class="sunny-icon"></span>
+                  <span class="sunny-icon active-icon">
+                    <svg class="icon plus ">
+                      <use xlink:href="/assets/images/sprite.svg#circle"></use>
+                    </svg>
+
+                  </span>
                 </span>
                 <span>
                   <span class="cloudy-icon"><img src="assets/images/cloudy-icon.png" alt="" /></span>
                 </span>
               </div>
+              <h2 class="heading value sun-rain">sunny</h2>
+
             </div>
           </div>
         </div><!-- end flex -->

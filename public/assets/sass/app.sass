@@ -9,6 +9,7 @@ html
 $brand-color : #e41f1f
 $blanco-nino :  #F2F1E5
 
+//helpers
 
 =centerer
 	position: absolute
@@ -119,9 +120,6 @@ h2
   margin-bottom: 100%
   position: absolute
   top: 0
-  // top: -100px
-  // margin-bottom: -100px
-  //background: linear-gradient(-180deg,#7dcfd7 0,#10659c 40%,#7babbf 68%,#e9c39f 85%,#7dcfd7  100%)
 
 .masthead
   position: relative
@@ -313,7 +311,6 @@ h2
 
 .value-modifier-wrap
   width: 80px
-  //border: 1px solid darken(#201816, 2%)
   padding: 0
   margin: 0
   float: left
@@ -330,6 +327,7 @@ h2
     line-height: 0
     &:first-of-type
       margin-bottom: -1px
+
 
 .icon
   width: 18px
@@ -364,12 +362,11 @@ h2
 
 
 .sunny-icon
-  display: block
-  border-radius: 50px
-  width: 24px !important
-  height: 24px !important
-  background: #C6DE5A
-  border: 1px solid darken(#C6DE5A, 5%)
+  svg
+    display: block
+    fill: #C6DE5A
+    width: 38px !important
+
   +centerer
 
 .cloudy-icon img

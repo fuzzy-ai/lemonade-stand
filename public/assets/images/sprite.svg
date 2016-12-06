@@ -543,6 +543,9 @@
     <title>minus-icon</title>
     <rect width="240" height="20"/>
   </symbol>
-
+  <symbol id="circle" viewBox="0 0 200 200">
+    <title>circle sun</title>
+     <circle cx="100"  cy="100" r="100" />
+  </symbol>
   </defs>
 </svg>
