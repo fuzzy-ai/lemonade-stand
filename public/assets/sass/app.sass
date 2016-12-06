@@ -7,7 +7,7 @@ html
 //var
 
 $brand-color : #e41f1f
-$blanco-nino :  #F2F1E5
+$blanco-nino : lighten(#FEE5C5, 2%)
 
 //helpers
 
@@ -64,7 +64,7 @@ body
   line-height: 28px
   color: #0D1819
   overflow-x: hidden
-  background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0,lighten(#7dcfd7,2%)55%,lighten(#7dcfd7,5% ) 100%)
+  background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0, #C3E9EF 55%,lighten(#7dcfd7,5% ) 100%)
   background-repeat:  no-repeat
 
 .cloudy
@@ -76,16 +76,32 @@ body
     display: none
 
 
+.sun
+  animation: fadeInDown 4s ease-in-out
+  width: 200px
+  height: 200px
+  border-radius: 50%
+  background: linear-gradient(-180deg, #e9ec76, #e2e571 50%, #f5ed71 80%)
+  border: 2px solid lighten(#f5ed71, 5%)
+  //margin: 7em auto
+  padding: 2em
+  box-shadow: 0 0 60px 40px #fbe602, 0 0 80px 60px lighten(#e70f14, 25%), 0 0 120px 90px #fabc14, 0 0 120px 80px #88d7de
+  position: absolute
+  top: -220px
+  left: calc(50% - 160px)
+  right: calc(50% - 160px)
+
+
 .row
   width: 100%
-  height: 100vh
+  //height: 100%
 
 a
   text-decoration: none
   color: $brand-color
 
 h1,h2,h3,button,.btn, .heading
-  font-family: "refrigerator-deluxe"
+  font-family: "refrigerator-deluxe", Helvetica, Arial
   text-transform: uppercase
   letter-spacing: 1px
 
@@ -102,28 +118,35 @@ h2
   img
     width: 100px
     filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
+    //display: block
 
-
-.page
-  padding: 40px 80px
 
 .lemonsplanation
   width: 70%
-  margin: 180px auto 60px
+  margin: 0 auto
   text-align: center
   h1
     text-transform: uppercase
     font-weight: 900
 
+
+
 .scene
+  height: 100vh
+  width: 100%
+  position: relative
+  //top: -100px
+
+.scene-inner
+  position: relative
   height: 100%
-  margin-bottom: 100%
-  position: absolute
-  top: 0
+  width: 100%
 
 .masthead
   position: relative
   height: 100px
+  padding: 40px 80px
+
 
 .signup
   position: absolute
@@ -144,24 +167,10 @@ h2
   bottom: 0
   left: 0
   right: 0
-  border-bottom: 2px solid #221A16
-
-.the-sun
-  width: 320px
-  height: 320px
-  position: absolute
-  top: -200px
-  left: calc(50% - 160px)
-  right: calc(50% - 160px)
-  border-radius: 100%
-  animation: fadeInDown 3s ease-in
-  svg
-    opacity: .75
+  border-bottom: 4px solid #1A1312
 
 
-  #outersun-blue
-    filter: url("/assets/images/blur.svg#blue-blur")
-
+//settings area
 .settings
   color: $blanco-nino
   clear: both
@@ -169,6 +178,7 @@ h2
 
 .secondary-zone
   position: relative
+  clear: both
   width: 100%
   height: 100%
   background: #29201e url("/assets/images/lemonade-stand-bg.jpg") repeat 0 0
@@ -284,9 +294,12 @@ h2
 
 .girl, .boy
   width: 140px
-  position: relative
-  bottom: -40px
+  position: absolute
+  bottom: 40px
   height: 200px
+
+.girl
+  left: 110px
 
 .btn
   font-size: 20px
@@ -364,7 +377,7 @@ h2
 .sunny-icon
   svg
     display: block
-    fill: #C6DE5A
+    fill: #F8C32D
     width: 38px !important
 
   +centerer
@@ -378,3 +391,30 @@ footer
   padding: 40px
   border-top:  4px dashed rgba(darken(#29201e, 25%), .2)
   box-shadow: 1px -1px 0 rgba(black, .25) inset
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+//social links
+
+.social-footer-links
+
+
+.copyright
+
+.social-icon
+  width: 32px
+  height: 32px
+  margin: 0 20px
+  fill: $blanco-nino
+  &:hover
+    fill: $brand-color
+
+
+.twitter-icon
+
+
+.facebook-icon
+
+
+.angel-icon
+  width: 20px
