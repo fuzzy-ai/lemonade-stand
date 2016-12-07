@@ -9,6 +9,7 @@ html
 $brand-color : #e41f1f
 $blanco-nino : lighten(#FEE5C5, 2%)
 
+$font-stack: Courier10BTRoman,Courier,monospace
 //helpers
 
 =centerer
@@ -59,18 +60,31 @@ $blanco-nino : lighten(#FEE5C5, 2%)
 
 
 body
-  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace
+  font-family: $font-stack
+  letter-spacing: -1px
   font-size: 16px
   line-height: 28px
   color: #0D1819
+  color: darken(#5EC3CE, 50%)
+
   overflow-x: hidden
-  background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0, #C3E9EF 55%,lighten(#7dcfd7,5% ) 100%)
+  //background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0, #C3E9EF 55%,lighten(#7dcfd7,5% ) 100%)
   background-repeat:  no-repeat
 
+.sky
+  background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0, #C3E9EF 55%,lighten(#7dcfd7,5% ) 100%)
+  height: 100vh
+  width: 100%
+  position: absolute
+  top: 0
+  animation: fadeIn 1s ease-in
+
+
+
 .cloudy
-  .scene
+  .sky
     background:  linear-gradient(-180deg,#233236  0,lighten( #3b5961,10%)55%,darken(#f5f5f5,5% ) 100%)
-    animation: fadeIn 1s ease-in
+    animation: fadeInDown 3s ease-in
   .sun
     animation: fadeOutUp 2s ease-in
     display: none
@@ -90,6 +104,7 @@ body
   top: -220px
   left: calc(50% - 160px)
   right: calc(50% - 160px)
+  filter: blur(.5px)
 
 
 .row
@@ -125,12 +140,16 @@ h2
 
 
 .lemonsplanation
-  width: 70%
-  margin: 0 auto
+  width: 60%
+  margin: 40px auto 0px
   text-align: center
+  position: relative
+  // text-shadow: 0px 1px 0px rgba(255,255,255,0.5)
+
   h1
     text-transform: uppercase
     font-weight: 900
+    color: darken(#5EC3CE, 75%)
 
 
 
@@ -144,11 +163,15 @@ h2
   position: relative
   height: 100%
   width: 100%
+  z-index: 2000
+
+
 
 .masthead
   position: relative
   height: 100px
   padding: 40px 80px
+  z-index: 1000
 
 
 .signup
@@ -313,6 +336,62 @@ h2
 .girl
   left: 110px
 
+.girl
+#face
+  background: red
+.cls-1
+  fill: #f9a675
+  fill: cyan
+.cls-2,.cls-9
+  fill: #f1ae88
+.cls-3
+  fill: #906bae
+.cls-4
+  fill: none
+.cls-4,.cls-9
+  stroke: #92278f
+  stroke-width: 4px
+.cls-12,.cls-13,.cls-14,.cls-15,.cls-16,.cls-4,.cls-6,.cls-9
+  stroke-miterlimit: 10
+.cls-5
+  fill: #fff
+.cls-17,.cls-6,.cls-8
+  fill: #80499d
+.cls-6
+  stroke: #9a6aad
+.cls-7
+  fill: #d3aa97
+  fill-opacity: 0.36
+.cls-8
+  fill-rule: evenodd
+.cls-10
+  fill: #f3bda2
+.cls-11,.cls-12,.cls-14
+  fill: #ede828
+.cls-12
+  stroke: #c5c62e
+.cls-12,.cls-16
+  stroke-width: 2px
+.cls-13
+  fill: #d2ca2c
+  stroke: #ece828
+.cls-14,.cls-15
+  stroke: #fff
+.cls-15
+  fill: #8857a3
+.cls-16
+  fill: #f1eb57
+  stroke: #80499d
+
+
+
+.girl
+  path#face
+    background: red
+
+
+
+
 .btn
   font-size: 20px
   padding: 12px 44px
@@ -350,11 +429,11 @@ h2
     position: relative
     margin: -1px 0  0 -1px
     line-height: 0
-    &:first-of-type
-    //  margin-left: -1px
-    //background: rgba(darkcyan, .95)
-
-
+    //background: transparent
+    transition: all .3s ease-in
+    &:hover
+      background: rgba(#1B1512, .5)
+      cursor: pointer
 .icon
   width: 18px
   height: 18px
@@ -363,7 +442,7 @@ h2
   +centerer
   &:hover
     fill: $brand-color
-    cursor: pointer
+    //cursor: pointer
 
 .active-icon
   background: rgba(#1B1512, .5)
@@ -375,15 +454,14 @@ h2
 .plus
 
 .setting-module
-  // padding: 40px
   position: relative
-  min-height: 162px
+  min-height: 160px
   border-top: 1px solid #1B1413
   margin-top: 1px
   background: rgba(255,255,255,.015)
-
-
   overflow: hidden
+
+
 
 
 .value
@@ -399,10 +477,14 @@ h2
 
   +centerer
 
-.cloudy-icon img
+.cloudy-icon
   width: 48px !important
+  fill: #fdffff
   +centerer
 
+
+.fade-in
+  animation: fadeIn .4s ease-in-out
 
 footer
   padding: 40px
