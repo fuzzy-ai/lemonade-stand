@@ -18,8 +18,23 @@ class LemonadeStand extends Microservice
     config
 
   setupMiddleware: (exp) ->
+    # Develpment mode tweaks
+    if process.env.NODE_ENV == 'development'
+      webpack = require('webpack')
+      webpackConfig = require '../webpack.config'
+      webpackConfig.entry.unshift('webpack-hot-middleware/client?reload=true')
+      webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+      console.dir webpackConfig
+      compiler = webpack(webpackConfig)
+
+      exp.use require('webpack-dev-middleware')(compiler, {
+        noInfo: true,
+        publicPath: webpackConfig.output.publicPath
+      })
+      exp.use(require('webpack-hot-middleware')(compiler))
+
     exp.use express.static path.join(__dirname, '..', 'public')
-    
+
   startDatabase: (callback) ->
     callback null
 
