@@ -24,7 +24,6 @@ class LemonadeStand extends Microservice
       webpackConfig = require '../webpack.config'
       webpackConfig.entry.unshift('webpack-hot-middleware/client?reload=true')
       webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
-      console.dir webpackConfig
       compiler = webpack(webpackConfig)
 
       exp.use require('webpack-dev-middleware')(compiler, {
