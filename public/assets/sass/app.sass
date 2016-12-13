@@ -7,7 +7,7 @@ html
 //var
 
 $brand-color : #e41f1f
-$blanco-nino : lighten(#FEE5C5, 2%)
+$blanco-nino : lighten(#FEE5C5, 5%)
 
 $font-stack: Courier10BTRoman,Courier,monospace
 //helpers
@@ -26,6 +26,14 @@ $font-stack: Courier10BTRoman,Courier,monospace
   100%
 		opacity: 1
 
+
+@keyframes fadeOut
+	0%
+		opacity: 1
+  100%
+		opacity: 0
+
+
 @keyframes fadeInDown
 	0%
 		opacity: 0
@@ -39,7 +47,8 @@ $font-stack: Courier10BTRoman,Courier,monospace
 		opacity: 1
 	100%
 		opacity: 0
-		transform: translate3d(0, -100%, 0)
+		transform: translate3d(0, -1000%, 0)
+
 
 @keyframes animateClouds
   0%
@@ -77,35 +86,67 @@ body
   width: 100%
   position: absolute
   top: 0
-  animation: fadeIn 1s ease-in
+  padding-bottom: 480px
 
 
 
-.cloudy
-  .sky
-    background:  linear-gradient(-180deg,#233236  0,lighten( #3b5961,10%)55%,darken(#f5f5f5,5% ) 100%)
-    animation: fadeInDown 3s ease-in
-  .sun
-    animation: fadeOutUp 2s ease-in
-    display: none
+
 
 
 .sun
-  animation: fadeInDown 4s ease-in-out
   width: 200px
   height: 200px
   border-radius: 50%
   background: linear-gradient(-180deg, #e9ec76, #e2e571 50%, #f5ed71 80%)
   border: 1px solid lighten(#f5ed71,7.50%)
-  //margin: 7em auto
   padding: 2em
   box-shadow: 0 0 60px 40px #fbe602, 0 0 80px 60px lighten(#e70f14, 25%), 0 0 120px 90px #fabc14, 0 0 120px 80px #8bd5da
+  filter: blur(.5px)
+  // animation: fadeInDown 4s ease-in-out
   position: absolute
-  top: -220px
   left: calc(50% - 160px)
   right: calc(50% - 160px)
+  top: -240px
+
+
+.cloudy
+  .sky
+    background:  linear-gradient(-180deg,#233236  0,lighten( #3b5961,10%)55%,darken(#f5f5f5,5% ) 100%)
+    animation: fadeIn 3s ease-in
+  .cloud1 img
+    width: 380px
+  .sun
+    animation: fadeOutUp 8s ease-in
+
+.cloudy .cloud4, .cloudy .cloud5
+  display: block
+
+.cloudy .cloud1
+  animation: floaterClouds 18s linear infinite
+  animation-iteration-count: 1
+
+.cloudy .cloud2
+  animation: animateClouds 42s linear infinite
+  animation-iteration-count: 2
   filter: blur(.5px)
 
+
+.cloudy .cloud3
+  animation: animateClouds 72s -2s infinite
+  transition-timing-function: cubic-bezier(52s .42,.23,.86,.69)
+  filter: blur(.25px)
+
+.sunny
+  .sun
+    animation: fadeInDown 4s ease-in-out
+    position: absolute
+    left: calc(50% - 160px)
+    right: calc(50% - 160px)
+    top: -180px
+    transform: scale(0.5)
+
+.offset-sun
+  top: -1000px
 
 .row
   width: 100%
@@ -114,6 +155,8 @@ body
 a
   text-decoration: none
   color: $brand-color
+p a
+  background: #F5ED71
 
 .accent
   color: $brand-color
@@ -132,6 +175,9 @@ h1
 h2
   font-size: 36px
 
+p
+  margin-bottom: 36px
+
 .logo
   img
     width: 100px
@@ -141,22 +187,26 @@ h2
 
 .lemonsplanation
   width: 60%
-  margin: 40px auto 0px
+  margin: 100px auto 0px
   text-align: center
   position: relative
-  // text-shadow: 0px 1px 0px rgba(255,255,255,0.5)
 
   h1
     text-transform: uppercase
     font-weight: 900
     color: darken(#5EC3CE, 75%)
-
+  p
+    font-size: 18px
+    line-height: 2em
+    margin-bottom: 72px
 
 
 .scene
   height: 100vh
   width: 100%
   position: relative
+  padding-bottom: 480px
+
   //top: -100px
 
 .scene-inner
@@ -164,6 +214,8 @@ h2
   height: 100%
   width: 100%
   z-index: 2000
+  padding-bottom: 480px
+
 
 
 
@@ -188,6 +240,7 @@ h2
 .grass
   height: 40px
   background: #8dcb61
+  border-top: 2px solid darken(#8dcb61, 5%)
   width: 100%
   position: absolute
   bottom: 0
@@ -259,6 +312,7 @@ h2
 .cloud1, .cloud2, .cloud3, .cloud4
   display: block
   filter: drop-shadow(0px 0px 10px rgba(0,0,0,.25))
+  z-index: 4000
 
 .cloud2
   position: absolute
@@ -274,11 +328,11 @@ h2
   right: 120px
 
   img
-    width: 240px
+    width: 280px
 
 .cloud3
   position: absolute
-  top: 80px
+  top: 180px
   left: 220px
 
   img
@@ -303,23 +357,11 @@ h2
     width: 250px
 
 
-.cloudy .cloud4, .cloudy .cloud5
-  display: block
 
-.moving .cloud1
-  animation: floaterClouds 18s linear infinite
-
-.moving .cloud2
-  animation: animateClouds 42s linear infinite
-
-
-.moving .cloud3
-  animation: animateClouds 72s  infinite
-  transition-timing-function: cubic-bezier(52s .42,.23,.86,.69)
 
 .add-buyer-inline
   position: absolute
-  top: 50%
+  bottom: 280px
   left: 20px
   font-size: 22px
   svg
@@ -333,8 +375,25 @@ h2
   bottom: 40px
   height: 200px
 
+
+
+@keyframes move
+  0%
+    transform: translate3d(0px, 0px, 0)
+  100%
+    transform: translate3d(200px, 0px, 0)
+
+
+
+
 .girl
   left: 110px
+  //animation: move 4s ease-in
+  backface-visibility: hidden
+  perspective: 1000
+
+
+
 
 
 .btn
@@ -347,6 +406,7 @@ h2
     background: darken(#E56463, 5%)
     color: $blanco-nino
     border-color: $blanco-nino
+    cursor: pointer
 
 
 
@@ -374,11 +434,13 @@ h2
     position: relative
     margin: -1px 0  0 -1px
     line-height: 0
-    //background: transparent
     transition: all .3s ease-in
     &:hover
       background: rgba(#1B1512, .5)
       cursor: pointer
+      .icon
+        fill: $brand-color
+
 .icon
   width: 18px
   height: 18px
@@ -391,7 +453,8 @@ h2
 
 .active-icon
   background: rgba(#1B1512, .5)
-  // box-shadow: 1px 1px 4px darken(#221A16, 2%) inset
+  .icon
+    fill: $brand-color
 
 .minus
 
@@ -400,7 +463,7 @@ h2
 
 .setting-module
   position: relative
-  min-height: 160px
+  min-height: 159px
   border-top: 1px solid #1B1413
   margin-top: 1px
   background: rgba(255,255,255,.015)
@@ -415,18 +478,14 @@ h2
 
 
 .sunny-icon
-  svg
-    display: block
-    fill: #F8C32D
-    width: 38px !important
-
-  +centerer
+  display: block
+  fill: #F8C32D
+  width: 38px !important
 
 .cloudy-icon
   width: 48px !important
   fill: #fdffff
-  +centerer
-
+  fill:#ecf7f8
 
 .fade-in
   animation: fadeIn .4s ease-in-out
@@ -462,3 +521,8 @@ footer
 
 .angel-icon
   width: 20px
+
+.js-not-active
+  opacity: 0
+
+.js-active
