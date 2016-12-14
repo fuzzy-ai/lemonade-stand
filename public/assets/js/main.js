@@ -1,8 +1,5 @@
 // Lemonade stand
 
-// $(window).load(function(){
-//   $("body").addClass("moving");
-// });
 
 let cloudyIcon = document.querySelector('.cloudy-icon-btn');
 let sunnyIcon = document.querySelector('.sunny-icon-btn');
@@ -10,8 +7,9 @@ let b = document.getElementsByTagName('body')[0];
 let bSunny = document.getElementsByClassName('sunny');
 let sun = document.querySelector('.sun');
 let sunnyOrCloudy = document.querySelector('.sunny-or-cloudy');
-const startBtn = document.querySelector('.js-start-btn');
 let jsNotActive = document.querySelector('.js-not-active');
+
+const startBtn = document.querySelector('.js-start-btn');
 const sceneAction = document.querySelector ('.scene-action');
 
 
@@ -51,19 +49,26 @@ sunnyIcon.addEventListener('click', function(){
 
 
 //GSAP animations
-TweenMax.from(".sun", 3, {opacity:0, y:0, rotation:360,  scale:.5, ease: Power4.easeInOut})
-TweenMax.to(".sun", 3, {opacity:1, y:65, rotation:360,  scale:1.1, ease: Power2.easeInOut})
-TweenMax.from(".clouds", 6, { opacity:0, scale:0, delay:0.75,  ease:  Circ.easeOut })
+
+
+TweenMax.from(".sun", 1, {opacity:0, rotation:360,  scale:0, ease: Power4.easeInOut})
+TweenMax.to(".sun", 2, {opacity:1, y:0,   scale:1.1, ease: Power2.easeInOut})
+TweenMax.from(".clouds", 3, { opacity:0, scale:0, delay:0.75,  ease:  Circ.easeOut })
 // TweenMax.to(".js-active" , 10, { opacity:1, x: 200, ease:  Circ.easeOut })
 
 startBtn.onclick = function() {
   TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
-  TweenMax.to(window, 2, {scrollTo:{y:"#funtimes", offsetY:10}, onComplete:function(){
+  TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-100}, onComplete:function(){
+    // var tl = New TimelineMax();
+    // //set label for timeline
+    // tl.add("label");
+
     jsNotActive.classList.remove('js-not-active');
     sceneAction.classList.add('js-active');
-    TweenMax.staggerFrom(".buyer" , 1, {opacity:1, x:-200})
+    TweenMax.staggerFrom(".buyer" , 1, {opacity: 0,  x:-200})
     TweenMax.staggerTo(".buyer" , 3, {opacity:1, x:0, ease:  Power0.easeIn }, 1.5)
-    }});
+    }
+  });
 
 }
 

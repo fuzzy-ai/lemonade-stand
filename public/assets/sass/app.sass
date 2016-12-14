@@ -20,6 +20,8 @@ $font-stack: Courier10BTRoman,Courier,monospace
 
 //Keyframe animations
 
+
+
 @keyframes fadeIn
 	0%
 		opacity: 0
@@ -65,7 +67,14 @@ $font-stack: Courier10BTRoman,Courier,monospace
     transform: translateX(-20px)
 
 
+@keyframes scale
+  0%
+    transform: scale(0)
+    opacity: 0
 
+  100%
+    transform: scale(1)
+    opacity: 1
 
 
 body
@@ -86,7 +95,7 @@ body
   width: 100%
   position: absolute
   top: 0
-  padding-bottom: 480px
+  padding-bottom: 720px
 
 
 
@@ -106,7 +115,7 @@ body
   position: absolute
   left: calc(50% - 160px)
   right: calc(50% - 160px)
-  top: -240px
+  top: -200px
 
 
 .cloudy
@@ -121,9 +130,9 @@ body
 .cloudy .cloud4, .cloudy .cloud5
   display: block
 
-.cloudy .cloud1
-  animation: floaterClouds 18s linear infinite
-  animation-iteration-count: 1
+// .cloudy .cloud1
+//   animation: floaterClouds 18s linear infinite
+//   animation-iteration-count: 4
 
 .cloudy .cloud2
   animation: animateClouds 42s linear infinite
@@ -190,6 +199,8 @@ p
   margin: 100px auto 0px
   text-align: center
   position: relative
+  animation: scale 2s ease-in
+  //animation: fadeIn 4s ease-in-out
 
   h1
     text-transform: uppercase
@@ -205,16 +216,15 @@ p
   height: 100vh
   width: 100%
   position: relative
-  padding-bottom: 480px
+  padding-bottom: 720px
 
-  //top: -100px
 
 .scene-inner
   position: relative
   height: 100%
   width: 100%
   z-index: 2000
-  padding-bottom: 480px
+  padding-bottom: 720px
 
 
 
@@ -267,9 +277,7 @@ p
   padding: 0
   color: $blanco-nino
 
-.stand
-  margin: 0 auto
-  width: 400px
+
 
 .flex
   display: flex
@@ -309,7 +317,7 @@ p
 .cloud-zone
 
 
-.cloud1, .cloud2, .cloud3, .cloud4
+.cloud1, .cloud2, .cloud3, .cloud4, .cloud5, .cloud6
   display: block
   filter: drop-shadow(0px 0px 10px rgba(0,0,0,.25))
   z-index: 4000
@@ -326,9 +334,12 @@ p
   position: absolute
   top: 60px
   right: 120px
+  animation: floaterClouds 18s linear infinite
+  animation-iteration-count: 4
 
   img
-    width: 280px
+    width: 240px
+    filter: blur(.05px)
 
 .cloud3
   position: absolute
@@ -337,6 +348,7 @@ p
 
   img
     width: 180px
+    filter: blur(.15px)
 
 .cloud4
   position: absolute
@@ -357,6 +369,17 @@ p
     width: 250px
 
 
+.cloud6
+  position: absolute
+  top: 580px
+  left: 20px
+  animation: floaterClouds 44s linear infinite
+  animation-iteration-count: 2
+
+  img
+    width: 320px
+
+
 
 
 .add-buyer-inline
@@ -370,10 +393,10 @@ p
 
 
 .girl, .boy
-  width: 140px
+  width: 120px
   position: absolute
   bottom: 40px
-  height: 200px
+  height: 160px
 
 
 
@@ -497,7 +520,10 @@ footer
   display: flex
   flex-direction: row
   justify-content: space-between
-//social links
+
+
+
+
 
 .social-footer-links
 
@@ -513,16 +539,55 @@ footer
     fill: $brand-color
 
 
-.twitter-icon
-
-
-.facebook-icon
-
-
 .angel-icon
   width: 20px
 
 .js-not-active
   opacity: 0
 
-.js-active
+#stand
+  width: 320px
+  position: absolute
+  bottom: 40px
+  left: calc(50% - 160px)
+  right: calc(50% - 160px)
+
+  [data-name="verticalPlank"]
+    fill: #EFD39F
+    &:nth-child(3n)
+      fill: url(/#wood)
+    &:nth-child(2)
+      fill: #EEE39E
+    &:nth-child(4n)
+      fill: #EEE39E
+    &:nth-child(6)
+      fill: url(/#wood)
+      stroke: #EFD39F
+  [data-name="awning"]
+    fill: #63C8CD
+    stroke: #EEE39E
+    stroke-width: 4
+
+
+  [data-name="jug"]
+    fill: #63C8CD
+  [data-name="logoPanel"]
+    fill: #3A1447
+    stroke: #fdffff
+    stroke-width: 4
+    filter: drop-shadow(2px 4px 8px rgba(0,0,0,.25))
+  [data-name="tableTop"]
+    fill: #EEE39E
+    filter: drop-shadow(2px 4px 8px rgba(0,0,0,.25))
+    stroke: transparent
+    stroke-width: 1
+  [data-name="supportPole"]
+    fill: #FAF9F0
+    stroke: transparent
+    stroke-width: 1
+  [date-name="lemondade"]
+    fill: #63C8CD
+  .o
+    fill: #F9EC73
+  .stand-text
+    fill: #FAF9F0
