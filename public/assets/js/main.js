@@ -1,13 +1,13 @@
 // Lemonade stand
 
 
-let cloudyIcon = document.querySelector('.cloudy-icon-btn');
-let sunnyIcon = document.querySelector('.sunny-icon-btn');
-let b = document.getElementsByTagName('body')[0];
-let bSunny = document.getElementsByClassName('sunny');
-let sun = document.querySelector('.sun');
-let sunnyOrCloudy = document.querySelector('.sunny-or-cloudy');
-let jsNotActive = document.querySelector('.js-not-active');
+let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
+    sunnyIcon = document.querySelector('.sunny-icon-btn'),
+    b = document.getElementsByTagName('body')[0],
+    bSunny = document.getElementsByClassName('sunny'),
+    sun = document.querySelector('.sun'),
+    sunnyOrCloudy = document.querySelector('.sunny-or-cloudy'),
+    jsNotActive = document.querySelector('.js-not-active');
 
 const startBtn = document.querySelector('.js-start-btn');
 const sceneAction = document.querySelector ('.scene-action');
@@ -38,13 +38,6 @@ sunnyIcon.addEventListener('click', function(){
   cloudyIcon.classList.remove('active-icon');
 });
 
-//Load scene
-// setTimeout(function(){
-//   startBtn.addEventListener('click', function(){
-//     jsNotActive.classList.remove('js-not-active');
-//     this.classList.add('js-active');
-//   });
-// }, 8000);
 
 
 
@@ -53,26 +46,21 @@ sunnyIcon.addEventListener('click', function(){
 
 TweenMax.from(".sun", 1, {opacity:0, rotation:360,  scale:0, ease: Power4.easeInOut})
 TweenMax.to(".sun", 2, {opacity:1, y:0,   scale:1.1, ease: Power2.easeInOut})
-TweenMax.from(".clouds", 3, { opacity:0, scale:0, delay:0.75,  ease:  Circ.easeOut })
-// TweenMax.to(".js-active" , 10, { opacity:1, x: 200, ease:  Circ.easeOut })
+TweenMax.staggerFrom(".clouds", 3, {cycle:{
+  scale:[0, 1.1]
+}, autoAlpha:0,  ease:  Power1.easeOut }, 1)
 
 startBtn.onclick = function() {
   TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
   TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-100}, onComplete:function(){
-    // var tl = New TimelineMax();
-    // //set label for timeline
-    // tl.add("label");
-
     jsNotActive.classList.remove('js-not-active');
     sceneAction.classList.add('js-active');
-    TweenMax.staggerFrom(".buyer" , 1, {opacity: 0,  x:-200})
-    TweenMax.staggerTo(".buyer" , 3, {opacity:1, x:0, ease:  Power0.easeIn }, 1.5)
+
+    var tl = new TimelineLite();
+      tl.to(".buyer", 3, {left:"30%"})
+        .add("purchasing", '+=2')
+        .to(".buyer", 9, {x:2000}, "purchasing");
     }
-  });
+});
 
 }
-
-// function complete(){
-// TweenMax("#funtimes" , 4, { opacity:1, x: -1200, ease:  Circ.easeOut });
-//
-// };

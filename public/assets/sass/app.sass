@@ -334,12 +334,12 @@ p
   position: absolute
   top: 60px
   right: 120px
-  animation: floaterClouds 18s linear infinite
-  animation-iteration-count: 4
+  // animation: floaterClouds 18s linear infinite
+  // animation-iteration-count: 4
 
   img
     width: 240px
-    filter: blur(.05px)
+    filter: blur(.05 px)
 
 .cloud3
   position: absolute
@@ -373,8 +373,8 @@ p
   position: absolute
   top: 580px
   left: 20px
-  animation: floaterClouds 44s linear infinite
-  animation-iteration-count: 2
+  // animation: floaterClouds 44s linear infinite
+  // animation-iteration-count: 2
 
   img
     width: 320px
@@ -392,11 +392,13 @@ p
     fill: $brand-color
 
 
-.girl, .boy
+
+.buyer
   width: 120px
   position: absolute
   bottom: 40px
-  height: 160px
+  height: 180px
+  z-index: 1000 !important
 
 
 
@@ -410,7 +412,7 @@ p
 
 
 .girl
-  left: 110px
+  //left: 110px
   //animation: move 4s ease-in
   backface-visibility: hidden
   perspective: 1000
@@ -553,34 +555,38 @@ footer
   right: calc(50% - 160px)
 
   [data-name="verticalPlank"]
-    fill: #EFD39F
+    fill: #E2B1A2
     &:nth-child(3n)
       fill: url(/#wood)
     &:nth-child(2)
-      fill: #EEE39E
+      fill: #E2B1A2
     &:nth-child(4n)
-      fill: #EEE39E
+      fill: url(/#wood2)
     &:nth-child(6)
-      fill: url(/#wood)
+      fill: #FAF9F0
       stroke: #EFD39F
   [data-name="awning"]
     fill: #63C8CD
     stroke: #EEE39E
     stroke-width: 4
-
-
   [data-name="jug"]
+    fill: rgba(#63C8CD,.25)
+    stroke: rgba(#63C8CD,.75)
+  [data-name="jugHandle"]
+    fill: transparent
+    stroke: rgba(#63C8CD,.75)
+  [data-name="lemonade"]
     fill: #63C8CD
   [data-name="logoPanel"]
     fill: #3A1447
     stroke: #fdffff
     stroke-width: 4
-    filter: drop-shadow(2px 4px 8px rgba(0,0,0,.25))
+    filter: drop-shadow(4px 4px 8px rgba(0,0,0,.25))
   [data-name="tableTop"]
     fill: #EEE39E
-    filter: drop-shadow(2px 4px 8px rgba(0,0,0,.25))
-    stroke: transparent
-    stroke-width: 1
+    filter: drop-shadow(2px 8px 8px rgba(0,0,0,.5))
+    stroke: #FAF9F0
+    stroke-width: 2
   [data-name="supportPole"]
     fill: #FAF9F0
     stroke: transparent
