@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node lib/main.js",
     "test": "npm test",
-    "dev": "PORT=8080 NODE_ENV=development coffee -w src/main.coffee"
+    "dev": "coffee -r dotenv/config  -w src/main.coffee"
   },
   "repository": {
     "type": "git",
@@ -25,12 +25,15 @@
   "homepage": "https://github.com/fuzzy-ai/lemonade-stand#readme",
   "dependencies": {
     "autoprefixer": "^6.5.3",
+    "connect-databank": "^1.0.3",
     "css-loader": "^0.26.0",
     "databank": "^0.19.5",
-    "databank-mongodb": "^0.19.0",
+    "databank-redis": "^0.19.6",
+    "express-session": "^1.14.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "fuzzy.ai": "^1.0.0",
     "fuzzy.ai-microservice": "^1.0.0",
+    "lodash": "^4.17.2",
     "node-sass": "^3.13.0",
     "postcss-loader": "^1.1.1",
     "sass-loader": "^4.0.2",
@@ -40,6 +43,7 @@
   "devDependencies": {
     "coffee-script": "^1.11.1",
     "coffeelint": "^1.16.0",
+    "dotenv": "^2.0.0",
     "glob": "^7.1.1",
     "perjury": "^0.4.2",
     "webpack-dev-middleware": "^1.8.4",
