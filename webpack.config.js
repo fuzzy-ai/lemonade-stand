@@ -4,9 +4,9 @@ var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: {
-    app: ['./public/assets/js/app']
-  },
+  entry: [
+    './public/assets/js/app'
+  ],
   output: {
     filename: '[name].js',
     path: path.join(__dirname, 'public', 'assets'),
@@ -18,7 +18,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css'),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.NoErrorsPlugin()
   ],
   resolveLoader: {
     modulesDirectories: ['node_modules']

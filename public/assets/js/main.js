@@ -60,7 +60,13 @@ TweenMax.staggerFrom(".clouds", 3, {cycle:{
 }, autoAlpha:0,  ease:  Power1.easeOut }, 1)
 
 startBtn.onclick = function() {
+
   TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
+
+  $.post('/data/seller', function(data) {
+    console.log(data);
+  });
+  TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
   TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-100}, onComplete:function(){
     jsNotActive.classList.remove('js-not-active');
     sceneAction.classList.add('js-active');
