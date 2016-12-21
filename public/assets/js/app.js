@@ -10,7 +10,7 @@ var state = {
   addBuyer: function() {
     newBuyer = new buyer();
     this.buyers.push(newBuyer);
-  }
+  },
 
   removeBuyer: function() {
     oldBuyer = this.buyers.shift();
