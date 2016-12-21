@@ -38,6 +38,8 @@ jspm_packages
 
 lib/
 
+.env
 test/*.js
-public/assets/app.js
-public/assets/app.css
+public/assets/main.js
+public/assets/main.css
+client-secret.json
