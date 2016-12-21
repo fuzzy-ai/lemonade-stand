@@ -32,8 +32,8 @@
         </header>
         <div class="sun"></div><!-- end sun -->
           <article class="lemonsplanation">
-            <h1>Lemonade stand</h1>
-            <p>The price of each cup of lemonade is decided by <a href="https://fuzzy.ai">Fuzzy.ai</a>. Try changing the number of people in line, the temperature or the weather and see how that affects the price. Check out the Profits chart below to see how well <a href="https://fuzzy.ai">Fuzzy.ai</a> learns to maximize profit .</p>
+            <h1 class="lemonsplanation__heading">Lemonade stand</h1>
+            <p class="lemonsplanation__para">The price of each cup of lemonade is decided by <a href="https://fuzzy.ai">Fuzzy.ai</a>. Try changing the number of people in line, the temperature or the weather and see how that affects the price. Check out the Profits chart below to see how well <a href="https://fuzzy.ai">Fuzzy.ai</a> learns to maximize profit .</p>
             <span class="btn js-start-btn">Get Started</span>
           </article>
           <div class="cloud-zone flex">
@@ -52,14 +52,14 @@
             <svg class="icon plus">
             <use xlink:href="/assets/images/sprite.svg#plus"></use>
           </svg></span>
-          <!-- <svg class="boy buyer">
+          <svg class="boy buyer">
             <defs>
             <style>
               .\31 5295eb7-69ec-4a60-bb7b-4fdcfcc03590{fill:#f9a675;}.\32 42823b2-bec4-4582-9fd1-9801e0152ee8,.\32 cc61907-2f26-4c6e-aacc-3331d73fce5f{fill:#5fcae4;}.a1e2872c-af4f-4688-8777-ba3a2bbe7f82,.be2bc93c-eb7f-4363-934e-d253076ea776{fill:#a81d39;}.\32 567c715-dccd-45d6-bab5-36ad440533a8,.a1e2872c-af4f-4688-8777-ba3a2bbe7f82,.d095f36e-923f-4e5c-901c-0da691ab4772{stroke:#fff;}.\32 567c715-dccd-45d6-bab5-36ad440533a8,.\32 cc61907-2f26-4c6e-aacc-3331d73fce5f,.a1e2872c-af4f-4688-8777-ba3a2bbe7f82,.d095f36e-923f-4e5c-901c-0da691ab4772{stroke-miterlimit:10;}.d095f36e-923f-4e5c-901c-0da691ab4772{fill:#4ac5dd;}.\31 1690bb5-d956-405b-b292-e3771b727534{fill:#f1ae88;}.\32 ccec94c-d25b-4637-8ced-c1ed04509985{fill:#f3bda2;}.\34 7156025-8644-4c5e-9dd8-e96041cb39ea{fill:#fff;}.\32 567c715-dccd-45d6-bab5-36ad440533a8{fill:#50bacc;}.\33 4afe64d-b303-4870-942c-856c96e3e50f{fill:#303c68;}.\33 1c4f160-0f7e-4fa9-8efb-bf125aa00e69{fill:#ee3452;}.\32 cc61907-2f26-4c6e-aacc-3331d73fce5f{stroke:#ed1c24;}.e7e5d7b3-39a1-449d-a6aa-bbacde78bad1{fill:#d3aa97;fill-opacity:0.36;}.d99718e7-ba58-463f-92e3-c20e86bc629d{opacity:0.2;}.\39 522e636-fb4a-435e-a2ad-d3af14107007{fill:#d31f42;fill-rule:evenodd;}
             </style>
           </defs>
           <use xlink:href="/assets/images/sprite.svg#boy2"></use>
-          </svg> -->
+          </svg>
 
           <svg class="girl buyer">
             <defs>
@@ -116,7 +116,7 @@
         <path class="stand-text" d="M592.1,469.43s0.21,22.91-31.49,17.74L560,446.52C591.8,441.35,592.1,469.43,592.1,469.43ZM568.3,480.57c15.89-.84,15.76-10,15.76-10s-0.29-21.48-16.61-16.9Z" data-name="d" transform="translate(-226.01 -53.33)"/>
         </g>
         </svg>
-        <div class="grass"></div>
+        <div class="snow"></div>
     </div><!-- end SCENE-INNER -->
   </div><!-- END SCENNE -->
   </div>
@@ -143,7 +143,7 @@
                   </svg>
                 </span>
               </div><!-- end value mod -->
-              <h2 class="heading value">10</h2>
+              <h2 class="heading value" id="user-num">10</h2>
             </div>
           </div><!-- end flex item -->
           <div class="flex__item">
@@ -164,7 +164,7 @@
                   </svg>
                 </span>
               </div><!-- end value mod -->
-              <h2 class="heading value">75 <span class="accent">&deg;</span></h2>
+              <h2 class="heading value" id="temperature">75 <span class="accent">&deg;</span></h2>
             </div>
           </div><!-- end flex item -->
           <div class="flex__item">
