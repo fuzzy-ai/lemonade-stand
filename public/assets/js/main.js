@@ -1,6 +1,84 @@
 // Lemonade stand
 
+var state = {
+  buyers: [],
+  temperature: 75,
+  sunny: 1,
+  price: 1.00,
+  updatePending: false,
+
+  addBuyer: function() {
+    newBuyer = new buyer();
+    this.buyers.push(newBuyer);
+    this.queueUpdate();
+  },
+
+  removeBuyer: function() {
+    oldBuyer = this.buyers.shift();
+    this.queueUpdate();
+  },
+
+  setTemperature: function(temp) {
+    this.temperature = temp;
+    this.queueUpdate();
+  },
+
+  setPrice: function(price) {
+    this.price = price;
+    this.queueUpdate();
+  },
+
+  setSunny: function(sunny) {
+    this.sunny = sunny;
+    this.queueUpdate();
+  },
+
+  queueUpdate: function() {
+    if (!this.updatePending) {
+      this.updatePending = true;
+      setTimeout(sellerEvaluate, 2500);
+    }
+  }
+};
+
+function sellerEvaluate() {
+  var data = {
+    numBuyers: state.buyers.length,
+    temperature: state.temperature,
+    sunny: state.sunny
+  };
+  console.log(JSON.stringify(data));
+  $.ajax({
+    method: "POST",
+    url: "/data/seller/evaluate",
+    data: JSON.stringify(data),
+    contentType: 'application/json',
+    success: function(data) {
+      state.updatePending = false;
+      console.log(data);
+    }
+  });
+}
+
+var buyer = function () {
+  return {
+    evaluate: function() {
+      var data = {
+        price: state.price,
+        numBuyers: state.buyers.length,
+        temperature: state.temperature,
+        sunny: state.sunny
+      };
+
+      $.post("/data/buyer/evaluate", data, function(data) {
+        console.log("show buy / no buy");
+      });
+    }
+  }
+};
+
 (function(){
+  console.log(state);
 let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
     sunnyIcon = document.querySelector('.sunny-icon-btn'),
     b = document.getElementsByTagName('body')[0],
@@ -9,7 +87,9 @@ let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
     sunnyOrCloudy = document.querySelector('.sunny-or-cloudy'),
     jsNotActive = document.querySelector('.js-not-active'),
     lemonHeading = document.querySelector('.lemonsplanation__heading'),
-    lemonPara = document.querySelector('.lemonsplanation__para');
+    lemonPara = document.querySelector('.lemonsplanation__para'),
+    tempUp = document.querySelector('.temperature-up-icon'),
+    tempDown = document.querySelector('.temperature-down-icon');
 
 const startBtn = document.querySelector('.js-start-btn'),
       sceneAction = document.querySelector ('.scene-action');
@@ -24,7 +104,7 @@ cloudyIcon.addEventListener('click', function(){
   sunnyIcon.classList.remove('active-icon');
   sunnyOrCloudy.innerHTML = 'cloudy';
 
-
+  state.setSunny(0);
   window.setTimeout(function(){
     sun.classList.add('offset-sun');
   }, 7000);
@@ -32,6 +112,7 @@ cloudyIcon.addEventListener('click', function(){
 
 sunnyIcon.addEventListener('click', function(){
   console.log('clicked')
+  state.setSunny(1);
   b.classList.add('sunny');
   b.classList.remove('cloudy')
   sun.classList.remove('offset-sun');
@@ -40,7 +121,17 @@ sunnyIcon.addEventListener('click', function(){
   cloudyIcon.classList.remove('active-icon');
 });
 
+tempUp.addEventListener('click', function() {
+  state.setTemperature(state.temperature + 1);
+  tempValue = state.temperature;
+  $("#temperature").html(state.temperature);
+});
 
+tempDown.addEventListener('click', function() {
+  state.setTemperature(state.temperature - 1);
+  tempValue = state.temperature;
+  $("#temperature").html(state.temperature);
+});
 
 
 //GSAP animations
@@ -80,4 +171,4 @@ startBtn.onclick = function() {
       }
     });
   }
-})()
+})();
