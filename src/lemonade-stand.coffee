@@ -91,7 +91,7 @@ class LemonadeStand extends Microservice
 
   _evaluateSeller: (req, res, next) ->
     client = req.app.apiClient
-
+    console.error req.body
     client.evaluate req.session.sellerID, req.body, true, (err, evaluation) ->
       if err
         next err
@@ -99,6 +99,7 @@ class LemonadeStand extends Microservice
         req.session.lastEvalID = evaluation.meta.reqID
         res.json
           status: 'OK'
+          evaluation: evaluation
 
   _feedbackSeller: (req, res, next) ->
     client = req.app.apiClient
@@ -112,6 +113,7 @@ class LemonadeStand extends Microservice
           next err
         res.json
           status: 'OK'
+          feedback: feedback
 
   _evaluateBuyer: (req, res, next) ->
     client = req.app.apiClient
@@ -122,5 +124,6 @@ class LemonadeStand extends Microservice
       else
         res.json
           status: 'OK'
+          evaluation: evaluation
 
 module.exports = LemonadeStand
