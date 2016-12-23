@@ -11,6 +11,7 @@ var state = {
     newBuyer = new buyer();
     this.buyers.push(newBuyer);
     this.queueUpdate();
+    gender = [ boy, girl];
   },
 
   removeBuyer: function() {
@@ -89,9 +90,11 @@ let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
     lemonsplanation = document.querySelector('.lemonsplanation'),
     lemonHeading = document.querySelector('.lemonsplanation__heading'),
     lemonPara = document.querySelector('.lemonsplanation__para'),
+    boy = document.querySelector(".boy"),
+    girl = document.querySelector(".girl"),
     tempUp = document.querySelector('.temperature-up-icon'),
     tempDown = document.querySelector('.temperature-down-icon'),
-    buyer = document.querySelectorAll('.buyer');
+    buyer = [boy, girl];
 
 
 const startBtn = document.querySelector('.js-start-btn'),
@@ -159,36 +162,46 @@ startBtn.addEventListener('click' , function() {
   console.log('start btn got clicked');
   TweenMax.to(lemonsplanation, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
 
-  $.post('/data/seller', function(data) {
-    console.log(data);
-  });
-  TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
-  TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-200}, onComplete:function(){
-    jsNotActive.classList.remove('js-not-active');
-    sceneAction.classList.add('js-active');
-    // TweenMax.staggerFrom( buyers , 1, {opacity: 0,  x:-200})
-    // TweenMax.staggerTo( buyers , 3, {opacity:1, x:0, ease:  Power0.easeIn }, 4.5)
+    $.post('/data/seller', function(data) {
+      console.log(data);
+    });
+
+      TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
+      TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-200}, onComplete:function(){
+      jsNotActive.classList.remove('js-not-active');
+      sceneAction.classList.add('js-active');
 
 
-    let tlBuyers = new TimelineLite(
-      {onComplete: function() {
-          this.restart();
-        }
-      });
+      // let tlBuyers = new TimelineLite(
+      //   {onComplete: function() {
+      //       this.restart();
+      //   }
+      // });
+      //
+      // tlBuyers
+      //   .fromTo( buyer, 3,{ left: "0%", scale: 0.5},{ left: "40%", scale:1, ease:Power1.easeIn})
+      //   .to( buyer, 4, {left: "140%", delay:10, ease:Power1.easeIn})
+      //
+      //   for(var i = 0; i>= buyer.length; i++){
+      //     tlBuyers;
+      //   }
+
+        var buyer = [boy,girl];
+          var tlBuyers = new TimelineLite(  {onComplete: function() {
+                this.restart();
+            }
+          });
+          // tlBuyers.staggerTo(buyer, 2, {left:"40%",},4)
+          //   .staggerTo(buyer, 2, {left:"140%", delay:10}, 0.25, 0.25);
+
+            tlBuyers.staggerTo(buyer, 3, {cycle: {
+          			left: ["0%", "40%"]
+          		}, delay:4, ease:Power1.easeOut}, 4)
+              .staggerTo(buyer, 3, {cycle: {
+            			left: ["40%", "140%"]
+            		}, delay:4, ease:Power1.easeOut}, 4)
 
 
-
-        tlBuyers
-        .fromTo( buyer, 3,
-          { left: "0%", scale: 0.5},
-          { left: "40%", scale:1, ease:Power1.easeIn})
-          //  .addPause(4)
-          // .add("pausing")
-          //.add(".purchasing", '+=2')
-          // .resume()
-        .to( buyer, 4, {left: "140%", delay:10, ease:Power1.easeIn})
-
-        // .to( buyer, 2, {x:2000}, "-=2");
       }
     });
   })
