@@ -86,10 +86,13 @@ let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
     sun = document.querySelector('.sun'),
     sunnyOrCloudy = document.querySelector('.sunny-or-cloudy'),
     jsNotActive = document.querySelector('.js-not-active'),
+    lemonsplanation = document.querySelector('.lemonsplanation'),
     lemonHeading = document.querySelector('.lemonsplanation__heading'),
     lemonPara = document.querySelector('.lemonsplanation__para'),
     tempUp = document.querySelector('.temperature-up-icon'),
-    tempDown = document.querySelector('.temperature-down-icon');
+    tempDown = document.querySelector('.temperature-down-icon'),
+    buyer = document.querySelectorAll('.buyer');
+
 
 const startBtn = document.querySelector('.js-start-btn'),
       sceneAction = document.querySelector ('.scene-action');
@@ -135,40 +138,58 @@ tempDown.addEventListener('click', function() {
 
 
 //GSAP animations
-
+tlSunEntrance = new TimelineMax();
 tlIntroText = new TimelineMax();
 
   tlIntroText
-  .from(lemonHeading, .5, {autoAlpha: 0, y: -20, ease: Power2.easeIn})
-  .from(lemonPara, .5, {autoAlpha: 0, ease: Power4.easeIn})
-  .fromTo(startBtn, 2, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, ease: Back.easeIn}, '-=.25');
+    .from(lemonHeading, .5, {autoAlpha: 0, y: -20, ease: Power2.easeIn})
+    .from(lemonPara, .5, {autoAlpha: 0, ease: Power4.easeIn})
+    .fromTo(startBtn, 2, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, ease: Back.easeIn}, '-=.25');
 
 
-TweenMax.from(".sun", 1, {opacity:0, rotation:360,  scale:0, ease: Power4.easeInOut})
-TweenMax.to(".sun", 2, {opacity:1, y:0,   scale:1.1, ease: Power2.easeInOut})
-TweenMax.staggerFrom(".clouds", 3, {cycle:{
-  scale:[0, 1.1]
+tlSunEntrance
+.fromTo(sun, 1, {opacity:0, rotation:0, Y: -200 , scale:0},
+        {opacity:1, y:0, rotation:360,  scale:1, ease: Power2.easeInOut})
+.staggerFrom(".clouds", 3, {cycle:{
+  scale:[0, 1]
 }, autoAlpha:0,  ease:  Power1.easeOut }, 1)
 
-startBtn.onclick = function() {
 
-  TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
+startBtn.addEventListener('click' , function() {
+  console.log('start btn got clicked');
+  TweenMax.to(lemonsplanation, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
 
   $.post('/data/seller', function(data) {
     console.log(data);
   });
   TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
-  TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-100}, onComplete:function(){
+  TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-200}, onComplete:function(){
     jsNotActive.classList.remove('js-not-active');
     sceneAction.classList.add('js-active');
-    // TweenMax.staggerFrom(".buyer" , 1, {opacity: 0,  x:-200})
-    // TweenMax.staggerTo(".buyer" , 3, {opacity:1, x:0, ease:  Power0.easeIn }, 4.5)
+    // TweenMax.staggerFrom( buyers , 1, {opacity: 0,  x:-200})
+    // TweenMax.staggerTo( buyers , 3, {opacity:1, x:0, ease:  Power0.easeIn }, 4.5)
 
-    let tl = new TimelineLite();
-      tl.to(".buyer", 3, {left:"30%"})
-        .add("purchasing", '+=2')
-        .to(".buyer", 9, {x:2000}, "purchasing");
+
+    let tlBuyers = new TimelineLite(
+      {onComplete: function() {
+          this.restart();
+        }
+      });
+
+
+
+        tlBuyers
+        .fromTo( buyer, 3,
+          { left: "0%", scale: 0.5},
+          { left: "40%", scale:1, ease:Power1.easeIn})
+          //  .addPause(4)
+          // .add("pausing")
+          //.add(".purchasing", '+=2')
+          // .resume()
+        .to( buyer, 4, {left: "140%", delay:10, ease:Power1.easeIn})
+
+        // .to( buyer, 2, {x:2000}, "-=2");
       }
     });
-  }
+  })
 })();
