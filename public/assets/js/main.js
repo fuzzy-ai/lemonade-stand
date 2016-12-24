@@ -187,19 +187,22 @@ startBtn.addEventListener('click' , function() {
       //   }
 
         var buyer = [boy,girl];
-          var tlBuyers = new TimelineLite(  {onComplete: function() {
+          var tlBuyers = new TimelineMax(  {onComplete: function() {
                 this.restart();
             }
           });
           // tlBuyers.staggerTo(buyer, 2, {left:"40%",},4)
           //   .staggerTo(buyer, 2, {left:"140%", delay:10}, 0.25, 0.25);
+            for(var i = 0; i <= buyer.length; i++){
+              tlBuyers
+              .to(buyer[i], 3, {left: "40%", delay:4, ease:Power1.easeOut})
+              .to(buyer[i], 4, { left:"120%",ease:Power3.easeIn})
+            }
+              //
+              // .staggerTo(buyer, 3, {cycle: {
+            	// 		left: "140%"
+            	// 	}, delay:4, ease:Power1.easeOut}, 4)
 
-            tlBuyers.staggerTo(buyer, 3, {cycle: {
-          			left: ["0%", "40%"]
-          		}, delay:4, ease:Power1.easeOut}, 4)
-              .staggerTo(buyer, 3, {cycle: {
-            			left: ["40%", "140%"]
-            		}, delay:4, ease:Power1.easeOut}, 4)
 
 
       }
