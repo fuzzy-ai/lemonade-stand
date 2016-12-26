@@ -100,10 +100,7 @@ let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
 const startBtn = document.querySelector('.js-start-btn'),
       sceneAction = document.querySelector ('.scene-action');
 
-
-//toggle cloudy or sunny weather
-cloudyIcon.addEventListener('click', function(){
-  console.log('clicked')
+function setCloudyWeather() {
   b.classList.toggle('cloudy');
   b.classList.remove('sunny')
   cloudyIcon.classList.add('active-icon');
@@ -111,13 +108,14 @@ cloudyIcon.addEventListener('click', function(){
   sunnyOrCloudy.innerHTML = 'cloudy';
 
   state.setSunny(0);
+
   window.setTimeout(function(){
     sun.classList.add('offset-sun');
-  }, 7000);
-});
+    }, 7000);
+  };
 
-sunnyIcon.addEventListener('click', function(){
-  console.log('clicked')
+
+function setSunnyWeather() {
   state.setSunny(1);
   b.classList.add('sunny');
   b.classList.remove('cloudy')
@@ -125,7 +123,12 @@ sunnyIcon.addEventListener('click', function(){
   sunnyOrCloudy.innerHTML = 'sunny';
   sunnyIcon.classList.add('active-icon');
   cloudyIcon.classList.remove('active-icon');
-});
+}
+
+//toggle cloudy or sunny weather
+
+sunnyIcon.addEventListener('click', setSunnyWeather);
+cloudyIcon.addEventListener('click', setCloudyWeather);
 
 tempUp.addEventListener('click', function() {
   state.setTemperature(state.temperature + 1);
@@ -140,71 +143,51 @@ tempDown.addEventListener('click', function() {
 });
 
 
-//GSAP animations
+//GSAP animations timelines
 tlSunEntrance = new TimelineMax();
 tlIntroText = new TimelineMax();
+tlSunEntrance = new TimelineMax();
 
+  // intro text animation
   tlIntroText
     .from(lemonHeading, .5, {autoAlpha: 0, y: -20, ease: Power2.easeIn})
     .from(lemonPara, .5, {autoAlpha: 0, ease: Power4.easeIn})
-    .fromTo(startBtn, 2, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, ease: Back.easeIn}, '-=.25');
+    .fromTo(startBtn, .75, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, yPercent:'0', ease: Back.easeIn}, '-=.25');
 
+    // sun entrance into scene
+  tlSunEntrance
+  .fromTo(sun, 1, {opacity:0, rotation:0, Y: -200 , scale:0},
+         {opacity:1, y:0, rotation:360,  scale:1, ease: Power2.easeInOut})
+  .staggerFrom(".clouds", 3, {cycle:{
+    scale:[0, 1]
+  }, autoAlpha:0,  ease:  Power1.easeOut }, 1)
 
-tlSunEntrance
-.fromTo(sun, 1, {opacity:0, rotation:0, Y: -200 , scale:0},
-        {opacity:1, y:0, rotation:360,  scale:1, ease: Power2.easeInOut})
-.staggerFrom(".clouds", 3, {cycle:{
-  scale:[0, 1]
-}, autoAlpha:0,  ease:  Power1.easeOut }, 1)
+  //start and load animation loop
+  startBtn.addEventListener('click' , function() {
+    TweenMax.to(lemonsplanation, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
 
-
-startBtn.addEventListener('click' , function() {
-  console.log('start btn got clicked');
-  TweenMax.to(lemonsplanation, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
-
-    $.post('/data/seller', function(data) {
-      console.log(data);
-    });
+      $.post('/data/seller', function(data) {
+        console.log(data);
+      });
 
       TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
       TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-200}, onComplete:function(){
       jsNotActive.classList.remove('js-not-active');
       sceneAction.classList.add('js-active');
 
-
-      // let tlBuyers = new TimelineLite(
-      //   {onComplete: function() {
-      //       this.restart();
-      //   }
-      // });
-      //
-      // tlBuyers
-      //   .fromTo( buyer, 3,{ left: "0%", scale: 0.5},{ left: "40%", scale:1, ease:Power1.easeIn})
-      //   .to( buyer, 4, {left: "140%", delay:10, ease:Power1.easeIn})
-      //
-      //   for(var i = 0; i>= buyer.length; i++){
-      //     tlBuyers;
-      //   }
-
+      let buyers = document.querySelectorAll('.buyer');
         var buyer = [boy,girl];
-          var tlBuyers = new TimelineMax(  {onComplete: function() {
-                this.restart();
-            }
-          });
-          // tlBuyers.staggerTo(buyer, 2, {left:"40%",},4)
-          //   .staggerTo(buyer, 2, {left:"140%", delay:10}, 0.25, 0.25);
-            for(var i = 0; i <= buyer.length; i++){
-              tlBuyers
-              .to(buyer[i], 3, {left: "40%", delay:4, ease:Power1.easeOut})
-              .to(buyer[i], 4, { left:"120%",ease:Power3.easeIn})
-            }
-              //
-              // .staggerTo(buyer, 3, {cycle: {
-            	// 		left: "140%"
-            	// 	}, delay:4, ease:Power1.easeOut}, 4)
-
-
-
+        var tlBuyers = new TimelineMax(  {onComplete: function() {
+              this.restart();
+          }
+        });
+        
+      //buyer loop
+      buyers.forEach(function(buyer){
+        tlBuyers
+          .to(buyer, 3, {left: "40%", delay:4, ease:Power1.easeOut})
+          .to(buyer, 4, { left:"120%",ease:Power3.easeIn})
+        })
       }
     });
   })
