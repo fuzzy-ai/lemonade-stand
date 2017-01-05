@@ -27,6 +27,7 @@ var state = {
 
   setTemperature: function(temp) {
     this.temperature = temp;
+    $("#temperature").html(this.temperature);
     this.queueUpdate();
   },
 
@@ -62,6 +63,10 @@ function sellerEvaluate() {
     contentType: 'application/json',
     success: function(data) {
       state.updatePending = false;
+      var num = data.evaluation.price;
+      if (num) {
+        $("#current-price").html("$" + num.toFixed(2));
+      }
       console.log(data);
     }
   });
@@ -169,14 +174,10 @@ cloudyIcon.addEventListener('click', setCloudyWeather);
 
 tempUp.addEventListener('click', function() {
   state.setTemperature(state.temperature + 1);
-  tempValue = state.temperature;
-  $("#temperature").html(state.temperature);
 });
 
 tempDown.addEventListener('click', function() {
   state.setTemperature(state.temperature - 1);
-  tempValue = state.temperature;
-  $("#temperature").html(state.temperature);
 });
 
 buyerPlus.addEventListener("click", function(){
