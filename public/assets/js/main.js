@@ -8,10 +8,11 @@ var state = {
   updatePending: false,
 
   addBuyer: function() {
+    var genders = ['boy', 'girl'];
     newBuyer = new buyer();
+    newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
     this.buyers.push(newBuyer);
     this.queueUpdate();
-    // gender = [ boy, girl];
   },
 
   removeBuyer: function() {
@@ -63,6 +64,7 @@ function sellerEvaluate() {
 
 var buyer = function () {
   return {
+    gender: 'boy',
     evaluate: function() {
       var data = {
         price: state.price,
