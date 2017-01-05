@@ -34,10 +34,10 @@ module.exports.buyer =
       omgYes: [0.75, 1]
   rules: [
     '''price DECREASES willBuy WITH 1.0'''
-    '''numBuyers DECREASES willBuy WITH 0.25'''
+    '''numBuyers DECREASES willBuy WITH 0.75'''
     '''temperature DECREASES willBuy WITH 0.75'''
-    '''IF sunny IS true THEN willBuy IS no WITH 0.25'''
-    '''IF sunny IS false THEN willBuy IS yes WITH 0.25'''
+    '''IF sunny IS true THEN willBuy IS no WITH 0.5'''
+    '''IF sunny IS false THEN willBuy IS yes WITH 0.5'''
   ]
 
 module.exports.seller =
