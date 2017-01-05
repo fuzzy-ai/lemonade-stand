@@ -234,7 +234,7 @@ function animateBuyer(buyer) {
   });
   let buyerEl = document.querySelector('.' + buyer.gender);
   tlBuyers
-  .set(buyerEl, {x:-420, force3D:true, y:20, scale:.85})
+  .set(buyerEl, {x:-420, force3D:true, y:20, scale:1.15})
   .set(stand, {y: 70})
   .set(snowMid, { x: 200})
   .set(chocoSteam, {autoAlpha:0.5, y: -2})
@@ -254,7 +254,7 @@ function animateBuyer(buyer) {
   // .to(snowmanLeftEye, .75, { x: 4, scale: 1.1 })
   // .to(snowmanRightEye, .75, { x: 4, scale: .95 })
   .to(chocoCupTable,0.5, {autoAlpha:0})
-  .to(buyerEl, 4, { scale: .95,  x:"1120%", ease:Power4.easeIn})
+  .to(buyerEl, 4, { scale: .95,  x: `${walkingDist} * 3`, ease:Power4.easeIn})
   .to(chocoCup, 0.05, {autoAlpha:0});
 }
 function getStartSceneTl(){
