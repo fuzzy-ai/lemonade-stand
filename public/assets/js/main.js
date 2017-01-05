@@ -8,15 +8,20 @@ var state = {
   updatePending: false,
 
   addBuyer: function() {
-    var genders = ['boy', 'girl'];
+    //var genders = ['boy', 'girl'];
+    var genders = ['boy'];
     newBuyer = new buyer();
     newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
     this.buyers.push(newBuyer);
+    numBuyers = state.buyers.length;
+    $("#buyer-num").html(numBuyers);
     this.queueUpdate();
   },
 
   removeBuyer: function() {
     oldBuyer = this.buyers.shift();
+    numBuyers = state.buyers.length;
+    $("#buyer-num").html(numBuyers);
     this.queueUpdate();
   },
 
@@ -175,26 +180,16 @@ tempDown.addEventListener('click', function() {
 });
 
 buyerPlus.addEventListener("click", function(){
-  state.addBuyer(state.numBuyers + 1);
-  numBuyers = state.buyers.length;
-  console.log("come on plus",  numBuyers);
-  $("#buyer-num").html(numBuyers);
+  state.addBuyer();
 });
 
 buyerMinus.addEventListener("click", function(){
-  state.removeBuyer(state.numBuyers - 1);
-  numBuyers = state.buyers.length;
-  console.log("come on minus",  numBuyers);
-
-  $("#buyer-num").html(numBuyers);
+  state.removeBuyer();
 });
 
 //add buyer inline btn
 addBuyerLink.addEventListener('click', function(){
   state.addBuyer();
-  numBuyers = state.buyers.length;
-  console.log("come on",  numBuyers);
-  $("#buyer-num").html(numBuyers);// this.buyers is undefined
 });
 
 //GSAP animations timelines
@@ -227,6 +222,41 @@ function getIntroText(){
     return introTextTl
 }
 
+function animateBuyer(buyer) {
+  console.log("called animate", buyer);
+  let tlBuyers = new TimelineMax(  {onComplete: function() {
+      console.log("buyer finished.");
+      state.removeBuyer();
+      if (state.buyers.length) {
+        animateBuyer(state.buyers[0]);
+      }
+    }
+  });
+  let buyerEl = document.querySelector('.' + buyer.gender);
+  tlBuyers
+  .set(buyerEl, {x:-420, force3D:true, y:20, scale:.85})
+  .set(stand, {y: 70})
+  .set(snowMid, { x: 200})
+  .set(chocoSteam, {autoAlpha:0.5, y: -2})
+  .set(snow, {y: 42})
+  .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
+  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:4, ease:Power1.easeInOut}, "-=2.5")
+  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:-2, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
+  .add("chocoServed")
+  .to(chocoSteam, 1, {y:-14, autoAlpha:0.8, onComplete: function() { console.log('evaluate now'); buyer.evaluate()}})// <= evaluate here
+  .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete:   function addCup(){
+    chocoCup.classList.remove("choco-cup-noshow");
+    chocoCup.classList.add("choco-cup-bought");
+  }})
+  .to(snowmanArm, 0.25, {rotation:2, y: '+=1px', x: "+=1px", transformOrigin: "top leftt", repeat: 3, yoyo: true}, "chocoServed+=.5")
+  .fromTo(star, 0.2, {fill:'#E1D9CE'}, {fill: '#A36B92', repeat: 4, yoyo: true}, "-=.4")
+  .fromTo(star2, 0.2, {fill:'#A36B92'}, {fill: '#E1D9CE', repeat: 4, yoyo: true}, "-=.4")
+  // .to(snowmanLeftEye, .75, { x: 4, scale: 1.1 })
+  // .to(snowmanRightEye, .75, { x: 4, scale: .95 })
+  .to(chocoCupTable,0.5, {autoAlpha:0})
+  .to(buyerEl, 4, { scale: .95,  x:"1120%", ease:Power4.easeIn})
+  .to(chocoCup, 0.05, {autoAlpha:0});
+}
 function getStartSceneTl(){
 
 let startScene = new TimelineMax();
@@ -236,6 +266,9 @@ let startScene = new TimelineMax();
 
       $.post('/data/seller', function(data) {
         console.log(data);
+        state.addBuyer();
+        state.addBuyer();
+        state.addBuyer();
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
       TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
@@ -244,43 +277,16 @@ let startScene = new TimelineMax();
       sceneAction.classList.add('js-active');
       TweenMax.to(sceneAction, 1.75, {autoAlpha:1})
 
-      let tlBuyers = new TimelineMax(  {onComplete: function() {
-        //buyer.evaluate(); // set evaluation at the top...no good
-        this.restart();
-        }
-      });
-
+      animateBuyer(state.buyers[0]);
 // var buyer = state.buyers[0]; buyer.evaluate();
 
       //buyer loop
+      /*
       buyers.forEach(function(buyer){
         console.log("hrm", state);
 
-        tlBuyers
-        .set(buyer, {x:-420, force3D:true, y:20, scale:.85})
-        .set(stand, {y: 70})
-        .set(snowMid, { x: 200})
-        .set(chocoSteam, {autoAlpha:0.5, y: -2})
-        .set(snow, {y: 42})
-        .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
-        .to(buyer, 2.5, {scale:1, x: `${walkingDist}`, delay:4, ease:Power1.easeInOut}, "-=2.5")
-        .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:-2, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
-        .add("chocoServed")
-        .to(chocoSteam, 1, {y:-14, autoAlpha:0.8, onComplete: buyer.evaluate()})// <= evaluate here
-        .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete:   function addCup(){
-          chocoCup.classList.remove("choco-cup-noshow");
-          chocoCup.classList.add("choco-cup-bought");
-        }})
-        .to(snowmanArm, 0.25, {rotation:2, y: '+=1px', x: "+=1px", transformOrigin: "top leftt", repeat: 3, yoyo: true}, "chocoServed+=.5")
-        .fromTo(star, 0.2, {fill:'#E1D9CE'}, {fill: '#A36B92', repeat: 4, yoyo: true}, "-=.4")
-        .fromTo(star2, 0.2, {fill:'#A36B92'}, {fill: '#E1D9CE', repeat: 4, yoyo: true}, "-=.4")
-        // .to(snowmanLeftEye, .75, { x: 4, scale: 1.1 })
-        // .to(snowmanRightEye, .75, { x: 4, scale: .95 })
-        .to(chocoCupTable,0.5, {autoAlpha:0})
-        .to(buyer, 4, { scale: .95,  x:"1120%", ease:Power4.easeIn})
-        .to(chocoCup, 0.05, {autoAlpha:0})
 
-        })
+      })*/
       }
     });
   });
