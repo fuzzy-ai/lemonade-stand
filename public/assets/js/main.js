@@ -246,14 +246,29 @@ function getIntroText(){
     return introTextTl
 }
 
+function nextBuyer() {
+  console.log("called nextBuyer", state.buyers.length);
+  if (state.buyers.length) {
+    animateBuyer(state.buyers[0]);
+  } else {
+    setTimeout(nextBuyer, 1000);
+  }
+}
+
+function completeBuyer() {
+  console.log("completing buyer");
+  state.removeBuyer();
+  nextBuyer();
+}
+
 function animateBuyer(buyer) {
   console.log("called animate", buyer);
-  let tlBuyers = new TimelineMax(  {onComplete: function() {
-      console.log("buyer finished.");
-      state.removeBuyer();
-      if (state.buyers.length) {
-        animateBuyer(state.buyers[0]);
-      }
+  let tlBuyers = new TimelineMax({
+    onComplete: function() {
+      completeBuyer();
+    },
+    onReverseComplete: function () {
+      completeBuyer();
     }
   });
 
@@ -303,14 +318,6 @@ let startScene = new TimelineMax();
     TweenMax.to(lemonsplanation, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
 
       $.post('/data/seller', function(data) {
-
-        console.log(data);
-        state.addBuyer();
-        state.addBuyer();
-        state.addBuyer();
-        state.setTemperature(0);
-        state.setSunny(0);
-
         for (var i = 0; i < 10; i++) {
           state.addBuyer();
         }
@@ -324,7 +331,7 @@ let startScene = new TimelineMax();
       sceneAction.classList.add('js-active');
       TweenMax.to(sceneAction, 1.75, {autoAlpha:1})
 
-      animateBuyer(state.buyers[0]);
+      nextBuyer();
 // var buyer = state.buyers[0]; buyer.evaluate();
 
       //buyer loop
