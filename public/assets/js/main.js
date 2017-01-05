@@ -3,9 +3,10 @@
 var state = {
   buyers: [],
   temperature: 32,
-  sunny: 0,
+  sunny: 1,
   price: 1.00,
   updatePending: false,
+  didPurchase: false,
 
   addBuyer: function() {
     //var genders = ['boy', 'girl'];
@@ -44,7 +45,7 @@ var state = {
   queueUpdate: function() {
     if (!this.updatePending) {
       this.updatePending = true;
-      setTimeout(sellerEvaluate, 2500);
+      setTimeout(sellerEvaluate, 1000);
     }
   }
 };
@@ -67,7 +68,6 @@ function sellerEvaluate() {
       if (num) {
         $("#current-price").html("$" + num.toFixed(2));
       }
-      console.log(data);
     }
   });
 }
@@ -89,17 +89,18 @@ var buyer = function () {
         data: JSON.stringify(data),
         contentType: 'application/json',
         success: function(data) {
-          console.log(data);
           if (data.evaluation.willBuy > 0.5) {
-            console.log("BUY!");
+            state.didPurchase = true;
+            console.log("BUY!", data.evaluation.willBuy);
           } else {
-            console.log("Don't buy :-(");
+            console.log("Don't buy :-(", data.evaluation.willBuy);
+            state.didPurchase = false;
           }
           // Send feedback to the seller
           $.ajax({
             method: "POST",
             url: "/data/seller/feedback",
-            data: JSON.stringify({willBuy: data.willBuy}),
+            data: JSON.stringify({willBuy: data.evaluation.willBuy}),
             contentType: 'application/json',
             success: function(data) {
               console.log(data);
@@ -257,7 +258,7 @@ function animateBuyer(buyer) {
   });
 
 function purchase(){
-  if(  state.updatePending = true){
+  if (state.didPurchase == true){
     console.log("buying");
     tlBuyers.resume();
   } else {
@@ -302,12 +303,19 @@ let startScene = new TimelineMax();
     TweenMax.to(lemonsplanation, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
 
       $.post('/data/seller', function(data) {
+
         console.log(data);
         state.addBuyer();
         state.addBuyer();
         state.addBuyer();
         state.setTemperature(0);
         state.setSunny(0);
+
+        for (var i = 0; i < 10; i++) {
+          state.addBuyer();
+        }
+        state.setTemperature(50);
+
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
       TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})

@@ -35,7 +35,7 @@ module.exports.buyer =
   rules: [
     '''price DECREASES willBuy WITH 1.0'''
     '''numBuyers DECREASES willBuy WITH 0.25'''
-    '''temperature DECREASES willBuy WITH 0.25'''
+    '''temperature DECREASES willBuy WITH 0.75'''
     '''IF sunny IS true THEN willBuy IS no WITH 0.25'''
     '''IF sunny IS false THEN willBuy IS yes WITH 0.25'''
   ]
@@ -64,6 +64,8 @@ module.exports.seller =
       "medium": [1.25, 2.5, 3.75]
       "high": [2.5, 3.75, 5]
       "very high": [3.75, 5]
+  performance:
+    willBuy: "maximize"
   rules: [
     '''numBuyers DECREASES price WITH 0.5'''
     '''temperature INCREASES price WITH 1.0'''
