@@ -136,7 +136,7 @@ var buyer = function () {
 
   const startBtn = document.querySelector('.js-start-btn'),
         sceneAction = document.querySelector ('.scene-action'),
-        walkingDist = (intFrameWidth - standWidth)  / 2 + buyerWidth;
+        walkingDist = (intFrameWidth - standWidth)  / 2 + buyerWidth * 3;
 
 
   // Main TL ///////////
@@ -235,14 +235,14 @@ function animateBuyer(buyer) {
   });
   let buyerEl = document.querySelector('.' + buyer.gender);
   tlBuyers
-  .set(buyerEl, {x:-420, force3D:true, y:20, scale:1.15})
+  .set(buyerEl, {x: -`${walkingDist}` * 4, force3D:true, y:20, scale:1.15})
   .set(stand, {y: 70})
   .set(snowMid, { x: 200})
   .set(chocoSteam, {autoAlpha:0.5, y: -2})
   .set(snow, {y: 42})
   .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
   .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:4, ease:Power1.easeInOut}, "-=2.5")
-  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:-2, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
+  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:6, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
   .add("chocoServed")
   .to(chocoSteam, 1, {y:-14, autoAlpha:0.8, onComplete: function() { console.log('evaluate now'); buyer.evaluate()}})// <= evaluate here
   .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete:   function addCup(){
@@ -255,7 +255,7 @@ function animateBuyer(buyer) {
   // .to(snowmanLeftEye, .75, { x: 4, scale: 1.1 })
   // .to(snowmanRightEye, .75, { x: 4, scale: .95 })
   .to(chocoCupTable,0.5, {autoAlpha:0})
-  .to(buyerEl, 4, { scale: .95,  x: `${walkingDist} * 3`, ease:Power4.easeIn})
+  .to(buyerEl, 4, { scale: .95,  x: `${walkingDist}` * 4, ease:Power4.easeIn})
   .to(chocoCup, 0.05, {autoAlpha:0});
 }
 function getStartSceneTl(){
