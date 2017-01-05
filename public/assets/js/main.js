@@ -11,7 +11,7 @@ var state = {
     newBuyer = new buyer();
     this.buyers.push(newBuyer);
     this.queueUpdate();
-    gender = [ boy, girl];
+    // gender = [ boy, girl];
   },
 
   removeBuyer: function() {
@@ -81,6 +81,7 @@ var buyer = function () {
 (function(){
   console.log(state);
   let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
+      addBuyerLink = document.querySelector("#add-buyer-link"),
       stand = document.querySelector('#stand'),
       snowMount = document.querySelector('#snow'),
       snowMid = document.querySelector("#snow-backer"),
@@ -96,6 +97,8 @@ var buyer = function () {
       boy = document.querySelector(".boy"),
       girl = document.querySelector(".girl"),
       buyers = document.querySelectorAll('.buyer'),
+      buyerPlus = document.querySelector("#buyer-plus"),
+      buyerMinus = document.querySelector("#buyer-minus"),
       tempUp = document.querySelector('.temperature-up-icon'),
       tempDown = document.querySelector('.temperature-down-icon'),
       lTopArm = document.querySelector("#left-toparm"),
@@ -169,6 +172,28 @@ tempDown.addEventListener('click', function() {
   $("#temperature").html(state.temperature);
 });
 
+buyerPlus.addEventListener("click", function(){
+  state.addBuyer(state.numBuyers + 1);
+  numBuyers = state.buyers.length;
+  console.log("come on plus",  numBuyers);
+  $("#buyer-num").html(numBuyers);
+});
+
+buyerMinus.addEventListener("click", function(){
+  state.removeBuyer(state.numBuyers - 1);
+  numBuyers = state.buyers.length;
+  console.log("come on minus",  numBuyers);
+
+  $("#buyer-num").html(numBuyers);
+});
+
+//add buyer inline btn
+addBuyerLink.addEventListener('click', function(){
+  state.addBuyer();
+  numBuyers = state.buyers.length;
+  console.log("come on",  numBuyers);
+  $("#buyer-num").html(numBuyers);// this.buyers is undefined
+});
 
 //GSAP animations timelines
 
@@ -218,12 +243,17 @@ let startScene = new TimelineMax();
       TweenMax.to(sceneAction, 1.75, {autoAlpha:1})
 
       let tlBuyers = new TimelineMax(  {onComplete: function() {
+        //buyer.evaluate(); // set evaluation at the top...no good
         this.restart();
         }
       });
 
+// var buyer = state.buyers[0]; buyer.evaluate();
+
       //buyer loop
       buyers.forEach(function(buyer){
+        console.log("hrm", state);
+
         tlBuyers
         .set(buyer, {x:-420, force3D:true, y:20, scale:.85})
         .set(stand, {y: 70})
@@ -234,11 +264,10 @@ let startScene = new TimelineMax();
         .to(buyer, 2.5, {scale:1, x: `${walkingDist}`, delay:4, ease:Power1.easeInOut}, "-=2.5")
         .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:-2, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
         .add("chocoServed")
-        .to(chocoSteam, 1, {y:-14, autoAlpha:0.8}, "-=.5")
+        .to(chocoSteam, 1, {y:-14, autoAlpha:0.8, onComplete: buyer.evaluate()})// <= evaluate here
         .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete:   function addCup(){
           chocoCup.classList.remove("choco-cup-noshow");
           chocoCup.classList.add("choco-cup-bought");
-          console.log("choco");
         }})
         .to(snowmanArm, 0.25, {rotation:2, y: '+=1px', x: "+=1px", transformOrigin: "top leftt", repeat: 3, yoyo: true}, "chocoServed+=.5")
         .fromTo(star, 0.2, {fill:'#E1D9CE'}, {fill: '#A36B92', repeat: 4, yoyo: true}, "-=.4")
