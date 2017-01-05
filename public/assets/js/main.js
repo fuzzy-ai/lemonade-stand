@@ -158,7 +158,7 @@ var buyer = function () {
 
   const startBtn = document.querySelector('.js-start-btn'),
         sceneAction = document.querySelector ('.scene-action'),
-        walkingDist = (intFrameWidth - standWidth)  / 2 + buyerWidth * 3;
+        walkingDist = (intFrameWidth - standWidth)  / 2 + buyerWidth ;
 
 
   // Main TL ///////////
@@ -222,7 +222,7 @@ function getPageIntro() {
   let tlSunEntrance = new TimelineMax()
 
   tlSunEntrance
-    .fromTo(sun, 1.25, {opacity:0, rotation:0, Y: -200 , scale:0},
+    .fromTo(sun, 1.5, {opacity:0, rotation:0, Y: -200 , scale:0},
            {opacity:1, y:0, rotation:720,  scale:1, ease: Back.easeInOut})
            .add("sunLoaded")
     .staggerFrom(".clouds", 1.5,
@@ -239,8 +239,8 @@ function getIntroText(){
 
     introTextTl
     .from(lemonHeading, .5, {autoAlpha: 0, ease: Power4.easeIn})
-    .from(lemonPara, .25, {autoAlpha: 0, ease: Power4.easeIn})
-    .fromTo(startBtn, .5, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, yPercent:'0', ease: Back.easeIn}, '-=1');
+    .from(lemonPara, .5, {autoAlpha: 0, ease: Power4.easeIn}, '-=.25')
+    .fromTo(startBtn, .5, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, yPercent:'0', ease: Back.easeIn});
 
     return introTextTl
 }
@@ -278,7 +278,7 @@ function purchase(){
    tlBuyers
    .addPause("ThinkingAboutIt+=4", purchase)
 
-  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:6, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
+  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:2, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
   .add("chocoServed")
   .to(chocoSteam, 1, {y:-14, autoAlpha:0.8})// <= evaluate here
   .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete:   function addCup(){
@@ -306,7 +306,7 @@ let startScene = new TimelineMax();
         state.addBuyer();
         state.addBuyer();
         state.addBuyer();
-        state.setTemperature(32);
+        state.setTemperature(0);
         state.setSunny(0);
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
