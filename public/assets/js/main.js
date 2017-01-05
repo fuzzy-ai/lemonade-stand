@@ -2,8 +2,8 @@
 
 var state = {
   buyers: [],
-  temperature: 75,
-  sunny: 1,
+  temperature: 32,
+  sunny: 0,
   price: 1.00,
   updatePending: false,
 
@@ -55,7 +55,6 @@ function sellerEvaluate() {
     temperature: state.temperature,
     sunny: state.sunny
   };
-  console.log(JSON.stringify(data));
   $.ajax({
     method: "POST",
     url: "/data/seller/evaluate",
@@ -64,6 +63,7 @@ function sellerEvaluate() {
     success: function(data) {
       state.updatePending = false;
       var num = data.evaluation.price;
+      console.log("current price is: $" + num.toFixed(2));
       if (num) {
         $("#current-price").html("$" + num.toFixed(2));
       }
@@ -83,8 +83,30 @@ var buyer = function () {
         sunny: state.sunny
       };
 
-      $.post("/data/buyer/evaluate", data, function(data) {
-        console.log("show buy / no buy");
+      $.ajax({
+        method: "POST",
+        url: "/data/buyer/evaluate",
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function(data) {
+          console.log(data);
+          if (data.evaluation.willBuy > 0.5) {
+            console.log("BUY!");
+          } else {
+            console.log("Don't buy :-(");
+          }
+          // Send feedback to the seller
+          $.ajax({
+            method: "POST",
+            url: "/data/seller/feedback",
+            data: JSON.stringify({willBuy: data.willBuy}),
+            contentType: 'application/json',
+            success: function(data) {
+              console.log(data);
+            }
+          });
+
+        }
       });
     }
   }
@@ -284,6 +306,8 @@ let startScene = new TimelineMax();
         state.addBuyer();
         state.addBuyer();
         state.addBuyer();
+        state.setTemperature(32);
+        state.setSunny(0);
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
       TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})

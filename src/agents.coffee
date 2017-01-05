@@ -5,11 +5,11 @@ module.exports.buyer =
   name: "Buyer"
   inputs:
     price:
-      "very low": [0, 2.5]
-      "low": [0, 2.5, 5]
-      "medium": [2.5, 5, 7.5]
-      "high": [5, 7.5, 10]
-      "very high": [7.5, 10]
+      veryLow: [0, 1.25]
+      low: [0, 1.25, 2.5]
+      medium: [1.25, 2.5, 3.75]
+      high: [2.5, 3.75, 5]
+      veryHigh: [3.75, 5]
     numBuyers:
       "very low": [0, 5]
       "low": [0, 5, 10]
@@ -27,13 +27,17 @@ module.exports.buyer =
       true: [0.5, 1]
   outputs:
     willBuy:
-      no: [0, 0.5]
-      yes: [0.5, 1]
+      hellNo: [0, 0.25]
+      no: [0, 0.25, 0.5]
+      maybe: [0.25, 0.5, 0.75]
+      yes: [0.5, 0.75, 1]
+      omgYes: [0.75, 1]
   rules: [
     '''price DECREASES willBuy WITH 1.0'''
-    '''numBuyers DECREASES willBuy WITH 0.75'''
-    '''temperature INCREASES willBuy WITH 0.75'''
-    '''sunny INCREASES willBuy WITH 0.5'''
+    '''numBuyers DECREASES willBuy WITH 0.25'''
+    '''temperature DECREASES willBuy WITH 0.25'''
+    '''IF sunny IS true THEN willBuy IS no WITH 0.25'''
+    '''IF sunny IS false THEN willBuy IS yes WITH 0.25'''
   ]
 
 module.exports.seller =
@@ -55,14 +59,14 @@ module.exports.seller =
       true: [0.5, 1]
   outputs:
     price:
-      "very low": [0, 2.5]
-      "low": [0, 2.5, 5]
-      "medium": [2.5, 5, 7.5]
-      "high": [5, 7.5, 10]
-      "very high": [7.5, 10]
+      "very low": [0, 1.25]
+      "low": [0, 1.25, 2.5]
+      "medium": [1.25, 2.5, 3.75]
+      "high": [2.5, 3.75, 5]
+      "very high": [3.75, 5]
   rules: [
     '''numBuyers DECREASES price WITH 0.5'''
     '''temperature INCREASES price WITH 1.0'''
-    '''IF sunny IS true THEN price IS high WITH 0.5'''
-    '''IF sunny IS false THEN price IS low WITH 0.5'''
+    '''IF sunny IS true THEN price IS high WITH 0.75'''
+    '''IF sunny IS false THEN price IS low WITH 0.75'''
   ]

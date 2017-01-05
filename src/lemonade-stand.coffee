@@ -71,6 +71,16 @@ class LemonadeStand extends Microservice
   stopDatabase: (callback) ->
     callback null
 
+  startCustom: (callback) ->
+    client = @express.apiClient
+
+    # Make sure we have the proper buyer agent.
+    client.putAgent @config.buyerID, buyer, (err, agent) ->
+      if err
+        callback err
+      else
+        callback null
+
   _newSeller: (req, res, next) ->
     if req.session.sellerID
       res.json
@@ -91,7 +101,6 @@ class LemonadeStand extends Microservice
 
   _evaluateSeller: (req, res, next) ->
     client = req.app.apiClient
-    console.error req.body
     client.evaluate req.session.sellerID, req.body, true, (err, evaluation) ->
       if err
         next err
@@ -117,8 +126,9 @@ class LemonadeStand extends Microservice
 
   _evaluateBuyer: (req, res, next) ->
     client = req.app.apiClient
+    config = req.app.config
 
-    client.evaluate @config.buyerID, req.body, (err, evaluation) ->
+    client.evaluate config.buyerID, req.body, (err, evaluation) ->
       if err
         next err
       else
