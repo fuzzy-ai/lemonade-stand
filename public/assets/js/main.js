@@ -233,6 +233,16 @@ function animateBuyer(buyer) {
       }
     }
   });
+
+function purchase(){
+  if(  state.updatePending = true){
+    console.log("buying");
+    tlBuyers.resume();
+  } else {
+    console.log("im out of here")
+    tlBuyers.reverse();
+  }
+}
   let buyerEl = document.querySelector('.' + buyer.gender);
   tlBuyers
   .set(buyerEl, {x: -`${walkingDist}` * 4, force3D:true, y:20, scale:1.15})
@@ -241,10 +251,14 @@ function animateBuyer(buyer) {
   .set(chocoSteam, {autoAlpha:0.5, y: -2})
   .set(snow, {y: 42})
   .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
-  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:4, ease:Power1.easeInOut}, "-=2.5")
+  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:4, ease:Power1.easeInOut, onComplete: function() { console.log('evaluate now'); buyer.evaluate()}}, "-=2.5")
+  .add("ThinkingAboutIt")
+   tlBuyers
+   .addPause("ThinkingAboutIt+=4", purchase)
+
   .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:6, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
   .add("chocoServed")
-  .to(chocoSteam, 1, {y:-14, autoAlpha:0.8, onComplete: function() { console.log('evaluate now'); buyer.evaluate()}})// <= evaluate here
+  .to(chocoSteam, 1, {y:-14, autoAlpha:0.8})// <= evaluate here
   .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete:   function addCup(){
     chocoCup.classList.remove("choco-cup-noshow");
     chocoCup.classList.add("choco-cup-bought");
