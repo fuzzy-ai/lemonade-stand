@@ -6,7 +6,11 @@ html
 //var
 
 $brand-color : #e41f1f
+$accent: #d3a0c5
+$accent: #c37db0
 $blanco-nino : lighten(#FEE5C5, 5%)
+$color-text: #57546c
+$heading-color: #392c4a
 
 $font-stack: Courier10BTRoman,Courier,monospace
 $heading-stack: "refrigerator-deluxe", Helvetica, Arial
@@ -82,8 +86,7 @@ body
   letter-spacing: -1px
   font-size: 16px
   line-height: 28px
-  color: #0D1819
-  color: darken(#5EC3CE, 50%)
+  color: $heading-color
   border-top: 1px solid #FAF1E8
 
   overflow-x: hidden
@@ -167,16 +170,16 @@ body
 a
   text-decoration: none
   color: $brand-color
-p a
-  background: #F5ED71
+
 
 .accent
-  color: $brand-color
+  color: $accent
 
 h1,h2,h3,button,.btn, .heading
   font-family: "refrigerator-deluxe", Helvetica, Arial
   text-transform: uppercase
   letter-spacing: 1px
+  color: $heading-color
 
 h1,h2,h3, p
   margin-bottom: 54px
@@ -192,7 +195,7 @@ h2
 .logo
   img
     width: 100px
-    filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
+    //filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
     //display: block
 
 
@@ -207,7 +210,6 @@ h2
   h1
     text-transform: uppercase
     font-weight: 900
-    color: darken(#5EC3CE, 75%)
   p
     font-size: 18px
     line-height: 2em
@@ -227,8 +229,6 @@ h2
   width: 100%
   z-index: 2000
   padding-bottom: 1040px
-//  background: url('/assets/images/trees.png') no-repeat bottom left
-
 
 
 
@@ -237,6 +237,8 @@ h2
   height: 100px
   padding: 40px 80px
   z-index: 1000
+  animation: fadeInDown 4s ease-in-out
+
 
 
 .signup
@@ -246,7 +248,7 @@ h2
   font-size: 28px
   font-family: "refrigerator-deluxe"
   text-transform: uppercase
-  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
+  //filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
 
 .trees
   position: absolute
@@ -289,12 +291,14 @@ h2
   width: 100%
   height: 100%
   background: #29201e url("/assets/images/lemonade-stand-bg.jpg") repeat 0 0
+  z-index: 50000
 
 .secondary-zone-inner
   background: rgba(darken(#29201e, 25%), .15)
   padding: 0
   color: $blanco-nino
-
+  h1,h2,h3
+    color: $blanco-nino
 
 
 .flex
@@ -306,7 +310,7 @@ h2
   .flex__item
     background: rgba(darken(#29201e, 25%), .05)
     border: 1px solid darken(#201816, 1%)
-    margin: 3px 2px 0
+    margin: 1px 2px 0
     flex: 1
     header
       background: rgba(darken(#29201e, 25%), .2)
@@ -322,7 +326,7 @@ h2
       text-transform: uppercase
       letter-spacing: 2px
       font-size: 10px
-      color: $brand-color
+      color: $accent
 
 .canvas-wrap
   background: rgba(darken(#29201e, 25%), .2)
@@ -413,40 +417,31 @@ h2
 #full-scene
   width: 100%
   position: absolute
-  bottom: 0px
+  bottom: -100px
   z-index: 3000
 
-.buyer
-  position: absolute
-  bottom: 80px
-  left: -100px
-  height: 380px
-  width: 220px
-  z-index: 4000 !important
-  background: yellow !important
+// .buyer
+//   position: absolute
+//   bottom: 80px
+//   left: -100px
+//   height: 380px
+//   width: 220px
+//   z-index: 4000 !important
+//   background: yellow !important
+
+
+
+//
+// .girl
+//   //left: 110px
+//   //animation: move 4s ease-in
+//   backface-visibility: hidden
+//   perspective: 1000
 
 
 
 
-@keyframes move
-  0%
-    transform: translate3d(0px, 0px, 0)
-  100%
-    transform: translate3d(200px, 0px, 0)
-
-
-
-
-.girl
-  //left: 110px
-  //animation: move 4s ease-in
-  backface-visibility: hidden
-  perspective: 1000
-
-
-
-
-
+//BTN Styles
 .btn
   font-size: 20px
   padding: 12px 44px
@@ -454,9 +449,10 @@ h2
   border: 2px dashed $blanco-nino
   color:  $brand-color
   &:hover
-    background: darken(#E56463, 5%)
+    background: $heading-color
     color: $blanco-nino
     border-color: $blanco-nino
+    border-style: solid
     cursor: pointer
 
 
@@ -490,7 +486,7 @@ h2
       background: rgba(#1B1512, .5)
       cursor: pointer
       .icon
-        fill: $brand-color
+        fill: $accent
 
 .icon
   width: 18px
@@ -499,18 +495,15 @@ h2
   fill: $blanco-nino
   +centerer
   &:hover
-    fill: $brand-color
+    fill: $accent
     //cursor: pointer
 
 .active-icon
   background: rgba(#1B1512, .5)
   .icon
-    fill: $brand-color
-
-.minus
+    fill: $accent
 
 
-.plus
 
 .setting-module
   position: relative
@@ -521,8 +514,6 @@ h2
   overflow: hidden
 
 
-
-
 .value
   font-size: 54px
   +centerer
@@ -530,12 +521,11 @@ h2
 
 .sunny-icon
   display: block
-  fill: #F8C32D
+  fill: #F5F2D2
   width: 38px !important
 
 .cloudy-icon
   width: 48px !important
-  fill: #fdffff
   fill:#ecf7f8
 
 .fade-in
@@ -564,7 +554,7 @@ footer
   margin: 0 20px
   fill: $blanco-nino
   &:hover
-    fill: $brand-color
+    fill: $accent
 
 
 .angel-icon
@@ -573,31 +563,59 @@ footer
 .js-not-active
   opacity: 0
 
-#stand
-  border: 4px solid purple
-  background: cyan
-
-
 
 .js-active
   animation: fadeIn 2s easeIn
 
 
 .display-prices
-  background: rgba(#615B5A, .85)
+  background: rgba(#fff,.95)
   width: 260px
   font-family: $heading-stack
-  color: $blanco-nino
+  letter-spacing: 1px
+  text-align: center
+  color: #836A7B
   padding: 20px 10px
-  border: 1px solid $blanco-nino
   z-index: 50000
   position: absolute
   left: calc(50% - 80px)
-  bottom: 600px
+  bottom: 40px
+
+  #current-price
+    font-size: 1.25rem
+    color: #CA88B5
 
   p
     margin: 0
-    text-align: center
-    font-size: .9rem
+    font-size: .95rem
+    letter-spacing: 2px
     text-transform: uppercase
-    letter-spacing: 1px
+
+//Buyers response
+.yes-no
+  position: absolute
+  bottom: 350px
+  left: calc(50% - 10px)
+  z-index: 5
+
+  #buying
+    display: none
+
+  #buying-no
+    display: none
+
+  .buying-active
+    display: block !important
+    animation: fadeInDown fadeOutUp
+    animation-delay: 0s, .5s
+
+  .no-buying-active
+    display: block !important
+    animation: fadeInDown fadeOutUp
+    animation-delay: 0s, .5s
+
+  .checkmark
+    fill: #1DB8A1
+
+  .cross
+    fill: #D8141F

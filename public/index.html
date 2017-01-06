@@ -43,9 +43,23 @@
           <div class="scene-action js-not-active" id="funtimes">
 
           <div class="display-prices">
+              <p>The Price is currently set at</p>
             <div id="current-price">
-              <p>The Price is currently set at <span class="dollar-sign">$</span><b>1.00</b></p>
+               <span class="dollar-sign">$</span><b>1.00</b>
             </div>
+          </div>
+
+          <div class="yes-no">
+            <span id="buying">
+              <svg class="icon checkmark">
+                <use xlink:href="/assets/images/sprite.svg#checkmark"></use>
+              </svg>
+            </span>
+            <span id="buying-no">
+              <svg class="icon cross">
+                <use xlink:href="/assets/images/sprite.svg#cross"></use>
+              </svg>
+            </span>
           </div>
 
 
@@ -108,7 +122,7 @@
            .cls-38{stroke:#e8e7e5;stroke-width:3px;}
            .cls-40{fill:#d2aa97;}
            .cls-39, .cls-44,.cls-51, #glove-btn{fill:#a81d39;}
-           .cls-41, .cls-43{fill:#14203b;}
+           .cls-43{fill:#14203b;}
            #bottom-fur{fill:#eff2f2; stroke: #ffffff}
            .cls-44{stroke:#eff2f2;}
            .cls-45{stroke:#012e47;}
@@ -118,6 +132,7 @@
            .cls-52{fill:url(#linear-gradient-2);}
            .cls-53{fill:url(#linear-gradient-3);}
            .cls-60{fill:#ffffff}
+           #glove-left{fill: #303C68}
 
          </style>
          <linearGradient id="linear-gradient" x1="1517.55" y1="1446.95" x2="504.73" y2="434.12" gradientUnits="userSpaceOnUse">
@@ -231,7 +246,7 @@
           <path id="left-toprarm" class="cls-39" d="M352.49 388.03v-49c0-6.26 5.41-11.39 12-11.39h1.32c6.61 0 12 5.12 12 11.39v49"/>
             <g id="left-action-arm">
                <rect id="left-forarm" class="cls-39" x="352.49" y="377.36" width="25.38" height="64.59" rx="11.9" ry="11.9"/>
-            <g id="choco-cup-in-hand" class="choco-cup-noshow">
+            <g id="choco-cup-in-hand" >
                <path class="cls-10" d="M381.67 470.79c0-9.53 2.44-19.71 7-19.71s7 10.18 7 19.71-2.44 19.71-7 19.71-7-10.18-7-19.71zm12.11 0c0-11.14-3-18-5.14-18s-5.14 6.84-5.14 18 3 18 5.14 18 5.15-6.86 5.15-18z" id="cuprim-2" data-name="cuprim"/>
                <path class="cls-10" d="M375.52 454.92c0-2.23.28-4.71 1.67-6.06a3.68 3.68 0 0 1 2.74-1.07c3.07 0 4.22 4 4.22 6.59h-1.83c0-2-.91-4.86-2.39-4.86a1.82 1.82 0 0 0-1.37.52c-1.42 1.41-1.2 5.28-1.07 7.36 0 .53.05 1 .05 1.31h-1.83a10.49 10.49 0 0 0-.05-1.21 22.13 22.13 0 0 1-.14-2.58z" id="cuphandle-2" data-name="cuphandle"/>
                <path class="cls-10" d="M388.52 451.08s-21.27 5-21.27 19.06c0 17.33 20.34 20.14 20.34 20.14s-5.11-9.68-5-20c.06-6.42 1.52-13.46 5.93-19.2z" id="cup-2-2" data-name="cup"/>
@@ -263,39 +278,7 @@
        </g>
        <path id="snow" class="cls-52" d="M11.34 663.7S258.61 533.56 384.4 533.92s300.62 21.13 300.62 21.13 232.53-92.66 463.08-64.14c0 0 171.29 47.07 239.3 46.14 0 0 171.86-64.8 271.93-59.46 185 9.88 372 186.17 372 186.17z"/>
 
-       <!-- add foreign object to svg -->
-       <foreignobject width="100%" height="80">
-           <body xmlns="http://www.w3.org/1999/xhtml">
-             <style>
-                div.display-prices{
-                    background: rgba(97, 91, 90, 0.85);
-                    width: 320px;
-                    color: #fbf8f8;
-                    border: 1px solid #fbf8f8;
-                    padding: 20px 10px;
-                    z-index: 50000;
-                    position: absolute;
-                    bottom: 100px
-                    left: 50%;
-                    right: 50%;
-                    margin-bottom: 40px
 
-                  }
-                .current-price p {
-                  margin: 0;
-                  text-align: center;
-                  text-transform: uppercase;
-                  font-family: "refrigerator-deluxe", Helvetica, Arial
-                }
-             </style>
-             <!-- <div class="display-prices">
-               <div id="current-price">
-                 <p>The Price is currently set at <span class="dollar-sign">$</span><b>1.00</b></p>
-               </div>
-             </div> -->
-           </body>
-
-         </foreignobject>
      </svg>
 
 
