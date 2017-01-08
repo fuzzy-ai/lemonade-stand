@@ -1,20 +1,18 @@
 @import "reset"
-html
-  height: 100%
-  background: #91D6DD
 
-//var
+//VARS///////////////////////////////////////////////
 
 $brand-color : #e41f1f
 $accent: #d3a0c5
 $accent: #c37db0
 $blanco-nino : lighten(#FEE5C5, 5%)
-$color-text: #57546c
-$heading-color: #392c4a
+$color-text:  #392c4a
+$heading-color: #342844
 
 $font-stack: Courier10BTRoman,Courier,monospace
 $heading-stack: "refrigerator-deluxe", Helvetica, Arial
-//helpers
+
+//HELPERS//////////////////////////////////////////////
 
 =centerer
 	position: absolute
@@ -22,9 +20,7 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
 	left: 50%
 	transform: translate(-50%, -50%)
 
-//Keyframe animations
-
-
+//KEYFRAMES ANIMATION/////////////////////////////////////
 
 @keyframes fadeIn
 	0%
@@ -32,13 +28,11 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
   100%
 		opacity: 1
 
-
 @keyframes fadeOut
 	0%
 		opacity: 1
   100%
 		opacity: 0
-
 
 @keyframes fadeInDown
 	0%
@@ -70,45 +64,26 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
   100%
     transform: translateX(-20px)
 
-
-@keyframes scale
-  0%
-    transform: scale(0)
-    opacity: 0
-
-  100%
-    transform: scale(1)
-    opacity: 1
-
+html
+  height: 100%
+  background: #E1EBE5
 
 body
   font-family: $font-stack
   letter-spacing: -1px
   font-size: 16px
   line-height: 28px
-  color: $heading-color
+  color: $color-text
   border-top: 1px solid #FAF1E8
-
   overflow-x: hidden
-  //background: linear-gradient(-180deg,darken(#7dcfd7,15%) 0, #C3E9EF 55%,lighten(#7dcfd7,5% ) 100%)
-  background-repeat:  no-repeat
 
 .sky
-  // background: linear-gradient(-180deg, lighten(#1B7D96, 5%) 0%, darken(#7dcfd7,20%) 20%, #C3E9EF 55%, darken(#97E4E4,2.5% ) 100%)
-  background: linear-gradient(-180deg, #FAF1E8 0%, #8BD1DD 30%,  #FAF1E8 80%)
-  background: linear-gradient(-180deg, #d59dc5 1%, #FAF1E8 30%, #a6e6ff 50%, #b1b5ea 80%)
   background: linear-gradient(180deg,  #86B1B8 0%,  #E1EBE5 55%)
-  //background: url('/assets/images/trees.png') no-repeat bottom left
   height: 100vh
   width: 100%
   position: absolute
   top: 0
-  padding-bottom: 1040px
-
-
-
-
-
+  padding-bottom: 1340px
 
 .sun
   width: 280px
@@ -123,34 +98,69 @@ body
   right: calc(50% - 140px)
   top: -140px
 
+.cloud1, .cloud2, .cloud3
+  display: block
+  filter: drop-shadow(0px 0px 10px rgba(0,0,0,.25))
+  z-index: 4000
+
+.cloud1
+  position: absolute
+  top: 60px
+  right: 120px
+  animation: floaterClouds 18s linear infinite
+  animation-iteration-count: 4
+  img
+    width: 240px
+    filter: blur(.05 px)
+
+.cloud2
+  position: absolute
+  top: 40px
+  left: -120px
+  img
+    width: 160px
+
+.cloud3
+  position: absolute
+  top: 180px
+  left: 220px
+  img
+    width: 180px
+    filter: blur(.15px)
+
+
+//CLOUDY STATE//////////////////////////////////////
 
 .cloudy
+
   .sky
     background:  linear-gradient(-180deg,#233236  0,lighten( #3b5961,10%)55%,darken(#f5f5f5,5% ) 100%)
     animation: fadeIn 3s ease-in
-  .cloud1 img
-    width: 380px
+
+  .cloud1
+    top: 180px
+    right: -20px
+    img
+      width: 75%
+
+  .cloud2
+    top: 120px
+    left: 20px
+    img
+      width: 65%
+      animation: floaterClouds 18s linear infinite
+
+  .cloud3
+    top: 200px
+    img
+      width: 55%
+      animation: floaterClouds 18s linear infinite
+
   .sun
     animation: fadeOutUp 8s ease-in
 
-.cloudy .cloud4, .cloudy .cloud5
-  display: block
 
-// .cloudy .cloud1
-//   animation: floaterClouds 18s linear infinite
-//   animation-iteration-count: 4
-
-.cloudy .cloud2
-  animation: animateClouds 42s linear infinite
-  animation-iteration-count: 2
-  filter: blur(.5px)
-
-
-.cloudy .cloud3
-  animation: animateClouds 72s -2s infinite
-  transition-timing-function: cubic-bezier(52s .42,.23,.86,.69)
-  filter: blur(.25px)
-
+//SUNNY STATE/////////////////////////////////////
 .sunny
   .sun
     animation: fadeInDown 4s ease-in-out
@@ -165,12 +175,11 @@ body
 
 .row
   width: 100%
-  //height: 100%
 
+//DEFAULTS///////////////////////////////////////////
 a
   text-decoration: none
   color: $brand-color
-
 
 .accent
   color: $accent
@@ -190,22 +199,50 @@ h1
 h2
   font-size: 36px
 
+.masthead
+  position: relative
+  height: 100px
+  padding: 40px 80px
+  z-index: 1000
+  animation: fadeInDown 4s ease-in-out
 
+.signup
+  position: absolute
+  right: 80px
+  top: 40px
+  font-size: 32px
+  letter-spacing: 1px
+  font-family: "refrigerator-deluxe"
+  text-transform: uppercase
 
 .logo
   img
     width: 100px
-    //filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
-    //display: block
+
+//BTN Styles////////////////////////////////////////
+.btn
+  position: relative
+  font-size: 20px
+  padding: 12px 44px
+  text-align: center
+  border: 2px dashed $blanco-nino
+  color:  $brand-color
+  z-index: 10
+  transition: background .3s ease-in-out, color .4s ease-in
+  &:hover
+    background: $heading-color
+    color: $blanco-nino
+    border-color: $blanco-nino
+    border-style: solid
+    cursor: pointer
 
 
+//INTRO TEXT///////////////////////////////////////////////
 .lemonsplanation
   width: 60%
-  margin: 100px auto 0px
+  margin: 180px auto 0px
   text-align: center
   position: relative
-  //animation: scale 2s ease-in
-  //animation: fadeIn 4s ease-in-out
 
   h1
     text-transform: uppercase
@@ -215,12 +252,12 @@ h2
     line-height: 2em
 
 
-
+//SCENE////////////////////////////////////////////////
 .scene
   height: 100vh
   width: 100%
   position: relative
-  padding-bottom: 1040px
+  padding-bottom: 1340px
 
 
 .scene-inner
@@ -228,58 +265,20 @@ h2
   height: 100%
   width: 100%
   z-index: 2000
-  padding-bottom: 1040px
-
-
-
-.masthead
-  position: relative
-  height: 100px
-  padding: 40px 80px
-  z-index: 1000
-  animation: fadeInDown 4s ease-in-out
-
-
-
-.signup
-  position: absolute
-  right: 80px
-  top: 40px
-  font-size: 28px
-  font-family: "refrigerator-deluxe"
-  text-transform: uppercase
-  //filter: drop-shadow(0px 0px 1px rgba(0,0,0,.25))
-
-.trees
-  position: absolute
-  bottom: 4px
-  left: -10px
-  z-index: 5000
-  display: none
-
-.choco-cup-noshow
-  display: none
-  visibility: hidden
-
-
-.choco-cup-bought
-  display: block
-  visibility: visible
-
+  padding-bottom: 1340px
 
 .snow
   height: 380px
-  background: #fbf8f8
-  background: linear-gradient(-180deg, #BED5C8 0, #ffffff 25%, #ffffff  55%, #ffffff 100%)
+  background: linear-gradient(-180deg, #BED5C8 5%, #ffffff 25%, #ffffff  55%, #ffffff 100%)
   width: 100%
   position: absolute
   bottom: 0
   left: 0
   right: 0
+  border-top-color: transparent
   border-bottom: 4px solid #1A1312
 
-
-//settings area
+//SETTINGS AREA////////////////////////////////////////////
 .settings
   color: $blanco-nino
   clear: both
@@ -290,7 +289,7 @@ h2
   clear: both
   width: 100%
   height: 100%
-  background: #29201e url("/assets/images/lemonade-stand-bg.jpg") repeat 0 0
+  background: rgba(darken(#29201e, 25%), .2) url("/assets/images/lemonade-stand-bg.jpg") repeat 0 0
   z-index: 50000
 
 .secondary-zone-inner
@@ -301,6 +300,7 @@ h2
     color: $blanco-nino
 
 
+//FLEX GRID////////////////////////////////////////////
 .flex
   display: flex
   flex-direction: row
@@ -310,7 +310,7 @@ h2
   .flex__item
     background: rgba(darken(#29201e, 25%), .05)
     border: 1px solid darken(#201816, 1%)
-    margin: 1px 2px 0
+    margin: 1px 1px 0
     flex: 1
     header
       background: rgba(darken(#29201e, 25%), .2)
@@ -327,80 +327,6 @@ h2
       letter-spacing: 2px
       font-size: 10px
       color: $accent
-
-.canvas-wrap
-  background: rgba(darken(#29201e, 25%), .2)
-
-  border: 1px solid darken(#201816, 1%)
-  margin: 3px 2px 0
-  padding: 40px
-  flex: 1
-
-.cloud-zone
-
-
-.cloud1, .cloud2, .cloud3, .cloud4, .cloud5, .cloud6
-  display: block
-  filter: drop-shadow(0px 0px 10px rgba(0,0,0,.25))
-  z-index: 4000
-
-.cloud2
-  position: absolute
-  top: 40px
-  left: -120px
-
-  img
-    width: 160px
-
-.cloud1
-  position: absolute
-  top: 60px
-  right: 120px
-  // animation: floaterClouds 18s linear infinite
-  // animation-iteration-count: 4
-
-  img
-    width: 240px
-    filter: blur(.05 px)
-
-.cloud3
-  position: absolute
-  top: 180px
-  left: 220px
-
-  img
-    width: 180px
-    filter: blur(.15px)
-
-.cloud4
-  position: absolute
-  top: 125px
-  left: 50px
-  display: none
-
-  img
-    width: 190px
-
-.cloud5
-  position: absolute
-  top: -120px
-  left: 280px
-  display: none
-
-  img
-    width: 250px
-
-
-.cloud6
-  position: absolute
-  top: 580px
-  left: 20px
-  // animation: floaterClouds 44s linear infinite
-  // animation-iteration-count: 2
-
-  img
-    width: 320px
-
 
 
 
@@ -420,49 +346,28 @@ h2
   bottom: -100px
   z-index: 3000
 
-// .buyer
-//   position: absolute
-//   bottom: 80px
-//   left: -100px
-//   height: 380px
-//   width: 220px
-//   z-index: 4000 !important
-//   background: yellow !important
+.choco-cup-noshow
+  display: none
+  visibility: hidden
 
+.choco-cup-bought
+  display: block
+  visibility: visible
 
-
-//
-// .girl
-//   //left: 110px
-//   //animation: move 4s ease-in
-//   backface-visibility: hidden
-//   perspective: 1000
-
-
-
-
-//BTN Styles
-.btn
-  font-size: 20px
-  padding: 12px 44px
-  text-align: center
-  border: 2px dashed $blanco-nino
-  color:  $brand-color
-  &:hover
-    background: $heading-color
-    color: $blanco-nino
-    border-color: $blanco-nino
-    border-style: solid
-    cursor: pointer
 
 
 
 .secondary-cta
-  width: 60%
-  padding: 120px 40px
-  margin: 40px auto
+  width: 100%
+  padding: 180px 40px
+  margin: 0px auto
   justify-content: space-around
+  background: rgba(darken(#29201e, 25%), .2)
 
+  .btn
+    color: $accent
+    &:hover
+      color: $blanco-nino
 
 
 .value-modifier-wrap
@@ -492,6 +397,7 @@ h2
   width: 18px
   height: 18px
   display: inline-block
+  transition: all .3s ease-in-out
   fill: $blanco-nino
   +centerer
   &:hover
@@ -538,15 +444,9 @@ footer
   display: flex
   flex-direction: row
   justify-content: space-between
+  p
+    margin-bottom: 0px
 
-
-
-
-
-.social-footer-links
-
-
-.copyright
 
 .social-icon
   width: 32px
@@ -563,10 +463,8 @@ footer
 .js-not-active
   opacity: 0
 
-
 .js-active
   animation: fadeIn 2s easeIn
-
 
 .display-prices
   background: rgba(#fff,.95)
@@ -574,7 +472,6 @@ footer
   font-family: $heading-stack
   letter-spacing: 1px
   text-align: center
-  color: #836A7B
   padding: 20px 10px
   z-index: 50000
   position: absolute
@@ -583,7 +480,7 @@ footer
 
   #current-price
     font-size: 1.25rem
-    color: #CA88B5
+    color: $accent
 
   p
     margin: 0
@@ -591,7 +488,7 @@ footer
     letter-spacing: 2px
     text-transform: uppercase
 
-//Buyers response
+//BUYER RESPONSE////////////////////////////////////////
 .yes-no
   position: absolute
   bottom: 350px
@@ -619,3 +516,9 @@ footer
 
   .cross
     fill: #D8141F
+
+
+.range
+  position: absolute
+  bottom: 340px
+  left: 0

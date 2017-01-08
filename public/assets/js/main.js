@@ -115,17 +115,17 @@ var buyer = function () {
 
 (function(){
   console.log(state);
-  let cloudyIcon = document.querySelector('.cloudy-icon-btn'),
-      settings = document.querySelector(".settings"),
+  let settings = document.querySelector(".settings"),
       addBuyerLink = document.querySelector("#add-buyer-link"),
       stand = document.querySelector('#stand'),
       snowMount = document.querySelector('#snow'),
       snowMid = document.querySelector("#snow-backer"),
+      cloudyIcon = document.querySelector('.cloudy-icon-btn'),
       sunnyIcon = document.querySelector('.sunny-icon-btn'),
-      b = document.getElementsByTagName('body')[0],
+      sunnyOrCloudy = document.querySelector('.sunny-or-cloudy'),
+      body = document.getElementsByTagName('body')[0],
       bSunny = document.getElementsByClassName('sunny'),
       sun = document.querySelector('.sun'),
-      sunnyOrCloudy = document.querySelector('.sunny-or-cloudy'),
       jsNotActive = document.querySelector('.js-not-active'),
       lemonsplanation = document.querySelector('.lemonsplanation'),
       lemonHeading = document.querySelector('.lemonsplanation__heading'),
@@ -140,10 +140,10 @@ var buyer = function () {
       lTopArm = document.querySelector("#left-toparm"),
       lActionArm = document.querySelector("#left-action-arm"),
       lArm = document.querySelector("#left-forarm"),
-      chocoCupTable = document.querySelector("#choco-cup")
+      chocoCupTable = document.querySelector("#choco-cup"),
       chocoCup = document.querySelector('#choco-cup-in-hand'),
       chocoSteam = document.querySelector("#choco-steam"),
-      forgroundTrees = document.querySelector("#forgroundTrees")
+      forgroundTrees = document.querySelector("#forgroundTrees"),
       bigtree = document.querySelector("#bigtree"),
       secondtree = document.querySelector("#secondtree"),
       smallertree = document.querySelector("#smallertree"),
@@ -170,22 +170,22 @@ var buyer = function () {
 
   function setCloudyWeather() {
     state.setSunny(0);
-    b.classList.toggle('cloudy');
-    b.classList.remove('sunny')
+    body.classList.add('cloudy');
+    body.classList.remove('sunny');
     cloudyIcon.classList.add('active-icon');
     sunnyIcon.classList.remove('active-icon');
     sunnyOrCloudy.innerHTML = 'cloudy';
 
     window.setTimeout(function(){
       sun.classList.add('offset-sun');
-      }, 7000);
+    }, 7000);
   };
 
 
   function setSunnyWeather() {
     state.setSunny(1);
-    b.classList.add('sunny');
-    b.classList.remove('cloudy')
+    body.classList.add('sunny');
+    body.classList.remove('cloudy');
     sun.classList.remove('offset-sun');
     sunnyOrCloudy.innerHTML = 'sunny';
     sunnyIcon.classList.add('active-icon');
@@ -279,11 +279,9 @@ function animateBuyer(buyer) {
 
 function purchase(){
   if (state.didPurchase == true){
-    console.log("buying");
     buying.classList.add("buying-active");
     tlBuyers.resume();
   } else {
-    console.log("im out of here")
     noBuying.classList.add("no-buying-active");
     tlBuyers.reverse();
   }
@@ -308,7 +306,7 @@ function purchase(){
    .addPause("ThinkingAboutIt+=4", purchase)//pass the purchase function here
    .set(buying, {className:"-=buying"})
    .set(noBuying, {className:"-=buying-no"})
-  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:-3, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
+  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:0, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
   .add("chocoServed")
   .to(chocoSteam, 1, {y:-14, autoAlpha:0.8})
   .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete: function addCup(){
@@ -341,10 +339,10 @@ let startScene = new TimelineMax();
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
       TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
-      TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-580, ease:Back.easeInOut}, onComplete:function(){
+      TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-260, ease:Back.easeInOut}, onComplete:function(){
       jsNotActive.classList.remove('js-not-active');
       sceneAction.classList.add('js-active');
-      TweenMax.to(sceneAction, 1.75, {autoAlpha:1})
+      TweenMax.to(sceneAction, 1.75, {autoAlpha:1, ease:Power2.easeInOut})
       TweenMax.to(settings, .75, {autoAlpha:1, scale:1, height: "100%"})
 
       nextBuyer();
