@@ -34,6 +34,19 @@ class LemonadeStand extends Microservice
       root: @config.apiServer
       key: @config.apiKey
 
+    # set up redis session
+    @db = Databank.get @config.driver, @config.params
+    @db.connect @config.params, (err) ->
+      if err
+        console.error "connection error"
+
+    store = new DatabankStore @db, exp.log
+    exp.use session
+      secret: 's3kr3t'
+      store: store
+      resave: true
+      saveUninitialized: true
+
     # Develpment mode tweaks
     if process.env.NODE_ENV == 'development'
       webpack = require('webpack')
@@ -60,24 +73,10 @@ class LemonadeStand extends Microservice
 
 
   startDatabase: (callback) ->
-    @db = Databank.get @config.driver, @config.params
-    if @db?
-      @db.connect @config.params, callback
-      store = new DatabankStore @db, @express.log
-      @express.use session
-        secret: 's3kr3t'
-        store: store
-        resave: true
-        saveUninitialized: true
-
-    else
-      callback new Error("db property not set for webserver")
+    callback null
 
   stopDatabase: (callback) ->
-    if @db?
-      @db.disconnect callback
-    else
-      callback null
+    callback null
 
   startCustom: (callback) ->
     client = @express.apiClient
@@ -93,6 +92,7 @@ class LemonadeStand extends Microservice
       callback null
 
   _newSeller: (req, res, next) ->
+    console.error req.session
     if req.session.sellerID
       res.json
         status: 'OK'
