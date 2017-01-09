@@ -113,6 +113,50 @@ var buyer = function () {
   }
 };
 
+var uiInteraction = {
+  init: function(){
+    this.cacheDom();
+    this.bindEvents();
+  },
+  cacheDom: function(){
+    this.el = document.querySelector(".settings");
+    this.cloudyIcon =   this.el.querySelector('.cloudy-icon-btn');
+    this.sunnyIcon =   this.el.querySelector('.sunny-icon-btn');
+    this.sunnyOrCloudy =   this.el.querySelector('.sunny-or-cloudy');
+    body = document.getElementsByTagName('body')[0];
+    bSunny = document.getElementsByClassName('sunny');
+    sun = document.querySelector('.sun');
+    console.log(this.el,this.cloudyIcon, this.sunnyIcon);
+  },
+  bindEvents: function(){
+    this.sunnyIcon.addEventListener('click', this.setSunnyWeather.bind(this));
+    this.cloudyIcon.addEventListener('click', this.setCloudyWeather.bind(this));
+  },
+
+  setCloudyWeather:  function () {
+      state.setSunny(0);
+      body.classList.add('cloudy');
+      body.classList.remove('sunny');
+      this.cloudyIcon.classList.add('active-icon');
+      this.sunnyIcon.classList.remove('active-icon');
+      this.sunnyOrCloudy.innerHTML = 'cloudy';
+
+      window.setTimeout(function(){
+        sun.classList.add('offset-sun');
+      }, 7000);
+    },
+    setSunnyWeather: function() {
+      state.setSunny(1);
+      body.classList.add('sunny');
+      body.classList.remove('cloudy');
+      sun.classList.remove('offset-sun');
+      this.sunnyOrCloudy.innerHTML = 'sunny';
+      this.sunnyIcon.classList.add('active-icon');
+      this.cloudyIcon.classList.remove('active-icon');
+    }
+};
+uiInteraction.init();
+
 (function(){
   console.log(state);
   let settings = document.querySelector(".settings"),
@@ -120,12 +164,12 @@ var buyer = function () {
       stand = document.querySelector('#stand'),
       snowMount = document.querySelector('#snow'),
       snowMid = document.querySelector("#snow-backer"),
-      cloudyIcon = document.querySelector('.cloudy-icon-btn'),
-      sunnyIcon = document.querySelector('.sunny-icon-btn'),
-      sunnyOrCloudy = document.querySelector('.sunny-or-cloudy'),
-      body = document.getElementsByTagName('body')[0],
-      bSunny = document.getElementsByClassName('sunny'),
-      sun = document.querySelector('.sun'),
+      // cloudyIcon = document.querySelector('.cloudy-icon-btn'),
+      // sunnyIcon = document.querySelector('.sunny-icon-btn'),
+      // sunnyOrCloudy = document.querySelector('.sunny-or-cloudy'),
+      // body = document.getElementsByTagName('body')[0],
+      // bSunny = document.getElementsByClassName('sunny'),
+      // sun = document.querySelector('.sun'),
       jsNotActive = document.querySelector('.js-not-active'),
       lemonsplanation = document.querySelector('.lemonsplanation'),
       lemonHeading = document.querySelector('.lemonsplanation__heading'),
@@ -168,34 +212,35 @@ var buyer = function () {
   // Main TL ///////////
   mainTl = new TimelineMax();
 
-  function setCloudyWeather() {
-    state.setSunny(0);
-    body.classList.add('cloudy');
-    body.classList.remove('sunny');
-    cloudyIcon.classList.add('active-icon');
-    sunnyIcon.classList.remove('active-icon');
-    sunnyOrCloudy.innerHTML = 'cloudy';
+  //
+  // function setCloudyWeather() {
+  //   state.setSunny(0);
+  //   body.classList.add('cloudy');
+  //   body.classList.remove('sunny');
+  //   cloudyIcon.classList.add('active-icon');
+  //   sunnyIcon.classList.remove('active-icon');
+  //   sunnyOrCloudy.innerHTML = 'cloudy';
+  //
+  //   window.setTimeout(function(){
+  //     sun.classList.add('offset-sun');
+  //   }, 7000);
+  // };
+  //
+  //
+  // function setSunnyWeather() {
+  //   state.setSunny(1);
+  //   body.classList.add('sunny');
+  //   body.classList.remove('cloudy');
+  //   sun.classList.remove('offset-sun');
+  //   sunnyOrCloudy.innerHTML = 'sunny';
+  //   sunnyIcon.classList.add('active-icon');
+  //   cloudyIcon.classList.remove('active-icon');
+  // }
 
-    window.setTimeout(function(){
-      sun.classList.add('offset-sun');
-    }, 7000);
-  };
-
-
-  function setSunnyWeather() {
-    state.setSunny(1);
-    body.classList.add('sunny');
-    body.classList.remove('cloudy');
-    sun.classList.remove('offset-sun');
-    sunnyOrCloudy.innerHTML = 'sunny';
-    sunnyIcon.classList.add('active-icon');
-    cloudyIcon.classList.remove('active-icon');
-  }
-
-//toggle cloudy or sunny weather
-
-sunnyIcon.addEventListener('click', setSunnyWeather);
-cloudyIcon.addEventListener('click', setCloudyWeather);
+// //toggle cloudy or sunny weather
+//
+// sunnyIcon.addEventListener('click', setSunnyWeather);
+// cloudyIcon.addEventListener('click', setCloudyWeather);
 
 tempUp.addEventListener('click', function() {
   state.setTemperature(state.temperature + 1);
