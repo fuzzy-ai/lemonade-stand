@@ -7,7 +7,7 @@ env:
   - PATH=/usr/lib/google-cloud-sdk/bin:$PATH
   - PROJECT=lemonade-stand
   - GCLOUD_PROJECT_ID=fuzzy-ai-lemonade-stand
-  - GCLOUD_ACCOUNT=travis-ci@fuzzy-ai-prod.iam.gserviceaccount.com
+  - GCLOUD_ACCOUNT=travis-ci@fuzzy-ai-lemonade-stand.iam.gserviceaccount.com
   - GCLOUD_CLUSTER=fuzzy-ai-prod-west-2
 before_install:
 - openssl aes-256-cbc -K $encrypted_8e6cd4036e27_key -iv $encrypted_8e6cd4036e27_iv
