@@ -5,7 +5,8 @@
   "main": "lib/main.js",
   "scripts": {
     "start": "node lib/main.js",
-    "test": "npm test",
+    "test": "cake test",
+    "lint": "coffeelint -q src",
     "dev": "coffee -r dotenv/config  -w src/main.coffee"
   },
   "repository": {

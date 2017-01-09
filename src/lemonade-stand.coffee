@@ -10,6 +10,7 @@ session = require 'express-session'
 DatabankStore = require('connect-databank')(session)
 Microservice = require 'fuzzy.ai-microservice'
 APIClient = require 'fuzzy.ai'
+version = require './version'
 
 { seller, buyer } = require './agents'
 
@@ -33,15 +34,6 @@ class LemonadeStand extends Microservice
       root: @config.apiServer
       key: @config.apiKey
 
-    @db = Databank.get @config.driver, @config.params
-    @db.connect @config.params
-    store = new DatabankStore @db, exp.log
-    exp.use session
-      secret: 's3kr3t'
-      store: store
-      resave: true
-      saveUninitialized: true
-
     # Develpment mode tweaks
     if process.env.NODE_ENV == 'development'
       webpack = require('webpack')
@@ -63,23 +55,42 @@ class LemonadeStand extends Microservice
     exp.post '/data/seller/evaluate', @_evaluateSeller
     exp.post '/data/seller/feedback', @_feedbackSeller
     exp.post '/data/buyer/evaluate', @_evaluateBuyer
+    exp.get '/version', (req, res, next) ->
+      res.json {name: 'lemonade-stand', version: version}
 
 
   startDatabase: (callback) ->
-    callback null
+    @db = Databank.get @config.driver, @config.params
+    if @db?
+      @db.connect @config.params, callback
+      store = new DatabankStore @db, @express.log
+      @express.use session
+        secret: 's3kr3t'
+        store: store
+        resave: true
+        saveUninitialized: true
+
+    else
+      callback new Error("db property not set for webserver")
 
   stopDatabase: (callback) ->
-    callback null
+    if @db?
+      @db.disconnect callback
+    else
+      callback null
 
   startCustom: (callback) ->
     client = @express.apiClient
 
     # Make sure we have the proper buyer agent.
-    client.putAgent @config.buyerID, buyer, (err, agent) ->
-      if err
-        callback err
-      else
-        callback null
+    if @config.buyderID
+      client.putAgent @config.buyerID, buyer, (err, agent) ->
+        if err
+          callback err
+        else
+          callback null
+    else
+      callback null
 
   _newSeller: (req, res, next) ->
     if req.session.sellerID
