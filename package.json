@@ -1,11 +1,12 @@
 {
   "name": "lemonade-stand",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "An example Fuzzy.ai application simulating a lemonade stand",
   "main": "lib/main.js",
   "scripts": {
     "start": "node lib/main.js",
-    "test": "npm test",
+    "test": "cake test",
+    "lint": "coffeelint -q src",
     "dev": "coffee -r dotenv/config  -w src/main.coffee"
   },
   "repository": {
