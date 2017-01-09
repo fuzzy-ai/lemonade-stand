@@ -1,6 +1,6 @@
 {
   "name": "lemonade-stand",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "An example Fuzzy.ai application simulating a lemonade stand",
   "main": "lib/main.js",
   "scripts": {
