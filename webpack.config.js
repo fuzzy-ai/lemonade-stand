@@ -14,7 +14,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.sass$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader?sourceMap=true') }
+      { test: /\.sass$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader?sourceMap=true') },
+      { test: /\.js$/, loader: 'babel-loader?presets[]=es2015' }
     ]
   },
   plugins: [

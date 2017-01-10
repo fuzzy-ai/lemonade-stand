@@ -64,7 +64,6 @@ function sellerEvaluate() {
     success: function(data) {
       state.updatePending = false;
       var num = data.evaluation.price;
-      console.log("current price is: $" + num.toFixed(2));
       if (num) {
         $("#current-price").html("$" + num.toFixed(2));
       }
@@ -91,9 +90,7 @@ var buyer = function () {
         success: function(data) {
           if (data.evaluation.willBuy > 0.5) {
             state.didPurchase = true;
-            console.log("BUY!", data.evaluation.willBuy);
           } else {
-            console.log("Don't buy :-(", data.evaluation.willBuy);
             state.didPurchase = false;
           }
           // Send feedback to the seller
@@ -103,7 +100,6 @@ var buyer = function () {
             data: JSON.stringify({willBuy: data.evaluation.willBuy}),
             contentType: 'application/json',
             success: function(data) {
-              console.log(data);
             }
           });
 
@@ -126,7 +122,6 @@ var uiInteraction = {
     body = document.getElementsByTagName('body')[0];
     bSunny = document.getElementsByClassName('sunny');
     sun = document.querySelector('.sun');
-    console.log(this.el,this.cloudyIcon, this.sunnyIcon);
   },
   bindEvents: function(){
     this.sunnyIcon.addEventListener('click', this.setSunnyWeather.bind(this));
@@ -158,7 +153,6 @@ var uiInteraction = {
 uiInteraction.init();
 
 (function(){
-  console.log(state);
   let settings = document.querySelector(".settings"),
       addBuyerLink = document.querySelector("#add-buyer-link"),
       stand = document.querySelector('#stand'),
@@ -258,7 +252,6 @@ function getIntroText(){
 }
 
 function nextBuyer() {
-  console.log("called nextBuyer", state.buyers.length);
   if (state.buyers.length) {
     animateBuyer(state.buyers[0]);
   } else {
@@ -268,13 +261,11 @@ function nextBuyer() {
 }
 
 function completeBuyer() {
-  console.log("completing buyer");
   state.removeBuyer();
   nextBuyer();
 }
 
 function animateBuyer(buyer) {
-  console.log("called animate", buyer);
   let tlBuyers = new TimelineMax({
     onComplete: function() {
       completeBuyer();
@@ -309,7 +300,7 @@ function purchase(){
   .set(snow, {y: 42})
   .set(lActionArm, {rotation:0})
   .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
-  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:3, ease:Power1.easeInOut, onComplete: function() { console.log('evaluate now'); buyer.evaluate()}}, "-=2.5")
+  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:3, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
   .add("ThinkingAboutIt")
    tlBuyers
    .addPause("ThinkingAboutIt+=4", purchase)//pass the purchase function here

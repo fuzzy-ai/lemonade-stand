@@ -28,7 +28,10 @@ cmd = (str, env, callback) ->
       process.exit(code)
 
 build = (callback) ->
-  cmd "coffee -c -o lib src", callback
+  env =
+    NODE_ENV: 'production'
+  cmd './node_modules/.bin/coffee -c -o lib src', ->
+    cmd './node_modules/.bin/webpack -p --bail', env, callback
 
 buildDocker = (callback) ->
   cmd "docker build -t #{DOCKER} .", callback
