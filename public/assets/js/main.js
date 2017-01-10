@@ -119,7 +119,7 @@ var uiInteraction = {
     this.cloudyIcon =   this.el.querySelector('.cloudy-icon-btn');
     this.sunnyIcon =   this.el.querySelector('.sunny-icon-btn');
     this.sunnyOrCloudy =   this.el.querySelector('.sunny-or-cloudy');
-    body = document.getElementsByTagName('body')[0];
+    body = document.querySelector('body');
     bSunny = document.getElementsByClassName('sunny');
     sun = document.querySelector('.sun');
   },
