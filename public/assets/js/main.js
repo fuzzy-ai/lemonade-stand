@@ -119,9 +119,9 @@ var uiInteraction = {
     this.cloudyIcon =   this.el.querySelector('.cloudy-icon-btn');
     this.sunnyIcon =   this.el.querySelector('.sunny-icon-btn');
     this.sunnyOrCloudy =   this.el.querySelector('.sunny-or-cloudy');
-    body = document.querySelector('body');
-    bSunny = document.getElementsByClassName('sunny');
-    sun = document.querySelector('.sun');
+    this.body = document.querySelector('body');
+    this.bSunny = document.querySelector('.sunny');
+    this.sun = document.querySelector('.sun');
   },
   bindEvents: function(){
     this.sunnyIcon.addEventListener('click', this.setSunnyWeather.bind(this));
@@ -129,26 +129,26 @@ var uiInteraction = {
   },
 
   setCloudyWeather:  function () {
-      state.setSunny(0);
-      body.classList.add('cloudy');
-      body.classList.remove('sunny');
-      this.cloudyIcon.classList.add('active-icon');
-      this.sunnyIcon.classList.remove('active-icon');
-      this.sunnyOrCloudy.innerHTML = 'cloudy';
+    state.setSunny(0);
+    body.classList.add('cloudy');
+    body.classList.remove('sunny');
+    this.cloudyIcon.classList.add('active-icon');
+    this.sunnyIcon.classList.remove('active-icon');
+    this.sunnyOrCloudy.innerHTML = 'cloudy';
 
-      window.setTimeout(function(){
-        sun.classList.add('offset-sun');
-      }, 7000);
-    },
-    setSunnyWeather: function() {
-      state.setSunny(1);
-      body.classList.add('sunny');
-      body.classList.remove('cloudy');
-      sun.classList.remove('offset-sun');
-      this.sunnyOrCloudy.innerHTML = 'sunny';
-      this.sunnyIcon.classList.add('active-icon');
-      this.cloudyIcon.classList.remove('active-icon');
-    }
+    window.setTimeout(function(){
+      sun.classList.add('offset-sun');
+    }, 7000);
+  },
+  setSunnyWeather: function() {
+    state.setSunny(1);
+    body.classList.add('sunny');
+    body.classList.remove('cloudy');
+    sun.classList.remove('offset-sun');
+    this.sunnyOrCloudy.innerHTML = 'sunny';
+    this.sunnyIcon.classList.add('active-icon');
+    this.cloudyIcon.classList.remove('active-icon');
+  }
 };
 uiInteraction.init();
 
@@ -175,6 +175,7 @@ uiInteraction.init();
       chocoCupTable = document.querySelector("#choco-cup"),
       chocoCup = document.querySelector('#choco-cup-in-hand'),
       chocoSteam = document.querySelector("#choco-steam"),
+      sun = document.querySelector('.sun'),
       forgroundTrees = document.querySelector("#forgroundTrees"),
       bigtree = document.querySelector("#bigtree"),
       secondtree = document.querySelector("#secondtree"),
@@ -198,7 +199,7 @@ uiInteraction.init();
 
 
 // Main TL ///////////
-mainTl = new TimelineMax();
+let mainTl = new TimelineMax();
 
 tempUp.addEventListener('click', function() {
   state.setTemperature(state.temperature + 1);
