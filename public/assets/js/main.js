@@ -130,21 +130,19 @@ var uiInteraction = {
 
   setCloudyWeather:  function () {
     state.setSunny(0);
-    body.classList.add('cloudy');
-    body.classList.remove('sunny');
+    this.body.classList.add('cloudy');
+    this.body.classList.remove('sunny');
     this.cloudyIcon.classList.add('active-icon');
     this.sunnyIcon.classList.remove('active-icon');
     this.sunnyOrCloudy.innerHTML = 'cloudy';
+    this.sun.classList.add('offset-sun');
 
-    window.setTimeout(function(){
-      sun.classList.add('offset-sun');
-    }, 7000);
   },
   setSunnyWeather: function() {
     state.setSunny(1);
-    body.classList.add('sunny');
-    body.classList.remove('cloudy');
-    sun.classList.remove('offset-sun');
+    this.body.classList.add('sunny');
+    this.body.classList.remove('cloudy');
+    this.sun.classList.remove('offset-sun');
     this.sunnyOrCloudy.innerHTML = 'sunny';
     this.sunnyIcon.classList.add('active-icon');
     this.cloudyIcon.classList.remove('active-icon');
@@ -156,6 +154,7 @@ uiInteraction.init();
   let settings = document.querySelector(".settings"),
       addBuyerLink = document.querySelector("#add-buyer-link"),
       stand = document.querySelector('#stand'),
+      snow = document.querySelector("#snow"),
       snowMid = document.querySelector("#snow-backer"),
       jsNotActive = document.querySelector('.js-not-active'),
       lemonsplanation = document.querySelector('.lemonsplanation'),
@@ -286,14 +285,14 @@ function purchase(){
   .set(noBuying, {className:"-=no-buying-active"})
   .set(chocoCup, {className:"-=choco-cup-bought"})
   .set(chocoCup, {className:"+=choco-cup-noshow"})
-  .set(buyerEl, {x: -`${walkingDist}` * 4, force3D:true, y:24, scale:1.20})
-  .set(stand, {y: 65})
+  .set(buyerEl, {x: -`${walkingDist}` * 4, force3D:true, y:20, scale:1.20})
+  .set(stand, {y: 60})
   .set(snowMid, { x: 200})
   .set(chocoSteam, {autoAlpha:0.5, y: -2})
   .set(snow, {y: 42})
   .set(lActionArm, {rotation:0})
   .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
-  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
+  .to(buyerEl, 2.5, {scale:1,  x: `${walkingDist}`, delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
   .add("ThinkingAboutIt")
    tlBuyers
    .addPause("ThinkingAboutIt+=4", purchase)//pass the purchase function here
@@ -320,7 +319,7 @@ let startScene = new TimelineMax();
   TweenMax.set(settings, {autoAlpha:0, scale:0, height: 0})
 
   startBtn.addEventListener('click' , function() {
-    TweenMax.to(lemonsplanation, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
+    TweenMax.to(startBtn, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
 
 
       $.post('/data/seller', function(data) {
@@ -331,8 +330,8 @@ let startScene = new TimelineMax();
 
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
-      TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
-      TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-260, ease:Back.easeInOut}, onComplete:function(){
+      // TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
+      TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-340, ease:Back.easeInOut}, onComplete:function(){
       jsNotActive.classList.remove('js-not-active');
       sceneAction.classList.add('js-active');
       TweenMax.to(sceneAction, 1.75, {autoAlpha:1, ease:Power2.easeInOut})

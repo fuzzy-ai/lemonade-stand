@@ -64,6 +64,20 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
   100%
     transform: translateX(-20px)
 
+//BreakPoints
+//
+=tab
+	@media only screen and (min-width: 768px)
+		@content
+
+
+=med
+  @media only screen and (min-width: 940px)
+    @content
+
+
+
+
 html
   height: 100%
   background: #E1EBE5
@@ -76,6 +90,7 @@ body
   color: $color-text
   border-top: 1px solid #FAF1E8
   overflow-x: hidden
+
 
 .sky
   background: linear-gradient(180deg,  #86B1B8 0%,  #E1EBE5 55%)
@@ -171,7 +186,7 @@ body
     transform: scale(0.5)
 
 .offset-sun
-  top: -1000px
+  top: -1000px !important
 
 .row
   width: 100%
@@ -268,7 +283,7 @@ h2
   padding-bottom: 1340px
 
 .snow
-  height: 380px
+  height: 240px
   background: linear-gradient(-180deg, #BED5C8 5%, #ffffff 25%, #ffffff  55%, #ffffff 100%)
   width: 100%
   position: absolute
@@ -276,7 +291,7 @@ h2
   left: 0
   right: 0
   border-top-color: transparent
-  border-bottom: 4px solid #1A1312
+  border-bottom: 1px solid #1A1312
 
 //SETTINGS AREA////////////////////////////////////////////
 .settings
@@ -314,10 +329,10 @@ h2
     flex: 1
     header
       background: rgba(darken(#29201e, 25%), .2)
-      padding: 40px 40px 20px
+      padding: 35px 40px 17px
 
     h2
-      margin-bottom: 9px
+      margin-bottom: 8px
 
     .flex__item-subline
       display: block
@@ -343,7 +358,7 @@ h2
 #full-scene
   width: 100%
   position: absolute
-  bottom: -100px
+  bottom: -170px
   z-index: 3000
 
 .choco-cup-noshow
@@ -371,7 +386,7 @@ h2
 
 
 .value-modifier-wrap
-  width: 80px
+  width: 70px
   padding: 0
   margin: 0
   float: left
@@ -379,8 +394,8 @@ h2
 
   span
     display: block
-    width: 80px
-    height: 80px
+    width: 70px
+    height: 70px
     border: 1px solid #1B1413
     border-bottom: none
     position: relative
@@ -413,7 +428,7 @@ h2
 
 .setting-module
   position: relative
-  min-height: 159px
+  min-height: 139px
   border-top: 1px solid #1B1413
   margin-top: 1px
   background: rgba(255,255,255,.015)
@@ -421,7 +436,7 @@ h2
 
 
 .value
-  font-size: 54px
+  font-size: 50px
   +centerer
 
 
@@ -472,14 +487,14 @@ footer
   font-family: $heading-stack
   letter-spacing: 1px
   text-align: center
-  padding: 20px 10px
+  padding: 0px
   z-index: 50000
   position: absolute
   left: calc(50% - 80px)
-  bottom: 40px
+  bottom: 20px
 
   #current-price
-    font-size: 1.25rem
+    font-size: 1.2rem
     color: $accent
 
   p
@@ -487,11 +502,12 @@ footer
     font-size: .95rem
     letter-spacing: 2px
     text-transform: uppercase
+		line-height: 1.4
 
 //BUYER RESPONSE////////////////////////////////////////
 .yes-no
   position: absolute
-  bottom: 350px
+  bottom: 280px
   left: calc(50% - 10px)
   z-index: 5
 
@@ -511,14 +527,8 @@ footer
     animation: fadeInDown fadeOutUp
     animation-delay: 0s, .5s
 
-  .checkmark
-    fill: #1DB8A1
+.checkmark
+  fill: #1DB8A1
 
-  .cross
-    fill: #D8141F
-
-
-.range
-  position: absolute
-  bottom: 340px
-  left: 0
+.cross
+  fill: #D8141F
