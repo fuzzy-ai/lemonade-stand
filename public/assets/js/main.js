@@ -11,17 +11,17 @@ var state = {
   addBuyer: function() {
     //var genders = ['boy', 'girl'];
     var genders = ['boy'];
-    newBuyer = new buyer();
+    var newBuyer = new buyer();
     newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
     this.buyers.push(newBuyer);
-    numBuyers = state.buyers.length;
+    var numBuyers = state.buyers.length;
     $("#buyer-num").html(numBuyers);
     this.queueUpdate();
   },
 
   removeBuyer: function() {
-    oldBuyer = this.buyers.shift();
-    numBuyers = state.buyers.length;
+    var oldBuyer = this.buyers.shift();
+    var numBuyers = state.buyers.length;
     $("#buyer-num").html(numBuyers);
     this.queueUpdate();
   },
@@ -156,7 +156,6 @@ uiInteraction.init();
   let settings = document.querySelector(".settings"),
       addBuyerLink = document.querySelector("#add-buyer-link"),
       stand = document.querySelector('#stand'),
-      snowMount = document.querySelector('#snow'),
       snowMid = document.querySelector("#snow-backer"),
       jsNotActive = document.querySelector('.js-not-active'),
       lemonsplanation = document.querySelector('.lemonsplanation'),
@@ -169,28 +168,21 @@ uiInteraction.init();
       buyerMinus = document.querySelector("#buyer-minus"),
       tempUp = document.querySelector('.temperature-up-icon'),
       tempDown = document.querySelector('.temperature-down-icon'),
-      lTopArm = document.querySelector("#left-toparm"),
+      // lTopArm = document.querySelector("#left-toparm"),
       lActionArm = document.querySelector("#left-action-arm"),
       lArm = document.querySelector("#left-forarm"),
       chocoCupTable = document.querySelector("#choco-cup"),
       chocoCup = document.querySelector('#choco-cup-in-hand'),
       chocoSteam = document.querySelector("#choco-steam"),
       sun = document.querySelector('.sun'),
-      forgroundTrees = document.querySelector("#forgroundTrees"),
-      bigtree = document.querySelector("#bigtree"),
-      secondtree = document.querySelector("#secondtree"),
-      smallertree = document.querySelector("#smallertree"),
       buyerWidth = buyers[0].getBoundingClientRect().width,
       standWidth = stand.getBoundingClientRect().width,
       snowmanArm = document.querySelector("#snowmanarm"),
-      snowmanLeftEye = document.querySelector("#lefteye"),
-      snowmanRightEye = document.querySelector("#righteye"),
       star = document.querySelector("#star"),
       star2 = document.querySelector("#star-2"),
       buying = document.querySelector("#buying"),
       noBuying = document.querySelector("#buying-no"),
       intFrameWidth = window.innerWidth;
-      //buyer = [boy, girl];
 
 
   const startBtn = document.querySelector('.js-start-btn'),
@@ -301,13 +293,13 @@ function purchase(){
   .set(snow, {y: 42})
   .set(lActionArm, {rotation:0})
   .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
-  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:3, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
+  .to(buyerEl, 2.5, {scale:1, x: `${walkingDist}`, delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
   .add("ThinkingAboutIt")
    tlBuyers
    .addPause("ThinkingAboutIt+=4", purchase)//pass the purchase function here
    .set(buying, {className:"-=buying"})
    .set(noBuying, {className:"-=buying-no"})
-  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:0, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
+  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:1, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
   .add("chocoServed")
   .to(chocoSteam, 1, {y:-14, autoAlpha:0.8})
   .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete: function addCup(){
