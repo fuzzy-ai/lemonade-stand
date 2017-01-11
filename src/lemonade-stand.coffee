@@ -82,7 +82,7 @@ class LemonadeStand extends Microservice
     client = @express.apiClient
 
     # Make sure we have the proper buyer agent.
-    if @config.buyderID
+    if @config.buyerID
       client.putAgent @config.buyerID, buyer, (err, agent) ->
         if err
           callback err
