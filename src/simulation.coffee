@@ -14,6 +14,9 @@ argv = require('yargs')
   .default('b', 100)
   .alias('b', 'buyers')
   .describe('b', 'number of buyers')
+  .default('p', 8)
+  .alias('p', 'parallel')
+  .describe('p', 'number of buyers to run in parallel')
   .default('t', 0.5)
   .alias('t', 'threshold')
   .describe('t', 'buy threshold')
@@ -23,6 +26,9 @@ argv = require('yargs')
   .env('HOT_CHOCOLATE')
   .config()
   .default('config', path.join(process.env['HOME'], '.hotchocolate.json'))
+  .alias('f', 'config')
+  .help()
+  .alias('h', 'help')
   .argv
 
 { seller, buyer } = require './agents'
@@ -33,7 +39,7 @@ main = (argv) ->
 
   debug(argv)
 
-  {key, buyers, threshold, cost} = argv
+  {key, buyers, threshold, cost, parallel} = argv
   cost = 0.50
 
   client = new APIClient {key: key}
@@ -92,7 +98,7 @@ main = (argv) ->
       sellerID = saved.id
       debug saved
       debug "Seller ID = #{sellerID}"
-      async.timesLimit 8, buyers, attemptSale, callback
+      async.timesLimit buyers, parallel, attemptSale, callback
     (results, callback) ->
       profits = results
       debug "Deleting buyer agent #{buyerID}"
