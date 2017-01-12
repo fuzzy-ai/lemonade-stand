@@ -285,7 +285,7 @@ function purchase(){
   .set(noBuying, {className:"-=no-buying-active"})
   .set(chocoCup, {className:"-=choco-cup-bought"})
   .set(chocoCup, {className:"+=choco-cup-noshow"})
-  .set(buyerEl, {x: -`${walkingDist}` * 4, force3D:true, y:20, scale:1.20})
+  .set(buyerEl, {x: -`${walkingDist}` /2, force3D:true, y:20, scale:1.20})
   .set(stand, {y: 60})
   .set(snowMid, { x: 200})
   .set(chocoSteam, {autoAlpha:0.5, y: -2})

@@ -28,6 +28,7 @@
   "homepage": "https://github.com/fuzzy-ai/lemonade-stand#readme",
   "dependencies": {
     "autoprefixer": "^6.5.3",
+    "chart.js": "^2.4.0",
     "connect-databank": "^1.0.3",
     "css-loader": "^0.26.0",
     "databank": "^0.19.5",
