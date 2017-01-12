@@ -63,7 +63,7 @@ main = (argv) ->
         debug "Results for seller for attempt #{i}"
         debug results
         id = results.meta.reqID
-        price = results.price
+        price = Math.round(results.price * 100) / 100
         inputs = _.extend({price: price}, status)
         debug "Calling buyer for attempt #{i}"
         client.evaluate buyerID, inputs, callback
@@ -71,7 +71,7 @@ main = (argv) ->
         debug "Results for buyer for attempt #{i}"
         debug results
         if results.willBuy > threshold
-          profit = price - cost
+          profit = Math.round((price - cost) * 100) / 100
         else
           profit = 0
         debug "profit for attempt #{i} = #{profit}"
