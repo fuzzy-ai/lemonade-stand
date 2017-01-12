@@ -1,4 +1,5 @@
 // Lemonade stand
+var FIXED_COST = 0.50;
 
 var state = {
   buyers: [],
@@ -64,6 +65,7 @@ function sellerEvaluate() {
     success: function(data) {
       state.updatePending = false;
       var num = data.evaluation.price;
+      state.setPrice(num);
       if (num) {
         $("#current-price").html("$" + num.toFixed(2));
       }
@@ -88,16 +90,19 @@ var buyer = function () {
         data: JSON.stringify(data),
         contentType: 'application/json',
         success: function(data) {
+          var profit;
           if (data.evaluation.willBuy > 0.5) {
             state.didPurchase = true;
+            profit = state.price - FIXED_COST;
           } else {
             state.didPurchase = false;
+            profit = 0;
           }
           // Send feedback to the seller
           $.ajax({
             method: "POST",
             url: "/data/seller/feedback",
-            data: JSON.stringify({willBuy: data.evaluation.willBuy}),
+            data: JSON.stringify({profit: profit}),
             contentType: 'application/json',
             success: function(data) {
             }
@@ -326,7 +331,7 @@ let startScene = new TimelineMax();
         for (var i = 0; i < 10; i++) {
           state.addBuyer();
         }
-        state.setTemperature(50);
+        state.setTemperature(32);
 
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
