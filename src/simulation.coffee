@@ -48,15 +48,24 @@ main = (argv) ->
   client = new APIClient {key: key, root: root}
   buyerID = null
   sellerID = null
+  temperature = 32
+  sunny = 0
 
   attemptSale = (i, callback) ->
     debug "Attempting sale #{i}"
     id = null
     price = null
+
+    # randomly change up the environment
+    if Math.round(Math.random())
+      temperature = Math.round(Math.random() * 100)
+      sunny = Math.round(Math.random())
+      
     status =
-      numBuyers: 5
-      temperature: 50
-      sunny: 0
+      numBuyers: buyers - i
+      temperature: temperature
+      sunny: sunny
+    debug status
     async.waterfall [
       (callback) ->
         inputs = _.clone(status)
