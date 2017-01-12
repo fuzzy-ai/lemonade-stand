@@ -34,7 +34,7 @@ module.exports.buyer =
       omgYes: [0.75, 1]
   rules: [
     '''price DECREASES willBuy WITH 1.0'''
-    '''numBuyers DECREASES willBuy WITH 0.75'''
+    '''numBuyers DECREASES willBuy WITH 0.10'''
     '''temperature DECREASES willBuy WITH 0.75'''
     '''IF sunny IS true THEN willBuy IS no WITH 0.5'''
     '''IF sunny IS false THEN willBuy IS yes WITH 0.5'''
@@ -65,10 +65,10 @@ module.exports.seller =
       "high": [2.5, 3.75, 5]
       "very high": [3.75, 5]
   performance:
-    willBuy: "maximize"
+    profit: "maximize"
   rules: [
-    '''numBuyers DECREASES price WITH 0.5'''
-    '''temperature INCREASES price WITH 1.0'''
-    '''IF sunny IS true THEN price IS high WITH 0.75'''
-    '''IF sunny IS false THEN price IS low WITH 0.75'''
+    '''numBuyers DECREASES price WITH 0.10'''
+    '''temperature DECREASES price WITH 1.0'''
+    '''IF sunny IS true THEN price IS low WITH 0.50'''
+    '''IF sunny IS false THEN price IS high  WITH 0.50'''
   ]
