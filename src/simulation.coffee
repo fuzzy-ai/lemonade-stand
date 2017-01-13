@@ -11,6 +11,9 @@ argv = require('yargs')
   .demand('k')
   .alias('k', 'key')
   .describe('k', 'API key')
+  .default('r', 'https://api.fuzzy.ai')
+  .alias('r', 'root')
+  .describe('r', 'API root URL')
   .default('b', 100)
   .alias('b', 'buyers')
   .describe('b', 'number of buyers')
@@ -39,21 +42,30 @@ main = (argv) ->
 
   debug(argv)
 
-  {key, buyers, threshold, cost, parallel} = argv
+  {key, root, buyers, threshold, cost, parallel} = argv
   cost = 0.50
 
-  client = new APIClient {key: key}
+  client = new APIClient {key: key, root: root}
   buyerID = null
   sellerID = null
+  temperature = 32
+  sunny = 0
 
   attemptSale = (i, callback) ->
     debug "Attempting sale #{i}"
     id = null
     price = null
+
+    # randomly change up the environment
+    if Math.round(Math.random())
+      temperature = Math.round(Math.random() * 100)
+      sunny = Math.round(Math.random())
+      
     status =
-      numBuyers: 5
-      temperature: 50
-      sunny: 0
+      numBuyers: buyers - i
+      temperature: temperature
+      sunny: sunny
+    debug status
     async.waterfall [
       (callback) ->
         inputs = _.clone(status)
