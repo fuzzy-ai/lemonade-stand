@@ -1,4 +1,6 @@
 // Lemonade stand
+import Chart from 'chart.js'
+
 var FIXED_COST = 0.50;
 
 var state = {
@@ -10,8 +12,8 @@ var state = {
   didPurchase: false,
 
   addBuyer: function() {
-    //var genders = ['boy', 'girl'];
-    var genders = ['boy'];
+    var genders = ['boy', 'girl'];
+    //var genders = ['boy'];
     var newBuyer = new buyer();
     newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
     this.buyers.push(newBuyer);
@@ -75,7 +77,7 @@ function sellerEvaluate() {
 
 var buyer = function () {
   return {
-    gender: 'boy',
+    gender: ['girl','boy'],
     evaluate: function() {
       var data = {
         price: state.price,
@@ -173,10 +175,10 @@ uiInteraction.init();
       tempUp = document.querySelector('.temperature-up-icon'),
       tempDown = document.querySelector('.temperature-down-icon'),
       // lTopArm = document.querySelector("#left-toparm"),
-      lActionArm = document.querySelector("#left-action-arm"),
+      lActionArm = document.querySelector(".left-action-arm"),
       lArm = document.querySelector("#left-forarm"),
       chocoCupTable = document.querySelector("#choco-cup"),
-      chocoCup = document.querySelector('#choco-cup-in-hand'),
+      chocoCup = document.querySelector('.choco-cup-in-hand'),
       chocoSteam = document.querySelector("#choco-steam"),
       sun = document.querySelector('.sun'),
       buyerWidth = buyers[0].getBoundingClientRect().width,
@@ -358,3 +360,49 @@ let startScene = new TimelineMax();
   }
   init();
 })();
+
+//chart JS
+var ctx = document.getElementById("myChart");
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+        datasets: [{
+            label: 'some label',
+            data: [24, 55, 78, 120, 19, 35, 51, 21, 90, 120, 124, 256],
+            backgroundColor: 'rgba(195, 125, 175, 0.95)' ,
+            borderColor: 'rgba(195,139,172,1)',
+            borderWidth: 1
+        }]
+    } ,
+    // legendCallback: function(myChart) {
+    //   console.log(myChart.data);
+    //   let customLegend = document.querySelector(".custom-legend");
+    //   let textLegend = [];
+    //
+    //   for(i = 0; i < myChart.data.datasets[0].data.length; i++){
+    //     textLegend.push(`
+    //       <div class="customlegend">
+    //       satans
+    //       <h2>chart.data.labels[i]</h2>
+    //       <span>${myChart.data.datasets[0].backgroundColor[i]}</span>
+    //     </div>`)
+    //   }
+    //   return textLegend.join("");
+    //   customLegend.innerHTML = textLegend;
+    // },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        },
+        legend: {
+          display: false
+        }
+    }
+});
+document.getElementById('custom-legend').innerHTML = myChart.generateLegend();
