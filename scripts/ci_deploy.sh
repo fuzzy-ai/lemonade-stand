@@ -8,7 +8,7 @@ sudo chown -R $USER $HOME/.config/gcloud
 # configure gcloud for travis service account
 gcloud config set container/use_client_certificate True
 gcloud auth activate-service-account $GCLOUD_ACCOUNT --key-file=client-secret.json
-gcloud config set compute/zone us-west1-b
+gcloud config set compute/zone us-west1-a
 gcloud config set project $GCLOUD_PROJECT_ID
 gcloud config set account $GCLOUD_ACCOUNT
 gcloud container clusters get-credentials $GCLOUD_CLUSTER
