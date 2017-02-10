@@ -292,7 +292,7 @@ function purchase(){
   .set(noBuying, {className:"-=no-buying-active"})
   .set(chocoCup, {className:"-=choco-cup-bought"})
   .set(chocoCup, {className:"+=choco-cup-noshow"})
-  .set(buyerEl, {x: -`${walkingDist}` /2, force3D:true, y:20, scale:1.20})
+  .set(buyerEl, {x: -`${walkingDist}` / 2, force3D:true, y:20, scale:1.20})
   .set(stand, {y: 60})
   .set(snowMid, { x: 200})
   .set(chocoSteam, {autoAlpha:0.5, y: -2})
@@ -362,41 +362,56 @@ let startScene = new TimelineMax();
 })();
 
 //chart JS
-var ctx = document.getElementById("myChart");
+var ctx = document.getElementById("chart");
 
-var myChart = new Chart(ctx, {
+var chart = new Chart(ctx, {
     type: 'bar',
+    //animationSteps: 60,
     data: {
         labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
         datasets: [{
             label: 'some label',
-            data: [24, 55, 78, 120, 19, 35, 51, 21, 90, 120, 124, 256],
-            backgroundColor: 'rgba(195, 125, 175, 0.95)' ,
+            data: [34, 35, 38, 30, 39, 35, 31, 31, 30, 37, 35, 35],
+            backgroundColor: 'rgba(195, 125, 175, 0.90)' ,
             borderColor: 'rgba(195,139,172,1)',
-            borderWidth: 1
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(195, 125, 175, 1)',
+            hoverBorderColor: 'rgba(195, 125, 175, 0.90)'
         }]
     } ,
-    // legendCallback: function(myChart) {
-    //   console.log(myChart.data);
-    //   let customLegend = document.querySelector(".custom-legend");
-    //   let textLegend = [];
-    //
-    //   for(i = 0; i < myChart.data.datasets[0].data.length; i++){
-    //     textLegend.push(`
-    //       <div class="customlegend">
-    //       satans
-    //       <h2>chart.data.labels[i]</h2>
-    //       <span>${myChart.data.datasets[0].backgroundColor[i]}</span>
-    //     </div>`)
-    //   }
-    //   return textLegend.join("");
-    //   customLegend.innerHTML = textLegend;
-    // },
+
     options: {
+      animationEasing: "easeOutQuart",
+      responsiveAnimationDuration: 5000,
+      barStrokeWidth : 1,
+      responsive: true,
+      maintainAspectRatio: true,
+      barShowStroke: false,
+      tooltips: {
+        enabled: true,
+        backgroundColor: "rgba(52, 40, 65, 0.9)",
+        titleFontSize: 11,
+        titleFontColor: "#FFFDF2",
+        titleFontStyle: "bold",
+        titleSpacing: 2,
+        titleMarginBottom: 8,
+        bodyFontColor: "#DCE0E4",
+        bodyFontSize: 12,
+        xPadding: 14,
+        yPadding: 14
+      },
+
         scales: {
             yAxes: [{
+              stacked: true,
+              display: true,
+                gridLines: {
+                  offsetGridLines: true
+                },
                 ticks: {
-                    beginAtZero:true
+                  beginAtZero:true,
+                  suggestedMin: 0,
+                  suggestedMax: 2
                 }
             }]
         },
@@ -405,4 +420,4 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-document.getElementById('custom-legend').innerHTML = myChart.generateLegend();
+document.getElementById('custom-legend').innerHTML = chart.generateLegend();
