@@ -4,12 +4,23 @@
 
 $brand-color: #e41f1f
 $accent: #d3a0c5
-$accent: #c37db0
-$blanco-nino: lighten(#FEE5C5, 5%)
+$accent: #EB4F48
+$blanco: #F6F9F5
 $color-text:  #392c4a
-$heading-color: #342844
+$heading-color: lighten(#32325D,1%)
+$darkness: #161628
+$darkness: #1F1E30
+$darkness: #160B24
+$darkness: #180E2A
+// $darkness: #120829
 
-$font-stack: Courier10BTRoman,Courier,monospace
+$ui: #1F1E30
+$ui: #262537
+$ui: #191025
+$ui: #20132B
+$ui: #2e233b
+
+$font-stack: "Proxima Nova", Helvetica, Courier10BTRoman,Courier,monospace
 $heading-stack: "refrigerator-deluxe", Helvetica, Arial
 
 //HELPERS//////////////////////////////////////////////
@@ -25,13 +36,13 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
 @keyframes fadeIn
 	0%
 		opacity: 0
-  100%
+	100%
 		opacity: 1
 
 @keyframes fadeOut
 	0%
 		opacity: 1
-  100%
+	100%
 		opacity: 0
 
 @keyframes fadeInDown
@@ -50,19 +61,6 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
 		transform: translate3d(0, -1000%, 0)
 
 
-@keyframes animateClouds
-  0%
-    transform: translateX(-1600px)
-  100%
-    transform: translateX(1600px)
-
-@keyframes floaterClouds
-  0%
-    transform: translateX(-20px)
-  50%
-    transform: translateX(10px)
-  100%
-    transform: translateX(-20px)
 
 //BreakPoints
 //
@@ -79,463 +77,388 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
 
 
 html
-  height: 100%
-  background: #E1EBE5
+	height: 100%
+	width: 100%
+	background: $ui
 
 body
-  font-family: $font-stack
-  letter-spacing: -1px
-  font-size: 16px
-  line-height: 28px
-  color: $color-text
-  border-top: 1px solid #FAF1E8
-  overflow-x: hidden
+	background: #F6F9F5
+	font-family: $font-stack
+	letter-spacing: .5px
+	font-size: 16px
+	line-height: 28px
+	color: $color-text
+	overflow-x: hidden
+	margin: 10px
 
 
-.sky
-  background: linear-gradient(180deg,  #86B1B8 0%,  #E1EBE5 55%)
-  height: 100vh
-  width: 100%
-  position: absolute
-  top: 0
-  padding-bottom: 1340px
 
-.sun
-  width: 280px
-  height: 280px
-  border-radius: 50%
-  background: linear-gradient(-180deg, #F1EDCA, #F9F6D5 50%, #EEEBCC 80%)
-  border: 1px solid lighten(#EEEBCC,7.50%)
-  box-shadow: 0 0 40px 40px #F1EDCA, 0 0 60px 40px #F9F6D5, 0 0 100px 80px #EEEBCC, 0 0 100px 80px #8bd5da
-  filter: blur(.5px)
-  position: absolute
-  left: calc(50% - 140px)
-  right: calc(50% - 140px)
-  top: -140px
+//ROW//////////////////////////////////////
 
-.cloud1, .cloud2, .cloud3
-  display: block
-  filter: drop-shadow(0px 0px 10px rgba(0,0,0,.25))
-  z-index: 4000
-
-.cloud1
-  position: absolute
-  top: 60px
-  right: 120px
-  animation: floaterClouds 18s linear infinite
-  animation-iteration-count: 4
-  img
-    width: 240px
-    filter: blur(.05 px)
-
-.cloud2
-  position: absolute
-  top: 40px
-  left: -120px
-  img
-    width: 160px
-
-.cloud3
-  position: absolute
-  top: 180px
-  left: 220px
-  img
-    width: 180px
-    filter: blur(.15px)
-
-
-//CLOUDY STATE//////////////////////////////////////
-
-.cloudy
-
-  .sky
-    background:  linear-gradient(-180deg,#233236  0,lighten( #3b5961,10%)55%,darken(#f5f5f5,5% ) 100%)
-    animation: fadeIn 3s ease-in
-
-  .cloud1
-    top: 180px
-    right: -20px
-    img
-      width: 75%
-
-  .cloud2
-    top: 120px
-    left: 20px
-    img
-      width: 65%
-      animation: floaterClouds 18s linear infinite
-
-  .cloud3
-    top: 200px
-    img
-      width: 55%
-      animation: floaterClouds 18s linear infinite
-
-  .sun
-    animation: fadeOutUp 8s ease-in
-
-
-//SUNNY STATE/////////////////////////////////////
-.sunny
-  .sun
-    animation: fadeInDown 4s ease-in-out
-    position: absolute
-    left: calc(50% - 160px)
-    right: calc(50% - 160px)
-    top: -180px
-    transform: scale(0.5)
-
-.offset-sun
-  top: -1000px !important
 
 .row
-  width: 100%
+	//border: 100px solid #fff
+	//background: yellow
 
 //DEFAULTS///////////////////////////////////////////
 a
-  text-decoration: none
-  color: $brand-color
+	text-decoration: none
+	color: $accent
 
 .accent
-  color: $accent
+	color: $accent
 
 h1,h2,h3,button,.btn, .heading
-  font-family: "refrigerator-deluxe", Helvetica, Arial
-  text-transform: uppercase
-  letter-spacing: 1px
-  color: $heading-color
+	font-family: "refrigerator-deluxe", Helvetica, Arial
+	text-transform: uppercase
+	letter-spacing: 1px
+	color: $heading-color
 
 h1,h2,h3, p
-  margin-bottom: 54px
+	margin-bottom: 54px
 
 h1
-  font-size: 48px
+	font-size: 58px
+	font-weight: 900
 
 h2
-  font-size: 36px
+	font-size: 36px
 
 .masthead
-  position: relative
-  height: 100px
-  padding: 40px 80px
-  z-index: 1000
-  animation: fadeInDown 4s ease-in-out
+	position: relative
+	height: 100px
+	padding: 40px 80px
+	z-index: 1000
+	animation: fadeInDown 4s ease-in-out
 
 .signup
-  position: absolute
-  right: 80px
-  top: 40px
-  font-size: 32px
-  letter-spacing: 1px
-  font-family: "refrigerator-deluxe"
-  text-transform: uppercase
+	position: absolute
+	right: 80px
+	top: 40px
+	font-size: 32px
+	letter-spacing: 1px
+	font-family: "refrigerator-deluxe"
+	text-transform: uppercase
 
 .logo
-  img
-    width: 100px
+	img
+		width: 100px
 
 //BTN Styles////////////////////////////////////////
 .btn
-  position: relative
-  font-size: 20px
-  padding: 12px 44px
-  text-align: center
-  border: 2px dashed $blanco-nino
-  color: $brand-color
-  z-index: 10
-  transition: background .3s ease-in-out, color .4s ease-in
-  &:hover
-    background: $heading-color
-    color: $blanco-nino
-    border-color: $blanco-nino
-    border-style: solid
-    cursor: pointer
+	position: relative
+	font-size: 20px
+	padding: 12px 44px
+	text-align: center
+	border: 1px dashed $darkness
+	color: $brand-color
+	z-index: 10
+	transition: background .3s ease-in-out, color .4s ease-in
+	&:hover
+		background: $heading-color
+		border-color: $blanco
+		border-style: solid
+		cursor: pointer
 
 
 //INTRO TEXT///////////////////////////////////////////////
 .lemonsplanation
-  width: 60%
-  margin: 180px auto 0px
-  text-align: center
-  position: relative
+	width: 60%
+	margin: 180px auto 0px
+	text-align: center
+	position: relative
+	&::after
+		content: ""
+		display: block
+		width: 320px
+		height: 320px
+		background:rgba(#c4f0ff,.45)
+		border: 1px solid #c4f0ff
+		animation: fadeIn 6s linear
+		// width: 0
+		// height: 0
+		// border-style: solid;
+		// border-width: 380px 200px 0 200px
+		// border-color: #9cdbff transparent transparent transparent
+		// border-left: 100px transparent solid
+		// border-right: 100px transparent solid
+		// border-top: 100px solid #cfd7df
+		//background: rgba(#cfd7df, .25)
+		@include centerer
+		transform: translate(-50%, -50%)  rotate(45deg)
+		z-index: -1
 
   h1
-    text-transform: uppercase
-    font-weight: 900
-  p
-    font-size: 18px
-    line-height: 2em
+		text-transform: uppercase
+		font-weight: 900
+
+	p.lemonsplanation__para
+		font-size: 17px
+		line-height: 2em
+		padding: 0px 40px
 
 
 //SCENE////////////////////////////////////////////////
 .scene
-  height: 100vh
-  width: 100%
-  position: relative
-  padding-bottom: 1340px
-
+	width: 100%
+	position: relative
 
 .scene-inner
-  position: relative
-  height: 100%
-  width: 100%
-  z-index: 2000
-  padding-bottom: 1340px
+	position: relative
+	width: 100%
+	z-index: 2000
+	padding-bottom: 220px
 
-.snow
-  height: 240px
-  background: linear-gradient(-180deg, #E0EFF1 5%, #ffffff 25%, #ffffff  55%, #ffffff 100%)
-  width: 100%
-  position: absolute
-  bottom: 0
-  left: 0
-  right: 0
-  border-top-color: transparent
-  border-bottom: 1px solid #1A1312
 
 //SETTINGS AREA////////////////////////////////////////////
 .settings
-  color: $blanco-nino
-  clear: both
-  padding: 1px
+	background: #110519
+	color: $blanco
+	clear: both
+	padding: 1px
 
 .secondary-zone
-  position: relative
-  clear: both
-  width: 100%
-  height: 100%
-  background: rgba(darken(#29201e, 25%), .2) url("/assets/images/lemonade-stand-bg.jpg") repeat 0 0
-  z-index: 50000
+	position: relative
+	clear: both
+	width: 100%
+	height: 100%
+	color: $blanco
+	background: $darkness
+	z-index: 50000
 
 .secondary-zone-inner
-  background: rgba(darken(#29201e, 25%), .15)
-  padding: 0
-  color: $blanco-nino
-  h1,h2,h3
-    color: $blanco-nino
+	background: #20132B
+	padding: 0
+	color: $blanco
+	margin-top: 10px
 
+	h1,h2,h3
+		color: $blanco
 
 //FLEX GRID////////////////////////////////////////////
 .flex
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  justify-content: space-between
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	justify-content: space-between
 
-  .flex__item
-    background: rgba(darken(#29201e, 25%), .05)
-    border: 1px solid darken(#201816, 1%)
-    margin: 1px 1px 0
-    flex: 1
-    header
-      background: rgba(darken(#29201e, 25%), .2)
-      padding: 35px 40px 17px
+	.flex__item
+		//background: rgba(darken(#29201e, 25%), .05)
+		//border: 1px solid darken(#201816, 1%)
+		margin: 1px .5px 0
+		flex: 1
+		header
+			//background: rgba(darken(#29201e, 25%), .2)
+			background: $ui
+			padding: 35px 40px 17px
+			color: $blanco
 
-    h2
-      margin-bottom: 8px
+		h2
+			margin-bottom: 8px
+			color: $blanco
 
-    .flex__item-subline
-      display: block
-      margin-bottom: 18px
-      font-family: helvetica, arial
-      text-transform: uppercase
-      letter-spacing: 2px
-      font-size: 10px
-      color: $accent
+		.flex__item-subline
+			display: block
+			margin-bottom: 18px
+			font-family: helvetica, arial
+			text-transform: uppercase
+			letter-spacing: 2px
+			font-size: 10px
+			color: $accent
 
 
 
 .add-buyer-inline
-  position: absolute
-  bottom: 490px
-  left: 20px
-  font-size: 22px
-  z-index: 20000
-  svg
-    margin-left: 80px
-    fill: $brand-color
+	display: none
+	position: absolute
+	bottom: 490px
+	left: 20px
+	font-size: 22px
+	z-index: 20000
+	svg
+		margin-left: 80px
+		fill: $brand-color
 
 #full-scene
-  width: 100%
-  position: absolute
-  bottom: 80px
-  z-index: 3000
+	width: 100%
+	position: absolute
+	bottom: 80px
+	z-index: 3000
 
 .choco-cup-noshow
-  display: none
-  visibility: hidden
+	display: none
+	visibility: hidden
 
 .choco-cup-bought
-  display: block
-  visibility: visible
-
-
-
+	display: block
+	visibility: visible
 
 .secondary-cta
-  width: 100%
-  padding: 180px 40px
-  margin: 0px auto
-  justify-content: space-around
-  background: rgba(darken(#29201e, 25%), .2)
+	width: 100%
+	padding: 180px 40px
+	margin: 0px auto
+	justify-content: space-around
+	background: $ui
 
-  .btn
-    color: $accent
-    &:hover
-      color: $blanco-nino
+	.btn
+		color: $accent
+		&:hover
+			color: $blanco
 
 
 .value-modifier-wrap
-  width: 70px
-  padding: 0
-  margin: 0
-  float: left
-  margin-right: 40px
+	width: 70px
+	padding: 0
+	margin: 0
+	float: left
+	margin-right: 40px
 
-  span
-    display: block
-    width: 70px
-    height: 70px
-    border: 1px solid #1B1413
-    border-bottom: none
-    position: relative
-    margin: -1px 0  0 -1px
-    line-height: 0
-    transition: all .3s ease-in
-    &:hover
-      background: rgba(#1B1512, .5)
-      cursor: pointer
-      .icon
-        fill: $accent
+	span
+		display: block
+		width: 70px
+		height: 70px
+		border: 1px solid #110519
+		border-bottom: none
+		position: relative
+		margin: -1px 0  0 -1px
+		line-height: 0
+		transition: all .3s ease-in
+		&:hover
+			background: #161628
+			cursor: pointer
+			.icon
+				fill: $accent
 
 .icon
-  width: 18px
-  height: 18px
-  display: inline-block
-  transition: all .3s ease-in-out
-  fill: $blanco-nino
-  +centerer
-  &:hover
-    fill: $accent
-    //cursor: pointer
+	width: 18px
+	height: 18px
+	display: inline-block
+	transition: all .3s ease-in-out
+	fill: $blanco
+	+centerer
+	&:hover
+		fill: $accent
 
 .active-icon
-  background: rgba(#1B1512, .5)
-  .icon
-    fill: $accent
+	background: #080319
+	.icon
+		fill: $accent
 
 
 
 .setting-module
-  position: relative
-  min-height: 139px
-  border-top: 1px solid #1B1413
-  margin-top: 1px
-  background: rgba(255,255,255,.015)
-  overflow: hidden
+	position: relative
+	min-height: 139px
+	//border-top: 1px solid #161628
+	margin-top: 1px
+	background: $ui
+	overflow: hidden
 
 
 .value
-  font-size: 50px
-  +centerer
+	font-size: 50px
+	+centerer
 
 
 .sunny-icon
-  display: block
-  fill: #F5F2D2
-  width: 38px !important
+	display: block
+	fill: #F5F2D2
+	width: 38px !important
 
 .cloudy-icon
-  width: 48px !important
-  fill:#ecf7f8
+	width: 48px !important
+	fill:#ecf7f8
 
 .fade-in
-  animation: fadeIn .4s ease-in-out
+	animation: fadeIn .4s ease-in-out
 
 footer
-  padding: 40px
-  border-top:  4px dashed rgba(darken(#29201e, 25%), .2)
-  box-shadow: 1px -1px 0 rgba(black, .25) inset
-  display: flex
-  flex-direction: row
-  justify-content: space-between
-  p
-    margin-bottom: 0px
+	padding: 40px
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	p
+		margin-bottom: 0px
 
 
 .social-icon
-  width: 32px
-  height: 32px
-  margin: 0 20px
-  fill: $blanco-nino
-  &:hover
-    fill: $accent
+	width: 24px
+	height: 24px
+	margin: 0 20px
+	fill: $blanco
+	&:hover
+		fill: $accent
 
 
 .angel-icon
-  width: 20px
+	width: 20px
 
 .js-not-active
-  opacity: 0
+	opacity: 0
 
 .js-active
-  animation: fadeIn 2s easeIn
+	animation: fadeIn 2s easeIn
 
 .display-prices
-  background: rgba(#fff,.95)
-  width: 260px
-  font-family: $heading-stack
-  letter-spacing: 1px
-  text-align: center
-  padding: 0px
-  z-index: 50000
-  position: absolute
-  left: calc(50% - 80px)
-  bottom: 20px
+	//background: #11111E
+	background: $ui
+	width: 100%
+	font-family: $heading-stack
+	letter-spacing: 1px
+	text-transform: uppercase
+	text-align: center
+	padding: 40px
+	z-index: 50000
+	position: relative
+	margin: 0px auto
 
-  #current-price
-    font-size: 1.2rem
-    color: $accent
-
-  p
-    margin: 0
-    font-size: .95rem
-    letter-spacing: 2px
-    text-transform: uppercase
+	p
+		margin-bottom: 24px
+		font-size: .95rem
+		letter-spacing: 2px
+		text-transform: uppercase
 		line-height: 1.4
+
+	#current-price
+		font-size: 50px !important
+		color: $accent
+
+
 
 //BUYER RESPONSE////////////////////////////////////////
 .yes-no
-  position: absolute
-  bottom: 280px
-  left: calc(50% - 10px)
-  z-index: 5
+	position: absolute
+	bottom: 280px
+	left: calc(50% - 10px)
+	z-index: 5
 
-  #buying
-    display: none
+	#buying
+		display: none
 
-  #buying-no
-    display: none
+	#buying-no
+		display: none
 
-  .buying-active
-    display: block !important
-    animation: fadeInDown fadeOutUp
-    animation-delay: 0s, .5s
+	.buying-active
+		display: block !important
+		animation: fadeInDown fadeOutUp
+		animation-delay: 0s, .5s
 
-  .no-buying-active
-    display: block !important
-    animation: fadeInDown fadeOutUp
-    animation-delay: 0s, .5s
+	.no-buying-active
+		display: block !important
+		animation: fadeInDown fadeOutUp
+		animation-delay: 0s, .5s
 
 .checkmark
-  fill: #1DB8A1
+	fill: #1DB8A1
 
 .cross
-  fill: #D8141F
+	fill: #D8141F
 
 
 .canvas-wrap
 	padding: 40px
+	background: #080319
+	margin-top: 1px
 
 	header
 		position: relative

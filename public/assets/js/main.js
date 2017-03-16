@@ -160,40 +160,40 @@ uiInteraction.init();
 (function(){
   let settings = document.querySelector(".settings"),
       addBuyerLink = document.querySelector("#add-buyer-link"),
-      stand = document.querySelector('#stand'),
-      snow = document.querySelector("#snow"),
-      snowMid = document.querySelector("#snow-backer"),
+      // stand = document.querySelector('#stand'),
+      // snow = document.querySelector("#snow"),
+      // snowMid = document.querySelector("#snow-backer"),
       jsNotActive = document.querySelector('.js-not-active'),
       lemonsplanation = document.querySelector('.lemonsplanation'),
       lemonHeading = document.querySelector('.lemonsplanation__heading'),
       lemonPara = document.querySelector('.lemonsplanation__para'),
-      boy = document.querySelector(".boy"),
-      girl = document.querySelector(".girl"),
-      buyers = document.querySelectorAll('.buyer'),
+      // boy = document.querySelector(".boy"),
+      // girl = document.querySelector(".girl"),
+      // buyers = document.querySelectorAll('.buyer'),
       buyerPlus = document.querySelector("#buyer-plus"),
       buyerMinus = document.querySelector("#buyer-minus"),
       tempUp = document.querySelector('.temperature-up-icon'),
       tempDown = document.querySelector('.temperature-down-icon'),
       // lTopArm = document.querySelector("#left-toparm"),
-      lActionArm = document.querySelector(".left-action-arm"),
-      lArm = document.querySelector("#left-forarm"),
-      chocoCupTable = document.querySelector("#choco-cup"),
-      chocoCup = document.querySelector('.choco-cup-in-hand'),
-      chocoSteam = document.querySelector("#choco-steam"),
-      sun = document.querySelector('.sun'),
-      buyerWidth = buyers[0].getBoundingClientRect().width,
-      standWidth = stand.getBoundingClientRect().width,
-      snowmanArm = document.querySelector("#snowmanarm"),
-      star = document.querySelector("#star"),
-      star2 = document.querySelector("#star-2"),
-      buying = document.querySelector("#buying"),
-      noBuying = document.querySelector("#buying-no"),
+      // lActionArm = document.querySelector(".left-action-arm"),
+      // lArm = document.querySelector("#left-forarm"),
+      // chocoCupTable = document.querySelector("#choco-cup"),
+      // chocoCup = document.querySelector('.choco-cup-in-hand'),
+      // chocoSteam = document.querySelector("#choco-steam"),
+      // sun = document.querySelector('.sun'),
+      // buyerWidth = buyers[0].getBoundingClientRect().width,
+      // standWidth = stand.getBoundingClientRect().width,
+      // snowmanArm = document.querySelector("#snowmanarm"),
+      // star = document.querySelector("#star"),
+      // star2 = document.querySelector("#star-2"),
+       buying = document.querySelector("#buying"),
+       noBuying = document.querySelector("#buying-no"),
       intFrameWidth = window.innerWidth;
 
 
   const startBtn = document.querySelector('.js-start-btn'),
-        sceneAction = document.querySelector ('.scene-action'),
-        walkingDist = (intFrameWidth - standWidth)  / 2 + buyerWidth ;
+        sceneAction = document.querySelector ('.scene-action');
+        //walkingDist = (intFrameWidth - standWidth)  / 2 + buyerWidth ;
 
 
 // Main TL ///////////
@@ -222,30 +222,29 @@ addBuyerLink.addEventListener('click', function(){
 
 //GSAP animations timelines
 
-function getPageIntro() {
-
-  let tlSunEntrance = new TimelineMax()
-
-  tlSunEntrance
-    .fromTo(sun, 1.5, {opacity:0, rotation:0, Y: -200 , scale:0},
-           {opacity:1, y:0, rotation:720,  scale:1, ease: Back.easeInOut})
-           .add("sunLoaded")
-    .staggerFrom(".clouds", 1.5,
-    {cycle:{
-      scale:[0, 1]
-    }, autoAlpha:0,  ease:  Power1.easeOut }, "sunLoaded-=1.5");
-
-    return tlSunEntrance;
-  }
+// function getPageIntro() {
+//   let tlSunEntrance = new TimelineMax()
+//
+//   tlSunEntrance
+//     .fromTo(sun, 1.5, {opacity:0, rotation:0, Y: -200 , scale:0},
+//            {opacity:1, y:0, rotation:720,  scale:1, ease: Back.easeInOut})
+//            .add("sunLoaded")
+//     .staggerFrom(".clouds", 1.5,
+//     {cycle:{
+//       scale:[0, 1]
+//     }, autoAlpha:0,  ease:  Power1.easeOut }, "sunLoaded-=1.5");
+//
+//     return tlSunEntrance;
+//   }
 
 
 function getIntroText(){
   let introTextTl = new TimelineMax();
 
     introTextTl
-    .from(lemonHeading, .5, {autoAlpha: 0, ease: Power4.easeIn})
-    .from(lemonPara, .5, {autoAlpha: 0, ease: Power4.easeIn}, '-=.25')
-    .fromTo(startBtn, .5, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, yPercent:'0', ease: Back.easeIn});
+    .from(lemonHeading, 1.25, {autoAlpha: 0, ease: Power4.easeIn})
+    .from(lemonPara, 1.25, {autoAlpha: 0, ease: Power4.easeIn}, '-=.25')
+    .fromTo(startBtn, 1.5, {autoAlpha: 0, scale:0},{autoAlpha:1, scale:1, yPercent:'0', ease: Back.easeIn});
 
     return introTextTl
 }
@@ -286,37 +285,41 @@ function purchase(){
   }
 }
 
-  let buyerEl = document.querySelector('.' + buyer.gender);
-  tlBuyers
-  .set(buying, {className:"-=buying-active"})
-  .set(noBuying, {className:"-=no-buying-active"})
-  .set(chocoCup, {className:"-=choco-cup-bought"})
-  .set(chocoCup, {className:"+=choco-cup-noshow"})
-  .set(buyerEl, {x: -`${walkingDist}` / 2, force3D:true, y:20, scale:1.20})
-  .set(stand, {y: 60})
-  .set(snowMid, { x: 200})
-  .set(chocoSteam, {autoAlpha:0.5, y: -2})
-  .set(snow, {y: 42})
-  .set(lActionArm, {rotation:0})
-  .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
-  .to(buyerEl, 2.5, {scale:1,  x: `${walkingDist}`, delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
-  .add("ThinkingAboutIt")
-   tlBuyers
-   .addPause("ThinkingAboutIt+=4", purchase)//pass the purchase function here
-   .set(buying, {className:"-=buying"})
-   .set(noBuying, {className:"-=buying-no"})
-  .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:1, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
-  .add("chocoServed")
-  .to(chocoSteam, 1, {y:-14, autoAlpha:0.8})
-  .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete: function addCup(){
-    chocoCup.classList.toggle("choco-cup-noshow");
-    chocoCup.classList.toggle("choco-cup-bought");
-  }})
-  .to(snowmanArm, 0.25, {rotation:2, y: '+=1px', x: "+=1px", transformOrigin: "top leftt", repeat: 3, yoyo: true}, "chocoServed+=.5")
-  .fromTo(star, 0.2, {fill:'#E1D9CE'}, {fill: '#A36B92', repeat: 4, yoyo: true}, "-=.4")
-  .fromTo(star2, 0.2, {fill:'#A36B92'}, {fill: '#E1D9CE', repeat: 4, yoyo: true}, "-=.4")
-  .to(chocoCupTable,0.5, {autoAlpha:0})
-  .to(buyerEl, 4, { scale: .95,  x: `${walkingDist}` * 4, ease:Power4.easeIn});
+  // let buyerEl = document.querySelector('.' + buyer.gender);
+  // tlBuyers
+  // .set(buying, {className:"-=buying-active"})
+  // .set(noBuying, {className:"-=no-buying-active"})
+  // .set(chocoCup, {className:"-=choco-cup-bought"})
+  // .set(chocoCup, {className:"+=choco-cup-noshow"})
+  // .set(buyerEl, {x: -`${walkingDist}` / 2, force3D:true, y:20, scale:1.20})
+  // .set(stand, {y: 60})
+  // .set(snowMid, { x: 200})
+  // .set(chocoSteam, {autoAlpha:0.5, y: -2})
+  // .set(snow, {y: 42})
+  // .set(lActionArm, {rotation:0})
+  // .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
+  // .to(buyerEl, 2.5, {scale:1,  delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
+  // .add("ThinkingAboutIt")
+
+
+  //  tlBuyers
+  //  .addPause("ThinkingAboutIt+=4", purchase)//pass the purchase function here
+  //  .set(buying, {className:"-=buying"})
+  //  .set(noBuying, {className:"-=buying-no"})
+
+
+  // .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:1, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
+  // .add("chocoServed")
+  // .to(chocoSteam, 1, {y:-14, autoAlpha:0.8})
+  // .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete: function addCup(){
+  //   chocoCup.classList.toggle("choco-cup-noshow");
+  //   chocoCup.classList.toggle("choco-cup-bought");
+  // }})
+  // .to(snowmanArm, 0.25, {rotation:2, y: '+=1px', x: "+=1px", transformOrigin: "top leftt", repeat: 3, yoyo: true}, "chocoServed+=.5")
+  // .fromTo(star, 0.2, {fill:'#E1D9CE'}, {fill: '#A36B92', repeat: 4, yoyo: true}, "-=.4")
+  // .fromTo(star2, 0.2, {fill:'#A36B92'}, {fill: '#E1D9CE', repeat: 4, yoyo: true}, "-=.4")
+  // .to(chocoCupTable,0.5, {autoAlpha:0})
+  // .to(buyerEl, 4, { scale: .95,  x: `${walkingDist}` * 4, ease:Power4.easeIn});
 }
 
 function getStartSceneTl(){
@@ -354,7 +357,7 @@ let startScene = new TimelineMax();
   function init(){
   //add timelines to the mainTl timeline
     mainTl
-    .add(getPageIntro())
+    //.add(getPageIntro())
     .add(getIntroText())
     .add(getStartSceneTl())
   }
@@ -370,32 +373,33 @@ var chart = new Chart(ctx, {
     data: {
         labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
         datasets: [{
-            label: 'some label',
-            data: [34, 35, 38, 30, 39, 35, 31, 31, 30, 37, 35, 35],
-            backgroundColor: 'rgba(195, 125, 175, 0.90)' ,
-            borderColor: 'rgba(195,139,172,1)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(195, 125, 175, 1)',
-            hoverBorderColor: 'rgba(195, 125, 175, 0.90)'
+          label: 'some label',
+          data: [34, 35, 38, 30, 39, 35, 31, 31, 30, 37, 35, 35],
+          backgroundColor: '#20132B' ,
+          borderColor: '#20032B',
+          borderWidth: 1,
+          hoverBackgroundColor: '#ef3d37)',
+          hoverBorderColor: '#EB4F48'
         }]
     } ,
 
     options: {
       animationEasing: "easeOutQuart",
       responsiveAnimationDuration: 5000,
-      barStrokeWidth : 1,
+      barStrokeWidth: 1,
+      barStrokeColor: '#161628',
       responsive: true,
       maintainAspectRatio: true,
       barShowStroke: false,
       tooltips: {
         enabled: true,
-        backgroundColor: "rgba(52, 40, 65, 0.9)",
+        backgroundColor: "#161628",
         titleFontSize: 11,
-        titleFontColor: "#FFFDF2",
+        titleFontColor: "#F6F9F5",
         titleFontStyle: "bold",
         titleSpacing: 2,
         titleMarginBottom: 8,
-        bodyFontColor: "#DCE0E4",
+        bodyFontColor: "#F6F9F5",
         bodyFontSize: 12,
         xPadding: 14,
         yPadding: 14
@@ -406,14 +410,22 @@ var chart = new Chart(ctx, {
               stacked: true,
               display: true,
                 gridLines: {
-                  offsetGridLines: true
+                  offsetGridLines: true,
+                  color: "#161628"
                 },
                 ticks: {
                   beginAtZero:true,
                   suggestedMin: 0,
                   suggestedMax: 2
                 }
+            }],
+            xAxes: [{
+              gridLines: {
+                offsetGridLines: true,
+                color: "#161628"
+              }
             }]
+
         },
         legend: {
           display: false
