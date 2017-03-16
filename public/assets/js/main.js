@@ -375,11 +375,11 @@ var chart = new Chart(ctx, {
         datasets: [{
           label: 'some label',
           data: [34, 35, 38, 30, 39, 35, 31, 31, 30, 37, 35, 35],
-          backgroundColor: '#20132B' ,
-          borderColor: '#20032B',
+          backgroundColor: '#2c223d' ,
+          borderColor: '#221A2F',
           borderWidth: 1,
-          hoverBackgroundColor: '#ef3d37)',
-          hoverBorderColor: '#EB4F48'
+          hoverBackgroundColor: '#221A2F)',
+          hoverBorderColor: '#332944'
         }]
     } ,
 
@@ -411,7 +411,7 @@ var chart = new Chart(ctx, {
               display: true,
                 gridLines: {
                   offsetGridLines: true,
-                  color: "#161628"
+                  color: "#2d233f"
                 },
                 ticks: {
                   beginAtZero:true,
@@ -422,7 +422,7 @@ var chart = new Chart(ctx, {
             xAxes: [{
               gridLines: {
                 offsetGridLines: true,
-                color: "#161628"
+                color: "#2d233f"
               }
             }]
 

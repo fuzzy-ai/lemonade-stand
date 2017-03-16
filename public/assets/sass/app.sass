@@ -5,20 +5,24 @@
 $brand-color: #e41f1f
 $accent: #d3a0c5
 $accent: #EB4F48
+$accent: #d74652
 $blanco: #F6F9F5
-$color-text:  #392c4a
-$heading-color: lighten(#32325D,1%)
+$color-text:  #221A2F
+$heading-color: #453955
 $darkness: #161628
 $darkness: #1F1E30
 $darkness: #160B24
 $darkness: #180E2A
 // $darkness: #120829
 
-$ui: #1F1E30
-$ui: #262537
-$ui: #191025
-$ui: #20132B
-$ui: #2e233b
+// $ui: #1F1E30
+// $ui: #262537
+// $ui: #191025
+// $ui: #20132B
+$ui: #221a2f
+$ui: #2b2238
+$ui: #261d34
+$ui: #282036
 
 $font-stack: "Proxima Nova", Helvetica, Courier10BTRoman,Courier,monospace
 $heading-stack: "refrigerator-deluxe", Helvetica, Arial
@@ -245,7 +249,7 @@ h2
 	.flex__item
 		//background: rgba(darken(#29201e, 25%), .05)
 		//border: 1px solid darken(#201816, 1%)
-		margin: 1px .5px 0
+		margin: 1px .25px 0
 		flex: 1
 		header
 			//background: rgba(darken(#29201e, 25%), .2)
@@ -317,14 +321,14 @@ h2
 		display: block
 		width: 70px
 		height: 70px
-		border: 1px solid #110519
+		border: .5px solid #110519
 		border-bottom: none
 		position: relative
 		margin: -1px 0  0 -1px
 		line-height: 0
 		transition: all .3s ease-in
 		&:hover
-			background: #161628
+			background: #1C1528
 			cursor: pointer
 			.icon
 				fill: $accent
@@ -340,7 +344,7 @@ h2
 		fill: $accent
 
 .active-icon
-	background: #080319
+	background: #1C1528
 	.icon
 		fill: $accent
 
@@ -373,18 +377,41 @@ h2
 	animation: fadeIn .4s ease-in-out
 
 footer
-	padding: 40px
+	padding: 0px
 	display: flex
 	flex-direction: row
 	justify-content: space-between
-	p
+	position: relative
+	.copyright
 		margin-bottom: 0px
+		padding: 20px 40px
+		font-size: 12px
+		letter-spacing: 2px
+		line-height: 40px
+		text-transform: uppercase
 
+
+
+.social-footer-links
+	display: flex
+	flex-direction: row
+
+.box-icon
+	background: $ui
+	width: 80px
+	height: 80px
+	position: relative
+	display: inline-block
+	&:hover
+		background: #20132B
+		svg
+			fill: $accent
 
 .social-icon
+	@include centerer
 	width: 24px
 	height: 24px
-	margin: 0 20px
+	//margin: 0 20px
 	fill: $blanco
 	&:hover
 		fill: $accent
@@ -410,7 +437,7 @@ footer
 	padding: 40px
 	z-index: 50000
 	position: relative
-	margin: 0px auto
+	margin: 0 auto 0.5px
 
 	p
 		margin-bottom: 24px
@@ -457,7 +484,7 @@ footer
 
 .canvas-wrap
 	padding: 40px
-	background: #080319
+	background: #1C1528
 	margin-top: 1px
 
 	header
