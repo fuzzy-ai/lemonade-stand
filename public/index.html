@@ -15,62 +15,43 @@
 
 </head>
 <body>
-
   <div class="row">
-
-        <header class="masthead">
-          <a href="https://fuzzy.ai" class="logo"><img src="assets/images/fuzzy-ai-logo.svg" alt="fuzzy logo" /></a>
-          <a href="https://fuzzy.ai/signup" class="signup">Signup</a>
-        </header>
-        <div class="scene">
-          <div class="scene-inner">
-        <article class="lemonsplanation">
-          <h1 class="lemonsplanation__heading">Lemonade Stand</h1>
-          <p class="lemonsplanation__para">
-            The price of each cup of hot chocolate is decided by <a href="https://fuzzy.ai">Fuzzy.ai</a>. Try changing the number of people in line, the temperature or the weather and see how that affects the price. Check out the Profits chart below to see how well <a href="https://fuzzy.ai">Fuzzy.ai</a> learns to maximize profit.</p>
-          <span class="btn js-start-btn">Get Started</span>
-        </article><!-- END EXPLANATION -->
-
-
-
-        <div class="scene-action js-not-active" id="funtimes">
-
-          <!-- <div class="display-prices">
-            <p>The Price is currently set at</p>
-            <div id="current-price">
-               <span class="dollar-sign">$</span><b>1.00</b>
-            </div>
-          </div> -->
-
-
-
-          <span id="add-buyer-link" class="add-buyer-inline heading">
-            Add a buyer
-            <svg class="icon plus">
-              <use xlink:href="/assets/images/sprite.svg#plus"></use>
-            </svg>
-          </span>
-
-
-          <div class="yes-no">
-            <span id="buying">
-              <svg class="icon checkmark">
-                <use xlink:href="/assets/images/sprite.svg#checkmark"></use>
-              </svg>
-            </span>
-            <span id="buying-no">
-              <svg class="icon cross">
-                <use xlink:href="/assets/images/sprite.svg#cross"></use>
-              </svg>
-            </span>
-          </div>
-      </div><!-- END SCENE-INNER -->
-    </div><!-- END SCENE -->
+    <header class="masthead">
+      <a href="https://fuzzy.ai" class="logo"><img src="assets/images/fuzzy-ai-logo.svg" alt="fuzzy logo" /></a>
+      <a href="https://fuzzy.ai/signup" target="_blank" class="signup">Signup</a>
+    </header><!-- end header -->
+    <section class="intro-text">
+      <article class="lemonsplanation">
+        <h1 class="lemonsplanation__heading">Lemonade Stand</h1>
+        <p class="lemonsplanation__para">
+          The price of each cup of hot chocolate is decided by <a href="https://fuzzy.ai">Fuzzy.ai</a>. Try changing the number of people in line, the temperature or the weather and see how that affects the price. Check out the Profits chart below to see how well <a href="https://fuzzy.ai">Fuzzy.ai</a> learns to maximize profit.</p>
+        <span class="btn js-start-btn">Get Started</span>
+      </article><!-- END EXPLANATION -->
+    </section> <!-- intro text -->
+    <div class="scene-action js-not-active" id="funtimes">
+      <span id="add-buyer-link" class="add-buyer-inline heading">
+        Add a buyer
+        <svg class="icon plus">
+          <use xlink:href="/assets/images/sprite.svg#plus"></use>
+        </svg>
+      </span>
+      <div class="buyer"></div>
+      <div class="yes-no">
+        <span id="buying">
+          <svg class="icon checkmark">
+            <use xlink:href="/assets/images/sprite.svg#checkmark"></use>
+          </svg>
+        </span>
+        <span id="buying-no">
+          <svg class="icon cross">
+            <use xlink:href="/assets/images/sprite.svg#cross"></use>
+          </svg>
+        </span>
+      </div>
   </div><!-- END ROW -->
 
   <div class="secondary-zone">
     <div class="secondary-zone-inner">
-
       <div class="settings">
         <div class="display-prices">
           <p>The Price is currently set at</p>
@@ -97,7 +78,8 @@
                   </svg>
                 </span>
               </div><!-- end value mod -->
-              <h2 class="heading value" id="buyer-num">10</h2>
+              <h2 class="heading value" id="buyer-num"><b>10</b>  <span class="acc-text">Currently inline</span></h2>
+
             </div>
           </div><!-- end flex item -->
           <div class="flex__item">
@@ -147,30 +129,31 @@
         <div class="canvas-wrap">
           <header>
             <h2>optimized Profits</h2>
+            <div id="custom-legend" class="chart-legend"></div>
           </header>
           <canvas id="chart"></canvas>
         </div><!-- end canvas wrap -->
 
       </div> <!-- END SETTINGS -->
       <div class="secondary-cta flex">
-        <a href="https://fuzzy.ai/signup" class="btn signup-btn" title="signup at fuzzy ai" target="_blank">signup</a>
-        <a href="https://github.com/fuzzy-ai/lemonade-stand" class="btn git-btn" target="_blank">github Repo</a>
+        <a href="https://fuzzy.ai/signup" class="btn signup-btn"  target="_blank" title="signup at fuzzy ai" target="_blank">signup</a>
+        <a href="https://github.com/fuzzy-ai/lemonade-stand" target="_blank" class="btn git-btn" target="_blank">github Repo</a>
       </div>
       <!-- END SECONDARY CTA -->
       <footer>
         <p class="copyright">Made By <a href="https://fuzzy.ai">Fuzzy ai</a> 2017</p>
         <div class="social-footer-links">
-          <a href="https://twitter.com/fuzzy_ai" class="twitter box-icon">
+          <a href="https://twitter.com/fuzzy_ai" class="twitter box-icon" target="_blank">
             <svg class="twitter-icon social-icon">
               <use xlink:href="/assets/images/sprite.svg#twitter"></use>
             </svg>
           </a>
-          <a href="https://twitter.com/fuzzy_ai" class="facebook box-icon">
+          <a href="https://twitter.com/fuzzy_ai" class="facebook box-icon" target="_blank">
             <svg class="facebook-icon social-icon">
               <use xlink:href="/assets/images/sprite.svg#facebook"></use>
             </svg>
           </a>
-          <a href="https://angel.co/fuzzy_ai" class="facebook box-icon">
+          <a href="https://angel.co/fuzzy_ai" class="facebook box-icon" target="_blank">
             <svg class="angel-icon social-icon">
               <use xlink:href="/assets/images/sprite.svg#angelco"></use>
             </svg>

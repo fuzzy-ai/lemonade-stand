@@ -12,20 +12,20 @@ var state = {
   didPurchase: false,
 
   addBuyer: function() {
-    var genders = ['boy', 'girl'];
+    //var genders = ['boy', 'girl'];
     //var genders = ['boy'];
     var newBuyer = new buyer();
-    newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
+    //newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
     this.buyers.push(newBuyer);
     var numBuyers = state.buyers.length;
-    $("#buyer-num").html(numBuyers);
+    $("#buyer-num b").html(numBuyers);
     this.queueUpdate();
   },
 
   removeBuyer: function() {
     var oldBuyer = this.buyers.shift();
     var numBuyers = state.buyers.length;
-    $("#buyer-num").html(numBuyers);
+    $("#buyer-num b").html(numBuyers);
     this.queueUpdate();
   },
 
@@ -48,7 +48,7 @@ var state = {
   queueUpdate: function() {
     if (!this.updatePending) {
       this.updatePending = true;
-      setTimeout(sellerEvaluate, 1000);
+      setTimeout(sellerEvaluate, 4000);
     }
   }
 };
@@ -77,7 +77,6 @@ function sellerEvaluate() {
 
 var buyer = function () {
   return {
-    gender: ['girl','boy'],
     evaluate: function() {
       var data = {
         price: state.price,
@@ -126,9 +125,6 @@ var uiInteraction = {
     this.cloudyIcon =   this.el.querySelector('.cloudy-icon-btn');
     this.sunnyIcon =   this.el.querySelector('.sunny-icon-btn');
     this.sunnyOrCloudy =   this.el.querySelector('.sunny-or-cloudy');
-    this.body = document.querySelector('body');
-    this.bSunny = document.querySelector('.sunny');
-    this.sun = document.querySelector('.sun');
   },
   bindEvents: function(){
     this.sunnyIcon.addEventListener('click', this.setSunnyWeather.bind(this));
@@ -137,19 +133,12 @@ var uiInteraction = {
 
   setCloudyWeather:  function () {
     state.setSunny(0);
-    this.body.classList.add('cloudy');
-    this.body.classList.remove('sunny');
     this.cloudyIcon.classList.add('active-icon');
     this.sunnyIcon.classList.remove('active-icon');
     this.sunnyOrCloudy.innerHTML = 'cloudy';
-    this.sun.classList.add('offset-sun');
-
   },
   setSunnyWeather: function() {
     state.setSunny(1);
-    this.body.classList.add('sunny');
-    this.body.classList.remove('cloudy');
-    this.sun.classList.remove('offset-sun');
     this.sunnyOrCloudy.innerHTML = 'sunny';
     this.sunnyIcon.classList.add('active-icon');
     this.cloudyIcon.classList.remove('active-icon');
@@ -160,41 +149,22 @@ uiInteraction.init();
 (function(){
   let settings = document.querySelector(".settings"),
       addBuyerLink = document.querySelector("#add-buyer-link"),
-      // stand = document.querySelector('#stand'),
-      // snow = document.querySelector("#snow"),
-      // snowMid = document.querySelector("#snow-backer"),
       jsNotActive = document.querySelector('.js-not-active'),
       lemonsplanation = document.querySelector('.lemonsplanation'),
       lemonHeading = document.querySelector('.lemonsplanation__heading'),
       lemonPara = document.querySelector('.lemonsplanation__para'),
-      // boy = document.querySelector(".boy"),
-      // girl = document.querySelector(".girl"),
-      // buyers = document.querySelectorAll('.buyer'),
+      buyers = document.querySelectorAll('.buyer'),
       buyerPlus = document.querySelector("#buyer-plus"),
       buyerMinus = document.querySelector("#buyer-minus"),
       tempUp = document.querySelector('.temperature-up-icon'),
       tempDown = document.querySelector('.temperature-down-icon'),
-      // lTopArm = document.querySelector("#left-toparm"),
-      // lActionArm = document.querySelector(".left-action-arm"),
-      // lArm = document.querySelector("#left-forarm"),
-      // chocoCupTable = document.querySelector("#choco-cup"),
-      // chocoCup = document.querySelector('.choco-cup-in-hand'),
-      // chocoSteam = document.querySelector("#choco-steam"),
-      // sun = document.querySelector('.sun'),
-      // buyerWidth = buyers[0].getBoundingClientRect().width,
-      // standWidth = stand.getBoundingClientRect().width,
-      // snowmanArm = document.querySelector("#snowmanarm"),
-      // star = document.querySelector("#star"),
-      // star2 = document.querySelector("#star-2"),
-       buying = document.querySelector("#buying"),
-       noBuying = document.querySelector("#buying-no"),
+      buying = document.querySelector("#buying"),
+      noBuying = document.querySelector("#buying-no"),
       intFrameWidth = window.innerWidth;
 
 
   const startBtn = document.querySelector('.js-start-btn'),
         sceneAction = document.querySelector ('.scene-action');
-        //walkingDist = (intFrameWidth - standWidth)  / 2 + buyerWidth ;
-
 
 // Main TL ///////////
 let mainTl = new TimelineMax();
@@ -222,21 +192,6 @@ addBuyerLink.addEventListener('click', function(){
 
 //GSAP animations timelines
 
-// function getPageIntro() {
-//   let tlSunEntrance = new TimelineMax()
-//
-//   tlSunEntrance
-//     .fromTo(sun, 1.5, {opacity:0, rotation:0, Y: -200 , scale:0},
-//            {opacity:1, y:0, rotation:720,  scale:1, ease: Back.easeInOut})
-//            .add("sunLoaded")
-//     .staggerFrom(".clouds", 1.5,
-//     {cycle:{
-//       scale:[0, 1]
-//     }, autoAlpha:0,  ease:  Power1.easeOut }, "sunLoaded-=1.5");
-//
-//     return tlSunEntrance;
-//   }
-
 
 function getIntroText(){
   let introTextTl = new TimelineMax();
@@ -253,8 +208,7 @@ function nextBuyer() {
   if (state.buyers.length) {
     animateBuyer(state.buyers[0]);
   } else {
-    setTimeout(nextBuyer, 1000);
-    buying.classList.remove("buying-active");//remove checkmark when no more buyers in queue
+    setTimeout(nextBuyer, 2500);
   }
 }
 
@@ -285,41 +239,9 @@ function purchase(){
   }
 }
 
-  // let buyerEl = document.querySelector('.' + buyer.gender);
-  // tlBuyers
-  // .set(buying, {className:"-=buying-active"})
-  // .set(noBuying, {className:"-=no-buying-active"})
-  // .set(chocoCup, {className:"-=choco-cup-bought"})
-  // .set(chocoCup, {className:"+=choco-cup-noshow"})
-  // .set(buyerEl, {x: -`${walkingDist}` / 2, force3D:true, y:20, scale:1.20})
-  // .set(stand, {y: 60})
-  // .set(snowMid, { x: 200})
-  // .set(chocoSteam, {autoAlpha:0.5, y: -2})
-  // .set(snow, {y: 42})
-  // .set(lActionArm, {rotation:0})
-  // .to(chocoSteam, 1, {y:-10, autoAlpha:0.65, repeat:3, delay: 0.25})
-  // .to(buyerEl, 2.5, {scale:1,  delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
-  // .add("ThinkingAboutIt")
-
-
-  //  tlBuyers
-  //  .addPause("ThinkingAboutIt+=4", purchase)//pass the purchase function here
-  //  .set(buying, {className:"-=buying"})
-  //  .set(noBuying, {className:"-=buying-no"})
-
-
-  // .fromTo(chocoCupTable, 2.25, {x:160, autoAlpha:0.9}, {x:1, autoAlpha:1, ease: Back.easeInOut}, "-=0.75")
-  // .add("chocoServed")
-  // .to(chocoSteam, 1, {y:-14, autoAlpha:0.8})
-  // .to(lActionArm , 0.8, {  rotation:-90, transformOrigin:"top top", ease: Power4.easeIn, onComplete: function addCup(){
-  //   chocoCup.classList.toggle("choco-cup-noshow");
-  //   chocoCup.classList.toggle("choco-cup-bought");
-  // }})
-  // .to(snowmanArm, 0.25, {rotation:2, y: '+=1px', x: "+=1px", transformOrigin: "top leftt", repeat: 3, yoyo: true}, "chocoServed+=.5")
-  // .fromTo(star, 0.2, {fill:'#E1D9CE'}, {fill: '#A36B92', repeat: 4, yoyo: true}, "-=.4")
-  // .fromTo(star2, 0.2, {fill:'#A36B92'}, {fill: '#E1D9CE', repeat: 4, yoyo: true}, "-=.4")
-  // .to(chocoCupTable,0.5, {autoAlpha:0})
-  // .to(buyerEl, 4, { scale: .95,  x: `${walkingDist}` * 4, ease:Power4.easeIn});
+  let buyerEl = document.querySelector('.buyer');
+  tlBuyers
+ .to(buyerEl, 2.5, {scale:1,  delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
 }
 
 function getStartSceneTl(){
@@ -329,7 +251,7 @@ let startScene = new TimelineMax();
   TweenMax.set(settings, {autoAlpha:0, scale:0, height: 0})
 
   startBtn.addEventListener('click' , function() {
-    TweenMax.to(startBtn, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
+    TweenMax.to(startBtn, 3, {scale: 0, opacity:0, y:-100, ease: Power4.easeInOut})
 
 
       $.post('/data/seller', function(data) {
@@ -341,11 +263,11 @@ let startScene = new TimelineMax();
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
       // TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
-      TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-340, ease:Back.easeInOut}, onComplete:function(){
+      TweenMax.to(window, 1, {scrollTo:{y:".secondary-zone", ease:Back.easeInOut}, onComplete:function(){
       jsNotActive.classList.remove('js-not-active');
       sceneAction.classList.add('js-active');
-      TweenMax.to(sceneAction, 1.75, {autoAlpha:1, ease:Power2.easeInOut})
-      TweenMax.to(settings, .75, {autoAlpha:1, scale:1, height: "100%"})
+      TweenMax.to(sceneAction, 1.25, {autoAlpha:1, ease:Power2.easeInOut})
+      TweenMax.to(settings, .5, {autoAlpha:1, scale:1, height: "100%"}, "-=2")
 
       nextBuyer();
       }
@@ -378,7 +300,7 @@ var chart = new Chart(ctx, {
           backgroundColor: '#2c223d' ,
           borderColor: '#221A2F',
           borderWidth: 1,
-          hoverBackgroundColor: '#221A2F)',
+          hoverBackgroundColor: '#221A2F',
           hoverBorderColor: '#332944'
         }]
     } ,
@@ -387,7 +309,6 @@ var chart = new Chart(ctx, {
       animationEasing: "easeOutQuart",
       responsiveAnimationDuration: 5000,
       barStrokeWidth: 1,
-      barStrokeColor: '#161628',
       responsive: true,
       maintainAspectRatio: true,
       barShowStroke: false,
@@ -395,6 +316,7 @@ var chart = new Chart(ctx, {
         enabled: true,
         backgroundColor: "#161628",
         titleFontSize: 11,
+        fontColor: "#F6F9F5",
         titleFontColor: "#F6F9F5",
         titleFontStyle: "bold",
         titleSpacing: 2,

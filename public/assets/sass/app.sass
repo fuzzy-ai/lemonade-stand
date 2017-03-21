@@ -6,8 +6,8 @@ $brand-color: #e41f1f
 $accent: #d3a0c5
 $accent: #EB4F48
 $accent: #d74652
-$blanco: #F6F9F5
-$color-text:  #221A2F
+$blanco: #fcefe3
+$color-text:  #716A7D
 $heading-color: #453955
 $darkness: #161628
 $darkness: #1F1E30
@@ -22,7 +22,7 @@ $darkness: #180E2A
 $ui: #221a2f
 $ui: #2b2238
 $ui: #261d34
-$ui: #282036
+$ui: rgba(darken(#282036,.5%),.97)
 
 $font-stack: "Proxima Nova", Helvetica, Courier10BTRoman,Courier,monospace
 $heading-stack: "refrigerator-deluxe", Helvetica, Arial
@@ -64,6 +64,8 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
 		opacity: 0
 		transform: translate3d(0, -1000%, 0)
 
+// @keyframes slideUp
+// 	0%
 
 
 //BreakPoints
@@ -83,10 +85,11 @@ $heading-stack: "refrigerator-deluxe", Helvetica, Arial
 html
 	height: 100%
 	width: 100%
-	background: $ui
+	background: #272035
 
 body
 	background: #F6F9F5
+	background: #FDFDFD
 	font-family: $font-stack
 	letter-spacing: .5px
 	font-size: 16px
@@ -101,8 +104,8 @@ body
 
 
 .row
-	//border: 100px solid #fff
-	//background: yellow
+	// border: 10px solid #000
+	// background: yellow
 
 //DEFAULTS///////////////////////////////////////////
 a
@@ -139,7 +142,7 @@ h2
 	position: absolute
 	right: 80px
 	top: 40px
-	font-size: 32px
+	font-size: 28px
 	letter-spacing: 1px
 	font-family: "refrigerator-deluxe"
 	text-transform: uppercase
@@ -150,6 +153,7 @@ h2
 
 //BTN Styles////////////////////////////////////////
 .btn
+	display: inline-block
 	position: relative
 	font-size: 20px
 	padding: 12px 44px
@@ -159,19 +163,31 @@ h2
 	z-index: 10
 	transition: background .3s ease-in-out, color .4s ease-in
 	&:hover
-		background: $heading-color
-		border-color: $blanco
+		background: #20132B
+		border-color: #453955
 		border-style: solid
 		cursor: pointer
 
 
 //INTRO TEXT///////////////////////////////////////////////
+.intro-text
+	position: relative
+	height: 100%
+	// display: flex
+	// flex-direction: column
+	//background: cyan
+	//border: dashed 10px green
+
+
 .lemonsplanation
+	//background: purple
 	width: 60%
-	margin: 180px auto 0px
+	// @include centerer
+	margin: 0 auto
+	padding: 120px 0
 	text-align: center
 	position: relative
-	&::after
+	&:after
 		content: ""
 		display: block
 		width: 320px
@@ -187,7 +203,6 @@ h2
 		// border-left: 100px transparent solid
 		// border-right: 100px transparent solid
 		// border-top: 100px solid #cfd7df
-		//background: rgba(#cfd7df, .25)
 		@include centerer
 		transform: translate(-50%, -50%)  rotate(45deg)
 		z-index: -1
@@ -203,15 +218,16 @@ h2
 
 
 //SCENE////////////////////////////////////////////////
-.scene
-	width: 100%
-	position: relative
-
-.scene-inner
-	position: relative
-	width: 100%
-	z-index: 2000
-	padding-bottom: 220px
+// .scene
+// 	width: 100%
+// 	position: relative
+// 	padding-bottom: 220px
+//
+// .scene-inner
+// 	position: relative
+	// width: 100%
+	// z-index: 2000
+	// padding-bottom: 220px
 
 
 //SETTINGS AREA////////////////////////////////////////////
@@ -219,22 +235,26 @@ h2
 	background: #110519
 	color: $blanco
 	clear: both
-	padding: 1px
+	 border: 1px solid darken(#201816, 1%)
+	//margin-top: .5px
+	//padding: .5px
 
 .secondary-zone
 	position: relative
 	clear: both
 	width: 100%
-	height: 100%
+	//height: 100vh
 	color: $blanco
 	background: $darkness
 	z-index: 50000
+	border-top: 1px solid #20132B
+
 
 .secondary-zone-inner
 	background: #20132B
 	padding: 0
 	color: $blanco
-	margin-top: 10px
+	//margin-top: 10px
 
 	h1,h2,h3
 		color: $blanco
@@ -248,11 +268,11 @@ h2
 
 	.flex__item
 		//background: rgba(darken(#29201e, 25%), .05)
-		//border: 1px solid darken(#201816, 1%)
-		margin: 1px .25px 0
+		border: .5px solid darken(#201816, 1%)
+		margin: 0px
 		flex: 1
 		header
-			//background: rgba(darken(#29201e, 25%), .2)
+			//background: rgba($ui, .1)
 			background: $ui
 			padding: 35px 40px 17px
 			color: $blanco
@@ -333,6 +353,12 @@ h2
 			.icon
 				fill: $accent
 
+.acc-text
+	font-family: $font-stack
+	font-size: 12px
+	text-transform: uppercase
+
+
 .icon
 	width: 18px
 	height: 18px
@@ -352,9 +378,9 @@ h2
 
 .setting-module
 	position: relative
-	min-height: 139px
+	min-height: 138px
 	//border-top: 1px solid #161628
-	margin-top: 1px
+	margin-top: .5px
 	background: $ui
 	overflow: hidden
 
@@ -402,6 +428,7 @@ footer
 	height: 80px
 	position: relative
 	display: inline-block
+	transition: background .3s ease-in-out, color .4s ease-in
 	&:hover
 		background: #20132B
 		svg
@@ -437,11 +464,13 @@ footer
 	padding: 40px
 	z-index: 50000
 	position: relative
-	margin: 0 auto 0.5px
+	margin: 0 auto
+	border: .5px solid darken(#201816, 1%)
+
 
 	p
 		margin-bottom: 24px
-		font-size: .95rem
+		font-size: 1rem
 		letter-spacing: 2px
 		text-transform: uppercase
 		line-height: 1.4
@@ -491,8 +520,8 @@ footer
 		position: relative
 
 .chart-legend
-	background: rgba(darken(#29201e, 25%), .2)
-	border: 1px solid rgba(darken(#29201e, 25%), .5)
+	background: rgba(darken(#1C1528, 5%), .2)
+	border: 1px solid darken(#1C1528, 7.5%)
 	width: 300px
 	padding: 10px
 	position: absolute
