@@ -12,20 +12,20 @@ var state = {
   didPurchase: false,
 
   addBuyer: function() {
-    //var genders = ['boy', 'girl'];
+    var genders = ['boy', 'girl'];
     //var genders = ['boy'];
     var newBuyer = new buyer();
-    //newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
+    newBuyer.gender = genders[Math.floor(Math.random() * genders.length)];
     this.buyers.push(newBuyer);
     var numBuyers = state.buyers.length;
-    $("#buyer-num b").html(numBuyers);
+    $("#buyer-num").html(numBuyers);
     this.queueUpdate();
   },
 
   removeBuyer: function() {
     var oldBuyer = this.buyers.shift();
     var numBuyers = state.buyers.length;
-    $("#buyer-num b").html(numBuyers);
+    $("#buyer-num").html(numBuyers);
     this.queueUpdate();
   },
 
@@ -48,7 +48,7 @@ var state = {
   queueUpdate: function() {
     if (!this.updatePending) {
       this.updatePending = true;
-      setTimeout(sellerEvaluate, 4000);
+      setTimeout(sellerEvaluate, 1000);
     }
   }
 };
@@ -77,6 +77,7 @@ function sellerEvaluate() {
 
 var buyer = function () {
   return {
+    // gender: ['girl','boy'],
     evaluate: function() {
       var data = {
         price: state.price,
@@ -108,7 +109,6 @@ var buyer = function () {
             success: function(data) {
             }
           });
-
         }
       });
     }
@@ -164,7 +164,8 @@ uiInteraction.init();
 
 
   const startBtn = document.querySelector('.js-start-btn'),
-        sceneAction = document.querySelector ('.scene-action');
+        sceneAction = document.querySelector ('.scene-action')
+
 
 // Main TL ///////////
 let mainTl = new TimelineMax();
@@ -193,13 +194,15 @@ addBuyerLink.addEventListener('click', function(){
 //GSAP animations timelines
 
 
+
+
 function getIntroText(){
   let introTextTl = new TimelineMax();
 
     introTextTl
-    .from(lemonHeading, 1.25, {autoAlpha: 0, ease: Power4.easeIn})
-    .from(lemonPara, 1.25, {autoAlpha: 0, ease: Power4.easeIn}, '-=.25')
-    .fromTo(startBtn, 1.5, {autoAlpha: 0, scale:0},{autoAlpha:1, scale:1, yPercent:'0', ease: Back.easeIn});
+    .from(lemonHeading, .5, {autoAlpha: 0, ease: Power4.easeIn})
+    .from(lemonPara, .5, {autoAlpha: 0, ease: Power4.easeIn}, '-=.25')
+    .fromTo(startBtn, .5, {autoAlpha: 0, scale:0, yPercent: '-100'},{autoAlpha:1, scale:1, yPercent:'0', ease: Back.easeIn});
 
     return introTextTl
 }
@@ -208,7 +211,7 @@ function nextBuyer() {
   if (state.buyers.length) {
     animateBuyer(state.buyers[0]);
   } else {
-    setTimeout(nextBuyer, 2500);
+    setTimeout(nextBuyer, 1000);
   }
 }
 
@@ -227,21 +230,26 @@ function animateBuyer(buyer) {
     }
   });
 
+let cupSold = document.querySelector('.total-sales b');
 
 
 function purchase(){
   if (state.didPurchase == true){
-    buying.classList.add("buying-active");
     tlBuyers.resume();
   } else {
-    noBuying.classList.add("no-buying-active");
     tlBuyers.reverse();
   }
 }
 
+
+
   let buyerEl = document.querySelector('.buyer');
-  tlBuyers
- .to(buyerEl, 2.5, {scale:1,  delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
+    tlBuyers
+    .to(buyerEl, 2.5, {delay:2, ease:Power1.easeInOut, onComplete: function() {buyer.evaluate()}}, "-=2.5")
+    .add("ThinkingAboutIt")
+   tlBuyers
+   .addPause("ThinkingAboutIt+=1", purchase)//pass the purchase function here
+
 }
 
 function getStartSceneTl(){
@@ -251,7 +259,7 @@ let startScene = new TimelineMax();
   TweenMax.set(settings, {autoAlpha:0, scale:0, height: 0})
 
   startBtn.addEventListener('click' , function() {
-    TweenMax.to(startBtn, 3, {scale: 0, opacity:0, y:-100, ease: Power4.easeInOut})
+    TweenMax.to(startBtn, 3, {scale: 0, opacity:0, x:-100, ease: Power4.easeInOut})
 
 
       $.post('/data/seller', function(data) {
@@ -263,11 +271,11 @@ let startScene = new TimelineMax();
       });
       TweenMax.set(sceneAction, { autoAlpha:0})
       // TweenMax.to(".lemonsplanation", 3, {scale: 0, opacity:0, ease: Power4.easeInOut})
-      TweenMax.to(window, 1, {scrollTo:{y:".secondary-zone", ease:Back.easeInOut}, onComplete:function(){
+      TweenMax.to(window, 1, {scrollTo:{y:"#funtimes", offsetY:-340, ease:Back.easeInOut}, onComplete:function(){
       jsNotActive.classList.remove('js-not-active');
       sceneAction.classList.add('js-active');
-      TweenMax.to(sceneAction, 1.25, {autoAlpha:1, ease:Power2.easeInOut})
-      TweenMax.to(settings, .5, {autoAlpha:1, scale:1, height: "100%"}, "-=2")
+      TweenMax.to(sceneAction, 1.75, {autoAlpha:1, ease:Power2.easeInOut})
+      TweenMax.to(settings, .75, {autoAlpha:1, scale:1, height: "100%"})
 
       nextBuyer();
       }
@@ -279,7 +287,7 @@ let startScene = new TimelineMax();
   function init(){
   //add timelines to the mainTl timeline
     mainTl
-    //.add(getPageIntro())
+
     .add(getIntroText())
     .add(getStartSceneTl())
   }
@@ -308,47 +316,45 @@ var chart = new Chart(ctx, {
     options: {
       animationEasing: "easeOutQuart",
       responsiveAnimationDuration: 5000,
-      barStrokeWidth: 1,
+      barStrokeWidth : 1,
       responsive: true,
       maintainAspectRatio: true,
       barShowStroke: false,
       tooltips: {
         enabled: true,
-        backgroundColor: "#161628",
+        backgroundColor: "rgba(52, 40, 65, 0.9)",
         titleFontSize: 11,
-        fontColor: "#F6F9F5",
-        titleFontColor: "#F6F9F5",
+        titleFontColor: "#FFFDF2",
         titleFontStyle: "bold",
         titleSpacing: 2,
         titleMarginBottom: 8,
-        bodyFontColor: "#F6F9F5",
+        bodyFontColor: "#DCE0E4",
         bodyFontSize: 12,
         xPadding: 14,
         yPadding: 14
       },
 
-        scales: {
-            yAxes: [{
-              stacked: true,
-              display: true,
-                gridLines: {
-                  offsetGridLines: true,
-                  color: "#2d233f"
-                },
-                ticks: {
-                  beginAtZero:true,
-                  suggestedMin: 0,
-                  suggestedMax: 2
-                }
-            }],
-            xAxes: [{
-              gridLines: {
-                offsetGridLines: true,
-                color: "#2d233f"
-              }
-            }]
-
-        },
+      scales: {
+        yAxes: [{
+          stacked: true,
+          display: true,
+            gridLines: {
+              offsetGridLines: true,
+              color: "#2d233f"
+            },
+            ticks: {
+              beginAtZero:true,
+              suggestedMin: 0,
+              suggestedMax: 2
+            }
+        }],
+        xAxes: [{
+          gridLines: {
+            offsetGridLines: true,
+            color: "#2d233f"
+          }
+        }]
+      },
         legend: {
           display: false
         }
